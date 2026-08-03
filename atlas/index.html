@@ -239,137 +239,145 @@ footer a{color:#bcd6e1}
 .wm{font-size:11px;color:#5f7a8b;margin-top:14px}
 
 /* ============================================================
-   DARK MINIMALIST RESKIN — site-wide design (deep-navy / sky-blue)
+   GOLD / NAVY LUXURY RESKIN — site-wide design
    Overrides the light theme above. Grade colors A–E kept (semantic).
+   Palette: deep navy #0a1628 · gold #c9a84c · cyan #0ef5e3 · white #f0f0f0
    ============================================================ */
 :root{
-  --deep:#02121f; --deep2:#02182b; --ocean:#0ea5e9; --teal:#0ea5e9; --teal2:#38bdf8;
-  --gold:#38bdf8; --foam:#0a2236; --ink:#eaf2f8; --paper:#000d1a; --muted:#8aa2b4;
+  --deep:#0d1f3c; --deep2:#0a1628; --ocean:#c9a84c; --teal:#c9a84c; --teal2:#0ef5e3;
+  --gold:#c9a84c; --foam:#122244; --ink:#f0f0f0; --paper:#0a1628; --muted:rgba(240,240,240,.6);
 }
-/* typeface: Inter across the whole page (matches the rest of the site) */
-body, body *{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}
-h1,h2,h3{letter-spacing:-.02em}
-body{background:linear-gradient(135deg,#000a14 0%,#001428 100%);background-attachment:fixed;color:var(--ink)}
-a{color:var(--teal2)}
+h1,h2,h3{font-weight:400;letter-spacing:.01em}
+body{background:radial-gradient(ellipse at 50% 0%, #0d2847 0%, #0a1628 55%, #060e1a 100%);
+  background-attachment:fixed;color:var(--ink)}
+a{color:var(--gold)}
 
-/* --- NAV (minimalist) --- */
-#nav{padding:16px 26px}
-#nav.solid{background:rgba(0,10,20,.85);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(255,255,255,.08)}
-#nav .brand{font-weight:800;font-size:22px;color:#fff;gap:9px;text-decoration:none}
-#nav .brand .mark{font-size:20px}
-#nav .links{gap:26px;font-size:15px;font-weight:500}
-#nav .links a{color:#cbd8e6;opacity:.85}
-#nav .links a:hover{opacity:1;color:#fff}
-#nav .links a.active{color:#38bdf8;opacity:1;border-bottom:0}
-#nav .links a.cta{background:#0ea5e9;color:#00121f;padding:9px 18px;border-radius:999px;font-weight:700;opacity:1}
-#nav .links a.cta:hover{background:#38bdf8;color:#00121f}
+/* --- NAV (luxury) --- */
+#nav{padding:20px 3rem}
+#nav.solid{background:rgba(10,22,40,.92);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(201,168,76,.1);padding:14px 3rem}
+#nav .brand{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;letter-spacing:.22em;
+  color:#c9a84c;text-transform:uppercase;text-decoration:none}
+#nav .links{gap:26px;font-size:12.5px}
+#nav .links a{color:rgba(240,240,240,.6);letter-spacing:.12em;text-transform:uppercase;font-weight:400;opacity:1}
+#nav .links a:hover{color:#c9a84c}
+#nav .links a.active{color:#c9a84c;border-bottom:0}
+#nav .links a.cta{background:transparent;border:1px solid #c9a84c;color:#c9a84c;padding:8px 18px;border-radius:2px;font-weight:400}
+#nav .links a.cta:hover{background:#c9a84c;color:#0a1628}
 @media(max-width:720px){#nav .links a:not(.cta){display:none}}
 
 /* --- HERO --- */
-#hero{background:linear-gradient(180deg,#00101f 0%,#04263f 45%,#062f4d 78%,#0a3d62 100%)}
-#sun circle,#sun{opacity:.45}
-.hero-stats .n{color:#38bdf8}
+#hero{background:radial-gradient(ellipse at 50% 120%, #0d2847 0%, #0a1628 55%, #060e1a 100%)}
+#sun circle,#sun{opacity:.3}
+.hero-content .kicker{color:#0ef5e3}
+.hero-stats .n{color:#c9a84c}
+.scrollcue{color:rgba(201,168,76,.5)}
 
 /* --- GENERIC BLOCKS --- */
 .block{color:var(--ink)}
-.block.tint{background:linear-gradient(180deg,#00101f,#02182b)}
-.block.dark{background:#02121f}
-.lead{color:#cddcea;font-weight:500}
-.block.dark .lead{color:#bfe4ec}
-.sub,.block.dark .sub{color:#8aa2b4}
-h2.big{color:#fff}
-.eyebrow{color:#38bdf8}
+.block.tint{background:linear-gradient(180deg,#0a1628,#0d1f3c)}
+.block.dark{background:#0a1628}
+.lead{color:rgba(240,240,240,.78);font-weight:400}
+.block.dark .lead{color:rgba(240,240,240,.78)}
+.sub,.block.dark .sub{color:rgba(240,240,240,.5)}
+h2.big{color:#f0f0f0}
+.eyebrow{color:#0ef5e3}
 
 /* --- WHAT-IS cards --- */
-.why .c{background:#06192b;border-color:rgba(255,255,255,.08);box-shadow:none}
-.why .c h3{color:#fff}
-.why .c p{color:#8aa2b4}
+.why .c{background:linear-gradient(160deg,rgba(201,168,76,.03),rgba(10,22,40,.8));border-color:rgba(201,168,76,.12);box-shadow:none}
+.why .c h3{color:#f0f0f0}
+.why .c p{color:rgba(240,240,240,.6)}
 
 /* --- VOYAGE split --- */
-.boatcard{background:#04182b;border-color:rgba(255,255,255,.08)}
-.split li b{color:#fff}
-.split li .dot{background:rgba(14,165,233,.16);color:#38bdf8}
+.boatcard{background:#0d1f3c;border-color:rgba(201,168,76,.12)}
+.split li b{color:#f0f0f0}
+.split li .dot{background:rgba(201,168,76,.14);color:#c9a84c}
 
 /* --- ATLAS map section --- */
-#atlas{background:linear-gradient(180deg,#02182b,#00101f)}
-.atlas-head{color:#c3d3e0}
-.legend .lg{color:#9fb4c4}
-.pill{background:#06192b;border-color:rgba(255,255,255,.12);color:#a9c0d0}
-.pill:hover{border-color:#0ea5e9;color:#38bdf8}
-.pill.active{background:#0ea5e9;border-color:#0ea5e9;color:#00121f}
-.searchbar{background:#06192b;border-color:rgba(255,255,255,.12)}
-.searchbar input{background:transparent;color:#eaf2f8}
-.searchbar input::placeholder{color:#6d8497}
-#map{box-shadow:0 20px 50px rgba(0,0,0,.45)}
-.rank{background:#06192b;box-shadow:0 20px 50px rgba(0,0,0,.35)}
-.rank .rh{border-bottom-color:rgba(255,255,255,.08)}
-.rank .rh h3{color:#fff}
-.rank .rh .cnt{color:#8aa2b4}
-.sortsel{background:#0a2236;border-color:rgba(255,255,255,.14);color:#c3d3e0}
-.row{border-bottom-color:rgba(255,255,255,.06)}
-.row:hover{background:rgba(255,255,255,.04)}
-.row .meta .nm{color:#eaf2f8}
-.row .meta .lo{color:#8aa2b4}
-.badge .t{background:#0a2236;color:#eaf2f8;box-shadow:0 1px 4px rgba(0,0,0,.4)}
+#atlas{background:linear-gradient(180deg,#0d1f3c,#0a1628)}
+.atlas-head{color:rgba(240,240,240,.78)}
+.legend .lg{color:rgba(240,240,240,.6)}
+.pill{background:rgba(201,168,76,.05);border-color:rgba(201,168,76,.2);color:rgba(240,240,240,.7)}
+.pill:hover{border-color:#c9a84c;color:#c9a84c}
+.pill.active{background:#c9a84c;border-color:#c9a84c;color:#0a1628}
+.searchbar{background:rgba(255,255,255,.03);border-color:rgba(201,168,76,.2)}
+.searchbar input{background:transparent;color:#f0f0f0}
+.searchbar input::placeholder{color:rgba(240,240,240,.3)}
+#map{box-shadow:0 20px 50px rgba(0,0,0,.5);border:1px solid rgba(201,168,76,.1)}
+.rank{background:linear-gradient(160deg,rgba(201,168,76,.03),rgba(10,22,40,.85));border:1px solid rgba(201,168,76,.12);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.rank .rh{border-bottom-color:rgba(201,168,76,.12)}
+.rank .rh h3{color:#f0f0f0}
+.rank .rh .cnt{color:rgba(240,240,240,.5)}
+.sortsel{background:#0d1f3c;border-color:rgba(201,168,76,.2);color:rgba(240,240,240,.7)}
+.row{border-bottom-color:rgba(201,168,76,.08)}
+.row:hover{background:rgba(201,168,76,.05)}
+.row .meta .nm{color:#f0f0f0}
+.row .meta .lo{color:rgba(240,240,240,.6)}
+.row .meta .cat{color:#0ef5e3}
+.badge .t{background:#0a1628;color:#f0f0f0;box-shadow:0 1px 4px rgba(0,0,0,.5)}
 
 /* --- DETAIL panel --- */
-.detail{background:#06192b;box-shadow:0 20px 50px rgba(0,0,0,.45)}
-.detail h3{color:#fff}
-.detail .loc{color:#8aa2b4}
-.dgrid .f .v{color:#c3d3e0}
-.bar .track{background:rgba(255,255,255,.09)}
+.detail{background:linear-gradient(160deg,rgba(201,168,76,.04),rgba(10,22,40,.92));border:1px solid rgba(201,168,76,.15);box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.detail h3{color:#f0f0f0}
+.detail .loc{color:rgba(240,240,240,.6)}
+.dgrid .f .k{color:#0ef5e3}
+.dgrid .f .v{color:rgba(240,240,240,.82)}
+.bar .track{background:rgba(255,255,255,.08)}
+.bar .fill{background:linear-gradient(90deg,#c9a84c,#e0c872)}
 .tag.pos{background:rgba(31,157,107,.16);color:#5fd6a2}
 .tag.neg{background:rgba(192,57,43,.18);color:#f0917f}
-.btn{background:#0ea5e9;color:#00121f}
-.btn:hover{background:#38bdf8}
-.btn.ghost{background:transparent;color:#38bdf8;border-color:rgba(255,255,255,.2)}
-.btn.ghost:hover{background:rgba(255,255,255,.06)}
+.btn{background:#c9a84c;color:#0a1628}
+.btn:hover{background:#e0c872}
+.btn.ghost{background:transparent;color:#c9a84c;border-color:rgba(201,168,76,.4)}
+.btn.ghost:hover{background:rgba(201,168,76,.1)}
 
 /* --- TRUST rubric --- */
-.rubric .p{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1)}
-.rubric .p .w{color:#38bdf8}
-.rubric .p .d{color:#a9c6d4}
-.tierleg{color:#bcd6e1}
+.rubric .p{background:rgba(201,168,76,.04);border-color:rgba(201,168,76,.15)}
+.rubric .p .w{color:#c9a84c}
+.rubric .p .d{color:rgba(240,240,240,.6)}
+.tierleg{color:rgba(240,240,240,.7)}
 
 /* --- PRICING --- */
-.prow{background:#06192b;border-color:rgba(255,255,255,.08);box-shadow:none}
-.prow .pl .t{color:#fff}
-.prow .pl .s{color:#8aa2b4}
-.pbar .track{background:rgba(255,255,255,.06)}
-.pbar .home{background:repeating-linear-gradient(45deg,rgba(255,255,255,.10),rgba(255,255,255,.10) 8px,rgba(255,255,255,.04) 8px,rgba(255,255,255,.04) 16px)}
-.pbar .save{color:#9fb4c4}
+.prow{background:linear-gradient(160deg,rgba(201,168,76,.03),rgba(10,22,40,.8));border-color:rgba(201,168,76,.12);box-shadow:none}
+.prow .pl .t{color:#f0f0f0}
+.prow .pl .s{color:rgba(240,240,240,.6)}
+.pbar .track{background:rgba(255,255,255,.05)}
+.pbar .dest{background:linear-gradient(90deg,#c9a84c,#e0c872);color:#0a1628}
+.pbar .home{background:repeating-linear-gradient(45deg,rgba(255,255,255,.08),rgba(255,255,255,.08) 8px,rgba(255,255,255,.03) 8px,rgba(255,255,255,.03) 16px)}
+.pbar .save{color:rgba(240,240,240,.6)}
 
 /* --- WORKFLOW --- */
-.step .sc h3{color:#fff}
-.step .sc p{color:#8aa2b4}
-.step .num{background:#0ea5e9;color:#00121f;box-shadow:0 8px 24px rgba(14,165,233,.35)}
-.steps:before{background:linear-gradient(180deg,#0ea5e9,transparent)}
+.step .sc h3{color:#f0f0f0}
+.step .sc p{color:rgba(240,240,240,.6)}
+.step .num{background:#c9a84c;color:#0a1628;box-shadow:0 8px 24px rgba(201,168,76,.3)}
+.steps:before{background:linear-gradient(180deg,#c9a84c,transparent)}
 
 /* --- CASE STUDY --- */
-#case{background:#00101f}
-.case-hero .cbg{background:linear-gradient(160deg,#02182b,#04263f 60%,#062f4d)}
-.case-scene .tagn{color:#38bdf8}
-.case-num .c .n{color:#38bdf8}
+#case{background:#0a1628}
+.case-hero .cbg{background:linear-gradient(160deg,#0d1f3c,#122244 60%,#0d2847)}
+.case-scene .tagn{color:#c9a84c}
+.case-num .c .n{color:#c9a84c}
 
 /* --- EXPANSION --- */
-.exp .e{background:#06192b;border-color:rgba(255,255,255,.08);box-shadow:none}
-.exp .e .n{color:#38bdf8}
-.exp .e h3{color:#fff}
-.exp .e p{color:#8aa2b4}
+.exp .e{background:linear-gradient(160deg,rgba(201,168,76,.03),rgba(10,22,40,.8));border-color:rgba(201,168,76,.12);box-shadow:none}
+.exp .e .n{color:#c9a84c}
+.exp .e h3{color:#f0f0f0}
+.exp .e p{color:rgba(240,240,240,.6)}
 
 /* --- FOOTER --- */
-footer{background:rgba(0,7,14,.7);border-top:1px solid rgba(255,255,255,.08)}
-footer .brand{color:#fff}
+footer{background:#0a1628;border-top:1px solid rgba(201,168,76,.1)}
+footer .brand{color:#c9a84c;font-family:'Cormorant Garamond',serif;letter-spacing:.2em}
+footer a{color:rgba(240,240,240,.6)}
+footer a:hover{color:#c9a84c}
 </style>
 </head>
 <body>
 
 <!-- ================= NAV ================= -->
 <nav id="nav">
-  <a class="brand" href="/"><span class="mark">🌊</span> Fathomm</a>
+  <a class="brand" href="/">FATHOMM</a>
   <div class="links">
-    <a href="/ocean/">Ocean Voyages</a>
     <a href="#atlas" class="active">Global Clinics</a>
+    <a href="/ocean/">Ocean Voyages</a>
     <a href="/#waitlist" class="cta">Join Waitlist</a>
   </div>
 </nav>
