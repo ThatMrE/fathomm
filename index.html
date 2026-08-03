@@ -133,12 +133,12 @@
   #problem { background: var(--deep); }
   #solution { background: linear-gradient(180deg, var(--deep) 0%, var(--deep-mid) 100%); }
   #experience { background: linear-gradient(180deg, var(--deep-mid) 0%, var(--deep) 100%); }
-  #science { background: var(--deep); }
+  #science { background: linear-gradient(180deg, var(--deep-mid) 0%, var(--deep) 100%); }
   #tiers { background: linear-gradient(180deg, var(--deep) 0%, var(--deep-mid) 100%); }
   #legal { background: linear-gradient(180deg, var(--deep-mid) 0%, var(--deep) 100%); }
   #market { background: var(--deep); }
   #vision { background: linear-gradient(180deg, var(--deep) 0%, var(--deep-mid) 100%); }
-  #waitlist { background: var(--deep); }
+  #waitlist { background: linear-gradient(180deg, var(--deep-mid) 0%, var(--deep) 100%); }
 
   /* ── GRID3 (problem) ── */
   .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
@@ -285,12 +285,8 @@
 <nav id="nav">
   <a href="#hero" class="nav-logo">FATHOMM</a>
   <div class="nav-links" id="navLinks">
-    <a href="#solution">The Voyage</a>
-    <a href="#science">Science</a>
-    <a href="#legal">Legal</a>
-    <a href="#market">Why Now</a>
     <a href="/atlas/">Clinics</a>
-    <a href="/ocean/">Voyages</a>
+    <a href="/voyage/">Voyages</a>
     <a href="#waitlist" class="nav-cta">Join Waitlist</a>
   </div>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
@@ -353,24 +349,6 @@
   </div>
 </section>
 
-<!-- ═══════ EXPERIENCE ═══════ -->
-<section id="experience" class="section-pad">
-  <div class="container">
-    <div class="reveal">
-      <p class="section-label">The Experience</p>
-      <h2 class="section-title">A single night, <em>choreographed</em></h2>
-      <div class="gold-line"></div>
-    </div>
-    <div class="timeline">
-      <div class="timeline-item reveal reveal-delay-1"><div class="timeline-time">6:00 PM</div><div class="timeline-label">Sunset Departure</div><p class="timeline-desc">Board in San Francisco, champagne welcome, and sail past the Golden Gate.</p></div>
-      <div class="timeline-item reveal reveal-delay-2"><div class="timeline-time">8:00 PM</div><div class="timeline-label">Dining &amp; Consult</div><p class="timeline-desc">A chef-prepared multi-course dinner alongside your private medical consultation.</p></div>
-      <div class="timeline-item reveal reveal-delay-3"><div class="timeline-time">10:00 PM</div><div class="timeline-label">Treatment</div><p class="timeline-desc">Your personalized protocol, administered by board-certified physicians.</p></div>
-      <div class="timeline-item reveal reveal-delay-4"><div class="timeline-time">7:00 AM</div><div class="timeline-label">Sunrise Return</div><p class="timeline-desc">Post-treatment monitoring, breakfast, and dock in San Francisco.</p></div>
-    </div>
-    <a href="/ocean/" class="morelink reveal">Explore the full voyage &rarr;</a>
-  </div>
-</section>
-
 <!-- ═══════ SCIENCE ═══════ -->
 <section id="science" class="section-pad">
   <div class="container">
@@ -394,41 +372,6 @@
   </div>
 </section>
 
-<!-- ═══════ TIERS ═══════ -->
-<section id="tiers" class="section-pad">
-  <div class="container">
-    <div class="reveal center">
-      <p class="section-label">Treatment Tiers</p>
-      <h2 class="section-title">Choose your <em>protocol</em></h2>
-      <p class="section-body">Every voyage includes the full luxury experience, private consultation, and post-treatment monitoring.</p>
-    </div>
-    <div class="cards">
-      <div class="card reveal reveal-delay-1"><p class="card-tier">Tier I</p><h3 class="card-name">Vitality</h3><div class="card-price">$4,500 <span>/ voyage</span></div><div class="card-divider"></div><p class="card-desc">A full peptide protocol &mdash; BPC-157, GHK-Cu, Thymosin Beta-4, and Epithalon &mdash; for recovery, regeneration, and longevity.</p></div>
-      <div class="card featured reveal reveal-delay-2"><p class="card-tier">Tier II &mdash; Most Popular</p><h3 class="card-name">Apex</h3><div class="card-price">$12,000 <span>/ voyage</span></div><div class="card-divider"></div><p class="card-desc">A single gene therapy &mdash; Follistatin or VEGF &mdash; with a supporting peptide stack.</p></div>
-      <div class="card reveal reveal-delay-3"><p class="card-tier">Tier III</p><h3 class="card-name">Transcend</h3><div class="card-price">$25,000 <span>/ voyage</span></div><div class="card-divider"></div><p class="card-desc">Multi-gene therapy, the full peptide protocol, a personalized longevity plan, and follow-up consultations.</p></div>
-    </div>
-    <div class="center"><a href="/ocean/" class="morelink reveal">See tiers in detail on Voyages &rarr;</a></div>
-  </div>
-</section>
-
-<!-- ═══════ LEGAL ═══════ -->
-<section id="legal" class="section-pad">
-  <div class="container">
-    <div class="reveal">
-      <p class="section-label">Legal Framework</p>
-      <h2 class="section-title">Legitimate by <em>flag-state law</em></h2>
-      <div class="gold-line"></div>
-      <p class="section-body">FATHOMM operates on a well-established principle of maritime law: in international waters, the law of the vessel's flag state governs &mdash; not the FDA.</p>
-    </div>
-    <div class="legal-grid">
-      <div class="legal-item reveal reveal-delay-1"><h3>International Waters</h3><p>Beyond 12 nautical miles from San Francisco &mdash; roughly a 90-minute sail past the Golden Gate &mdash; U.S. federal health jurisdiction diminishes.</p></div>
-      <div class="legal-item reveal reveal-delay-2"><h3>Flag-State Jurisdiction</h3><p>Under UNCLOS, a vessel registered in a permissive jurisdiction is governed by that state's medical and pharmaceutical law while at sea.</p></div>
-      <div class="legal-item reveal reveal-delay-3"><h3>Women on Waves Precedent</h3><p>A Dutch-flagged medical vessel has operated lawfully in international waters for 20+ years &mdash; the strongest precedent for the model.</p></div>
-      <div class="legal-item reveal reveal-delay-4"><h3>Compliance Architecture</h3><p>Maritime legal counsel, a medical advisory board, rigorous clinical protocols, and robust informed-consent processes.</p></div>
-    </div>
-  </div>
-</section>
-
 <!-- ═══════ MARKET / WHY NOW ═══════ -->
 <section id="market" class="section-pad">
   <div class="container">
@@ -445,21 +388,6 @@
     </div>
     <div class="demographic reveal">
       <b>The client:</b> ages 35&ndash;65, household income $250K+, concentrated in tech hubs &mdash; San Francisco, LA, Austin, Miami. Early adopters of CGMs, NAD+ protocols, and peptide stacks, frustrated by the pace of FDA approvals and willing to pay a premium for safe access to the frontier.
-    </div>
-  </div>
-</section>
-
-<!-- ═══════ TEAM ═══════ -->
-<section class="section-pad" style="background:linear-gradient(180deg,var(--deep-mid) 0%,var(--deep) 100%)">
-  <div class="container">
-    <div class="reveal">
-      <p class="section-label">Team</p>
-      <h2 class="section-title">Founded to <em>chart the frontier</em></h2>
-      <div class="gold-line"></div>
-    </div>
-    <div class="team reveal">
-      <div class="av">ER</div>
-      <div><h3>Elliot Roth</h3><div class="role">Founder &amp; CEO</div><p>Building FATHOMM at the intersection of longevity science, maritime law, and luxury hospitality. Additional team and advisory board to be announced.</p></div>
     </div>
   </div>
 </section>
@@ -504,11 +432,8 @@
 <footer>
   <div class="footer-logo">FATHOMM</div>
   <div class="footer-nav">
-    <a href="#solution">The Voyage</a>
-    <a href="#science">Science</a>
-    <a href="#legal">Legal</a>
     <a href="/atlas/">Clinics</a>
-    <a href="/ocean/">Voyages</a>
+    <a href="/voyage/">Voyages</a>
     <a href="#waitlist">Join Waitlist</a>
   </div>
   <p class="footer-text">
