@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fathomm — Medical Voyages Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<style>
+:root{
+  --deep:#04263f; --deep2:#062f4d; --ocean:#0a3d62; --teal:#1b8a9c; --teal2:#12a5b0;
+  --sand:#e9d8a6; --gold:#e9b949; --coral:#ee6c4d; --foam:#f4f7f8; --ink:#0c2233;
+  --paper:#fbfaf6; --muted:#6b8296;
+  --A:#1f9d6b; --B:#2f86c9; --C:#d9a021; --D:#e07b39; --E:#c0392b;
+  --maxw:1200px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);
+  background:var(--paper);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.serif{font-family:'Cormorant Garamond','Georgia',serif;font-weight:700;line-height:1.08}
+a{color:var(--teal)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.eyebrow{font-family:'Inter';font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  font-size:12px;color:var(--teal2)}
+section{position:relative}
+
+/* ---------- NAV ---------- */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:space-between;
+  align-items:center;padding:14px 26px;transition:.35s;color:#fff}
+#nav.solid{background:rgba(4,38,63,.92);backdrop-filter:blur(8px);box-shadow:0 2px 24px rgba(0,0,0,.25)}
+#nav .brand{font-family:'Cormorant Garamond';font-weight:700;font-size:26px;letter-spacing:.02em;
+  display:flex;align-items:center;gap:10px}
+#nav .brand svg{width:26px;height:26px}
+#nav .links{display:flex;gap:22px;font-size:14px;font-weight:500}
+#nav .links a{color:#dbe8ef;text-decoration:none;opacity:.85;transition:.2s}
+#nav .links a:hover{opacity:1;color:#fff}
+@media(max-width:820px){#nav .links{display:none}}
+
+/* ---------- HERO ---------- */
+#hero{height:100vh;min-height:640px;position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#0a3557 0%,#0d4a6e 42%,#1b6f86 75%,#2f97a6 100%)}
+.hero-svg{position:absolute;inset:0;width:100%;height:100%}
+.hero-layer{position:absolute;left:0;right:0;will-change:transform}
+#sun{top:12%;left:50%;transform:translateX(-50%)}
+.hero-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  align-items:center;text-align:center;color:#fff;z-index:6;padding:0 20px}
+.hero-content h1{font-size:clamp(44px,8.5vw,104px);letter-spacing:.01em;text-shadow:0 6px 40px rgba(2,20,35,.45)}
+.hero-content .tag{font-size:clamp(16px,2.4vw,23px);max-width:660px;margin-top:12px;
+  color:#eaf5f8;font-weight:400;text-shadow:0 2px 20px rgba(2,20,35,.5)}
+.hero-content .kicker{margin-bottom:14px;color:#bfe4ec}
+.scrollcue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:#dff1f5;z-index:7;
+  font-size:12px;letter-spacing:.2em;text-transform:uppercase;opacity:.9;animation:bob 2.4s infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+.hero-stats{display:flex;gap:30px;margin-top:34px;flex-wrap:wrap;justify-content:center;z-index:6}
+.hero-stats .s{color:#fff}
+.hero-stats .n{font-family:'Cormorant Garamond';font-size:40px;font-weight:700;line-height:1;color:var(--gold)}
+.hero-stats .l{font-size:12.5px;letter-spacing:.06em;color:#d7ecf1;text-transform:uppercase}
+
+/* ---------- GENERIC BLOCKS ---------- */
+.block{padding:96px 0}
+.block.tint{background:linear-gradient(180deg,#fff,#eef4f5)}
+.block.dark{background:var(--deep);color:#e8f1f5}
+.block.dark h2,.block.dark h3{color:#fff}
+.lead{font-size:clamp(19px,2.3vw,26px);font-family:'Cormorant Garamond';font-weight:600;
+  color:var(--ocean);max-width:820px}
+.block.dark .lead{color:#bfe4ec}
+h2.big{font-size:clamp(34px,5vw,58px);margin-bottom:8px}
+.sub{color:var(--muted);max-width:720px;margin-top:14px;font-size:17px}
+.block.dark .sub{color:#a9c6d4}
+.reveal{opacity:0;transform:translateY(28px);transition:.8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- WHAT-IS grid ---------- */
+.why{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:44px}
+@media(max-width:900px){.why{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.why{grid-template-columns:1fr}}
+.why .c{background:#fff;border:1px solid #e4ecef;border-radius:16px;padding:24px;box-shadow:0 10px 30px rgba(10,61,98,.05)}
+.why .c .ic{font-size:26px}
+.why .c h3{font-size:23px;margin:8px 0 4px}
+.why .c p{font-size:14.5px;color:var(--muted)}
+
+/* ---------- SAILING split ---------- */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+@media(max-width:880px){.split{grid-template-columns:1fr;gap:32px}}
+.split ul{list-style:none;margin-top:22px;display:grid;gap:16px}
+.split li{display:flex;gap:14px;align-items:flex-start}
+.split li .dot{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:rgba(27,138,156,.16);
+  display:grid;place-items:center;color:var(--teal2);font-weight:700}
+.split li b{color:#fff}
+.boatcard{border-radius:20px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.4);background:#08324f;
+  border:1px solid rgba(255,255,255,.08)}
+
+/* ---------- ATLAS ---------- */
+#atlas{background:linear-gradient(180deg,#eef4f5,#e2edf0)}
+.atlas-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px}
+.legend .lg{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:#38556a}
+.legend .sw{width:14px;height:14px;border-radius:4px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 6px}
+.pill{border:1px solid #cdd; background:#fff;border-radius:999px;padding:7px 14px;font-size:13px;
+  font-weight:600;color:#38556a;cursor:pointer;transition:.18s;user-select:none;border-color:#cddbe2}
+.pill:hover{border-color:var(--teal2);color:var(--teal2)}
+.pill.active{background:var(--ocean);color:#fff;border-color:var(--ocean)}
+.searchbar{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #cddbe2;border-radius:10px;
+  padding:8px 12px;flex:1;min-width:220px}
+.searchbar input{border:0;outline:0;font-size:14px;width:100%;font-family:inherit}
+.atlas-grid{display:grid;grid-template-columns:1fr 380px;gap:18px;margin-top:16px}
+@media(max-width:980px){.atlas-grid{grid-template-columns:1fr}}
+#map{height:620px;border-radius:18px;box-shadow:0 20px 50px rgba(10,61,98,.18);z-index:1}
+@media(max-width:980px){#map{height:440px}}
+.rank{background:#fff;border-radius:18px;box-shadow:0 20px 50px rgba(10,61,98,.12);
+  display:flex;flex-direction:column;height:620px;overflow:hidden}
+@media(max-width:980px){.rank{height:520px}}
+.rank .rh{padding:14px 16px;border-bottom:1px solid #eef2f4;display:flex;justify-content:space-between;
+  align-items:center}
+.rank .rh h3{font-size:20px}
+.rank .rh .cnt{font-size:12px;color:var(--muted);font-weight:600}
+.sortsel{font-size:12px;border:1px solid #d6e0e6;border-radius:8px;padding:5px 8px;color:#38556a;font-family:inherit}
+.rank .list{overflow-y:auto;flex:1}
+.row{display:flex;gap:12px;padding:12px 15px;border-bottom:1px solid #f0f3f5;cursor:pointer;transition:.15s}
+.row:hover{background:#f3f8f9}
+.badge{flex:0 0 auto;width:44px;height:44px;border-radius:11px;display:grid;place-items:center;color:#fff;
+  font-family:'Cormorant Garamond';font-weight:700;font-size:20px;line-height:1;position:relative}
+.badge .t{position:absolute;bottom:-2px;right:-2px;background:#fff;color:#0c2233;font-family:'Inter';
+  font-size:9px;font-weight:800;border-radius:5px;padding:1px 3px;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.row .meta{min-width:0;flex:1}
+.row .meta .nm{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .meta .lo{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .meta .cat{display:inline-block;font-size:10.5px;font-weight:700;color:var(--teal2);
+  text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
+.detail{background:#fff;border-radius:18px;box-shadow:0 20px 50px rgba(10,61,98,.14);margin-top:18px;
+  padding:22px 24px;display:none}
+.detail.show{display:block;animation:fade .4s}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
+.detail .dtop{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.detail h3{font-size:28px}
+.detail .loc{color:var(--muted);font-size:14px;margin-top:2px}
+.scorebox{text-align:center;flex:0 0 auto}
+.scorebox .big{font-family:'Cormorant Garamond';font-size:46px;font-weight:700;line-height:1}
+.scorebox .tl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.dgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 30px;margin-top:18px}
+@media(max-width:560px){.dgrid{grid-template-columns:1fr}}
+.dgrid .f .k{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--teal2)}
+.dgrid .f .v{font-size:14px;color:#2a3f4f}
+.bars{margin-top:18px;display:grid;gap:8px}
+.bar{display:grid;grid-template-columns:120px 1fr 40px;align-items:center;gap:10px;font-size:12px}
+.bar .track{background:#eef2f4;border-radius:6px;height:9px;overflow:hidden}
+.bar .fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--teal),var(--teal2))}
+.tags{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.tag{font-size:13px;padding:9px 12px;border-radius:10px;display:flex;gap:8px;align-items:flex-start}
+.tag.pos{background:rgba(31,157,107,.09);color:#166b4a}
+.tag.neg{background:rgba(192,57,43,.08);color:#a5342a}
+.dactions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--ocean);color:#fff;text-decoration:none;
+  padding:10px 18px;border-radius:10px;font-weight:600;font-size:14px;border:0;cursor:pointer;transition:.2s}
+.btn:hover{background:var(--teal)}
+.btn.ghost{background:#fff;color:var(--ocean);border:1px solid #cddbe2}
+.leaflet-popup-content{font-family:'Inter';font-size:13px}
+.leaflet-popup-content b{font-family:'Cormorant Garamond';font-size:16px}
+
+/* ---------- TRUST ---------- */
+.rubric{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:36px}
+@media(max-width:900px){.rubric{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.rubric{grid-template-columns:1fr}}
+.rubric .p{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:20px}
+.rubric .p .w{font-family:'Cormorant Garamond';font-size:40px;font-weight:700;color:var(--gold)}
+.rubric .p .n{font-weight:700;margin:2px 0 6px}
+.rubric .p .d{font-size:13px;color:#a9c6d4}
+.tierbar{display:flex;margin-top:40px;border-radius:12px;overflow:hidden;height:64px;
+  box-shadow:0 14px 40px rgba(0,0,0,.3)}
+.tierbar .seg{display:flex;flex-direction:column;justify-content:center;align-items:center;color:#fff;
+  font-weight:700;font-size:13px;transition:.3s}
+.tierbar .seg small{font-weight:500;opacity:.9;font-size:11px}
+.tierleg{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;font-size:13px;color:#bcd6e1}
+
+/* ---------- PRICING ---------- */
+.pricewrap{display:grid;gap:14px;margin-top:36px}
+.prow{background:#fff;border:1px solid #e6eef1;border-radius:14px;padding:16px 20px;
+  display:grid;grid-template-columns:230px 1fr;gap:18px;align-items:center;box-shadow:0 8px 24px rgba(10,61,98,.05)}
+@media(max-width:720px){.prow{grid-template-columns:1fr}}
+.prow .pl .t{font-weight:700;font-size:16px}
+.prow .pl .s{font-size:12.5px;color:var(--muted)}
+.pbar{position:relative}
+.pbar .track{background:#eef3f5;height:34px;border-radius:8px;position:relative;overflow:hidden}
+.pbar .home{position:absolute;top:0;left:0;height:100%;background:repeating-linear-gradient(45deg,#dbe6ea,#dbe6ea 8px,#eef3f5 8px,#eef3f5 16px)}
+.pbar .dest{position:absolute;top:0;left:0;height:100%;border-radius:8px;
+  background:linear-gradient(90deg,var(--teal),var(--teal2));display:flex;align-items:center;
+  padding-left:12px;color:#fff;font-weight:700;font-size:12.5px}
+.pbar .save{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:700;color:#38556a}
+
+/* ---------- WORKFLOW ---------- */
+.steps{position:relative;margin-top:50px}
+.steps:before{content:'';position:absolute;left:27px;top:10px;bottom:10px;width:2px;
+  background:linear-gradient(180deg,var(--teal2),transparent)}
+@media(max-width:640px){.steps:before{left:20px}}
+.step{display:flex;gap:22px;padding:14px 0;align-items:flex-start}
+.step .num{flex:0 0 auto;width:56px;height:56px;border-radius:50%;background:var(--ocean);color:#fff;
+  display:grid;place-items:center;font-family:'Cormorant Garamond';font-size:26px;font-weight:700;
+  z-index:2;box-shadow:0 8px 24px rgba(10,61,98,.3)}
+@media(max-width:640px){.step .num{width:42px;height:42px;font-size:20px}}
+.step .sc h3{font-size:24px}
+.step .sc p{color:var(--muted);font-size:15px;max-width:660px}
+
+/* ---------- CASE STUDY parallax ---------- */
+#case{background:#04263f;color:#eaf3f7;position:relative;overflow:hidden}
+.case-hero{height:78vh;min-height:520px;position:relative;display:flex;align-items:center;overflow:hidden}
+.case-hero .cbg{position:absolute;inset:0;background:linear-gradient(160deg,#052e4c,#0a4a63 60%,#12707f)}
+.case-waves{position:absolute;left:0;right:0;bottom:-2px;will-change:transform}
+.case-hero .inner{position:relative;z-index:3;max-width:640px}
+.case-hero .inner .who{font-family:'Cormorant Garamond';font-size:clamp(34px,5vw,58px);color:#fff}
+.case-scene{padding:70px 0;border-top:1px solid rgba(255,255,255,.06)}
+.case-scene .tagn{font-family:'Cormorant Garamond';font-size:15px;color:var(--gold);font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase}
+.case-scene h3{font-size:clamp(26px,3.4vw,40px);color:#fff;margin:6px 0 12px}
+.case-scene p{color:#bcd6e1;max-width:720px;font-size:16.5px}
+.case-num{display:flex;gap:26px;flex-wrap:wrap;margin-top:26px}
+.case-num .c .n{font-family:'Cormorant Garamond';font-size:38px;color:var(--gold);font-weight:700;line-height:1}
+.case-num .c .l{font-size:12.5px;color:#9fc0cf;text-transform:uppercase;letter-spacing:.05em}
+
+/* ---------- EXPANSION ---------- */
+.exp{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+@media(max-width:880px){.exp{grid-template-columns:1fr}}
+.exp .e{background:#fff;border:1px solid #e6eef1;border-radius:16px;padding:26px;
+  box-shadow:0 12px 34px rgba(10,61,98,.06)}
+.exp .e .n{font-family:'Cormorant Garamond';font-size:20px;color:var(--teal2);font-weight:700}
+.exp .e h3{font-size:22px;margin:6px 0 8px}
+.exp .e p{font-size:14.5px;color:var(--muted)}
+
+/* ---------- FOOTER ---------- */
+footer{background:#031c2e;color:#9db6c4;padding:60px 0 40px;font-size:13.5px}
+footer .ft{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+footer .brand{font-family:'Cormorant Garamond';font-size:30px;color:#fff}
+footer a{color:#bcd6e1}
+.disc{margin-top:26px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);font-size:12.5px;
+  color:#7f9aab;max-width:900px}
+.wm{font-size:11px;color:#5f7a8b;margin-top:14px}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<nav id="nav">
+  <div class="brand">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M12 2c3 3 4 6 4 10s-1 7-4 10c-3-3-4-6-4-10S9 5 12 2z" fill="#e9b949"/><path d="M4 14c2.5 2 5 3 8 3s5.5-1 8-3" stroke="#9fe3ea" stroke-width="1.6" stroke-linecap="round"/></svg>
+    Fathomm
+  </div>
+  <div class="links">
+    <a href="#what">Medical tourism</a>
+    <a href="#voyage">The voyage</a>
+    <a href="#atlas">The Atlas</a>
+    <a href="#trust">Trust score</a>
+    <a href="#workflow">How it works</a>
+    <a href="#case">Case study</a>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section id="hero">
+  <svg class="hero-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+    <circle id="sun" class="hero-layer" cx="720" cy="230" r="92" fill="#f7e08a" opacity=".9"/>
+    <circle cx="720" cy="230" r="140" fill="#ffe9a6" opacity=".18" class="hero-layer" id="sunglow"/>
+    <g class="hero-layer" id="wave3" opacity=".55"><path d="M0 640 Q360 600 720 640 T1440 640 V900 H0Z" fill="#1b6f86"/></g>
+    <g class="hero-layer" id="boat">
+      <path d="M690 566 l70 0 -10 26 -50 0 z" fill="#0a2f45"/>
+      <path d="M724 566 L724 470 L784 556 Z" fill="#f4f7f8"/>
+      <path d="M722 566 L722 486 L672 556 Z" fill="#dbe8ee"/>
+      <rect x="722" y="466" width="3" height="104" fill="#0a2f45"/>
+    </g>
+    <g class="hero-layer" id="wave2" opacity=".8"><path d="M0 700 Q360 660 720 700 T1440 700 V900 H0Z" fill="#12707f"/></g>
+    <g class="hero-layer" id="wave1"><path d="M0 770 Q360 730 720 770 T1440 770 V900 H0Z" fill="#0c5f6e"/></g>
+  </svg>
+  <div class="hero-content">
+    <div class="kicker eyebrow">Global medical-tourism atlas</div>
+    <h1>Medicine,<br>by way of the sea.</h1>
+    <p class="tag">Fathomm helps people find, vet, and reach the world's medical-tourism clinics — and recover aboard a voyage rather than in a waiting room.</p>
+    <div class="hero-stats">
+      <div class="s"><div class="n" id="hs-clinics">115</div><div class="l">Clinics mapped</div></div>
+      <div class="s"><div class="n" id="hs-countries">20</div><div class="l">Countries</div></div>
+      <div class="s"><div class="n">9</div><div class="l">Treatment categories</div></div>
+      <div class="s"><div class="n">0–100</div><div class="l">Trust scored</div></div>
+    </div>
+  </div>
+  <div class="scrollcue">Scroll to set sail ↓</div>
+</section>
+
+<!-- ================= WHAT IS ================= -->
+<section id="what" class="block">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">The concept</div>
+      <h2 class="big">What is medical tourism?</h2>
+      <p class="lead">Crossing a border to get care that's cheaper, faster, or simply unavailable at home — a mature, multi-billion-dollar global market that runs on one scarce resource: trust.</p>
+      <p class="sub">People travel for four reasons, usually together. The hard part isn't the flight — it's knowing whether the clinic is any good, what it truly costs, and what happens if something goes wrong. That gap is the whole problem Fathomm exists to solve.</p>
+    </div>
+    <div class="why">
+      <div class="c reveal"><div class="ic">💰</div><h3>Cost</h3><p>Procedures run 40–90% cheaper abroad. A $52,000 U.S. full-mouth restoration is ~$18,000 in Baja.</p></div>
+      <div class="c reveal"><div class="ic">🔑</div><h3>Access</h3><p>Treatments that are restricted, backlogged, or unavailable at home — from electives to the experimental frontier.</p></div>
+      <div class="c reveal"><div class="ic">🏅</div><h3>Expertise</h3><p>Some places lead the world by sheer volume: Turkey for hair, Korea for facial contouring, Switzerland for longevity.</p></div>
+      <div class="c reveal"><div class="ic">⚓</div><h3>Experience</h3><p>Recovery somewhere restorative. Fathomm's answer: recover at sea, on a voyage built around the procedure.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE VOYAGE ================= -->
+<section id="voyage" class="block dark">
+  <div class="wrap split">
+    <div class="reveal">
+      <div class="eyebrow">The Fathomm difference</div>
+      <h2 class="big">Care as a voyage.</h2>
+      <p class="lead">The world's best-value clinics cluster on coastlines. Fathomm turns the trip into a sail — and the vessel into a private recovery suite.</p>
+      <ul>
+        <li><span class="dot">✦</span><div><b>Recovery you control.</b> Dentistry, hair transplants and many cosmetic procedures are low-acuity but reward rest, calm, and low infection exposure. A chartered vessel is a private convalescence.</div></li>
+        <li><span class="dot">✦</span><div><b>The clusters are on the water.</b> Baja is a short sail from San Diego; Istanbul sits on the Bosphorus; Phuket, Bali, Busan and the Riviera are ringed by marinas.</div></li>
+        <li><span class="dot">✦</span><div><b>Discretion by design.</b> A voyage reframes a fraught medical trip as a considered, private experience — especially for elective and cosmetic care.</div></li>
+      </ul>
+    </div>
+    <div class="boatcard reveal">
+      <svg viewBox="0 0 520 420" style="width:100%;display:block">
+        <defs><linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c4a63"/><stop offset="1" stop-color="#1b8a9c"/></linearGradient></defs>
+        <rect width="520" height="420" fill="url(#sky2)"/>
+        <circle cx="400" cy="90" r="46" fill="#f7e08a" opacity=".85"/>
+        <path d="M0 250 Q130 232 260 250 T520 250 V420 H0Z" fill="#0a5566" opacity=".7"/>
+        <path d="M0 292 Q130 274 260 292 T520 292 V420 H0Z" fill="#0c5f6e"/>
+        <g>
+          <path d="M232 300 l86 0 -13 34 -60 0 z" fill="#07293c"/>
+          <path d="M276 300 L276 168 L352 288 Z" fill="#f4f7f8"/>
+          <path d="M273 300 L273 190 L206 288 Z" fill="#d7e7ee"/>
+          <rect x="273" y="162" width="4" height="140" fill="#07293c"/>
+          <path d="M273 162 l30 8 -30 10z" fill="#ee6c4d"/>
+        </g>
+        <path d="M0 330 Q130 316 260 330 T520 330 V420 H0Z" fill="#0a4658" opacity=".85"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ATLAS ================= -->
+<section id="atlas" class="block">
+  <div class="wrap">
+    <div class="atlas-head">
+      <div class="reveal">
+        <div class="eyebrow">Interactive map · ranked by trust</div>
+        <h2 class="big">The Medical-Tourism Atlas</h2>
+        <p class="sub">Every point is a real clinic with a live website, price band, and a Fathomm Trust Score. Filter by treatment and tier; the ranked list stays in sync with the map.</p>
+      </div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="filters" id="catFilters"></div>
+    <div class="filters" style="margin-top:0">
+      <div id="tierFilters" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+      <label class="searchbar">🔍<input id="search" placeholder="Search clinic, city, country…"/></label>
+    </div>
+    <div class="atlas-grid">
+      <div id="map"></div>
+      <div class="rank">
+        <div class="rh">
+          <h3>Ranking</h3>
+          <div style="display:flex;gap:10px;align-items:center">
+            <span class="cnt" id="rankCount"></span>
+            <select class="sortsel" id="sortsel">
+              <option value="score">Trust ↓</option>
+              <option value="scoreA">Trust ↑</option>
+              <option value="priceA">Price ↑</option>
+              <option value="name">Name A–Z</option>
+            </select>
+          </div>
+        </div>
+        <div class="list" id="rankList"></div>
+      </div>
+    </div>
+    <div class="detail" id="detail"></div>
+  </div>
+</section>
+
+<!-- ================= TRUST ================= -->
+<section id="trust" class="block dark">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Methodology</div>
+      <h2 class="big">The Fathomm Trust Score</h2>
+      <p class="lead">One number, 0–100, weighted so a beautifully marketed clinic offering an unproven treatment can never outrank a modest clinic doing a well-established one.</p>
+      <p class="sub">Because evidence carries the most weight, the score protects patients where the market fails them most: the gap between how a clinic looks and whether its treatment actually works.</p>
+    </div>
+    <div class="rubric">
+      <div class="p reveal"><div class="w">30</div><div class="n">Evidence base</div><div class="d">Scientific standing of the procedure itself — mature vs experimental vs discredited.</div></div>
+      <div class="p reveal"><div class="w">25</div><div class="n">Accreditation</div><div class="d">JCI / TEMOS / ISO, ministry licensing, practitioner board certification, GMP labs.</div></div>
+      <div class="p reveal"><div class="w">15</div><div class="n">Transparency</div><div class="d">Named, verifiable clinicians, published pricing, honest evidence disclaimers.</div></div>
+      <div class="p reveal"><div class="w">15</div><div class="n">Track record</div><div class="d">Years operating, patient volume, verifiable independent reviews.</div></div>
+      <div class="p reveal"><div class="w">15</div><div class="n">Safety & recourse</div><div class="d">Recourse, safety record, and the absence of FDA / government warnings or bans.</div></div>
+    </div>
+    <div class="tierbar" id="tierbar"></div>
+    <div class="tierleg" id="tierleg"></div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section class="block tint">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Standard estimates</div>
+      <h2 class="big">What it costs vs. home</h2>
+      <p class="sub">Signature-procedure price bands (USD, 2026). Striped bar = typical home-market price; solid teal = destination price.</p>
+    </div>
+    <div class="pricewrap" id="pricewrap"></div>
+    <p class="wm" style="color:#7f96a6;margin-top:16px">Full per-clinic pricing lives in the accompanying dataset. Longevity "revitalisation" and experimental categories have no home-market equivalent and are shown in the Atlas rather than here.</p>
+  </div>
+</section>
+
+<!-- ================= WORKFLOW ================= -->
+<section id="workflow" class="block">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Onboarding</div>
+      <h2 class="big">How a Fathomm voyage works</h2>
+      <p class="sub">Six steps. Each one removes a specific source of risk — turning an information-and-logistics problem into a considered journey.</p>
+    </div>
+    <div class="steps" id="steps"></div>
+  </div>
+</section>
+
+<!-- ================= CASE STUDY ================= -->
+<section id="case">
+  <div class="case-hero">
+    <div class="cbg"></div>
+    <svg class="case-waves" id="cwaves" viewBox="0 0 1440 220" preserveAspectRatio="none" style="height:220px;width:120%">
+      <path d="M0 120 Q360 80 720 120 T1440 120 V220 H0Z" fill="#0a4a63" opacity=".6"/>
+      <path d="M0 150 Q360 110 720 150 T1440 150 V220 H0Z" fill="#0c5f6e"/>
+    </svg>
+    <div class="wrap"><div class="inner">
+      <div class="eyebrow" style="color:#9fe3ea">Case study</div>
+      <div class="who">"A Pacific voyage<br>for a new smile."</div>
+      <p style="color:#cfe6ee;margin-top:12px;max-width:520px">Marcus, 54, San Diego. Needs a full-arch dental restoration. U.S. quote: <b>$52,000</b>. Insurance covers almost none of it — and he doesn't know how to tell a good Tijuana clinic from a bad one.</p>
+    </div></div>
+  </div>
+  <div class="wrap">
+    <div class="case-scene reveal"><div class="tagn">01 · Discover & match</div><h3>From a goal, not a clinic</h3><p>Marcus filters Fathomm for dentistry, coastal access, and Trust Tier A–B. Instead of the cheapest inland option in Los Algodones, Fathomm surfaces the Baja Pacific corridor — a Rosarito beachfront practice open since 1992 and a Zona Río Tijuana clinic whose lead dentist holds a California license. Both are a short sail from home. Estimated all-in: <b style="color:#fff">~$18,000</b> for both arches.</p></div>
+    <div class="case-scene reveal"><div class="tagn">02 · Vet</div><h3>Credentials, verified in writing</h3><p>Fathomm confirms the treating dentist's California license and AACD membership, pulls verified reviews, and secures a single itemized quote — implants, prostheses, imaging, sedation, and a five-year warranty. No "implants-only" bait pricing, no hidden broker markup.</p></div>
+    <div class="case-scene reveal"><div class="tagn">03 · The voyage</div><h3>San Diego → the Baja coast, by sea</h3><p>Marcus boards a chartered yacht at Shelter Island. An easy day-sail down the coast reaches an Ensenada/Rosarito anchorage. Treatment is scheduled across two short in-clinic days, surgical phase first, with a Spanish-speaking liaison handling transfers and the border.</p></div>
+    <div class="case-scene reveal"><div class="tagn">04 · Recover at sea</div><h3>A galley, not a hotel lobby</h3><p>After placement, Marcus recovers aboard — calm water, a soft-food menu, low infection exposure, a nurse check-in. The yacht returns him to San Diego; the crown phase is booked as a second, shorter voyage months later, with a local dentist on call for anything in between.</p>
+      <div class="case-num">
+        <div class="c"><div class="n">~$34k</div><div class="l">Saved vs. U.S.</div></div>
+        <div class="c"><div class="n">Tier A–B</div><div class="l">Vetted clinicians</div></div>
+        <div class="c"><div class="n">2 sails</div><div class="l">Surgery + crown phases</div></div>
+        <div class="c"><div class="n">0</div><div class="l">Follow-up gaps</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPANSION ================= -->
+<section class="block tint">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">The business</div>
+      <h2 class="big">Scaling the trusted navigator</h2>
+      <p class="sub">Fathomm's moat is credibility. It starts where trust and coastline align, then expands along the shoreline of what's genuinely reputable.</p>
+    </div>
+    <div class="exp">
+      <div class="e reveal"><div class="n">01</div><h3>Beachhead: Baja</h3><p>The Pacific dental corridor is ideal: verifiable quality, huge savings, a short safe sail from San Diego, and a vast uninsured U.S. audience. Prove the voyage model, then template it.</p></div>
+      <div class="e reveal"><div class="n">02</div><h3>Coast of credibility</h3><p>Add A/B-tier coastal clusters in sequence — Cancún, Istanbul/Izmir, Busan/Jeju, the Riviera & Gulf longevity peers — with "fly-and-berth" hybrids where the best clinic is inland.</p></div>
+      <div class="e reveal"><div class="n">03</div><h3>Monetize trust</h3><p>Concierge & orchestration fees, vetted-clinic partnerships, voyage charters, premium vetting tiers — while the Trust Score stays free and independent, because credibility is the product.</p></div>
+      <div class="e reveal"><div class="n">04</div><h3>The map is the front door</h3><p>The atlas is top-of-funnel: patients arrive to explore prices, meet the Trust Score, and convert into onboarding — and see Fathomm rank down the dangerous fringe.</p></div>
+      <div class="e reveal"><div class="n">05</div><h3>Guardrails as strategy</h3><p>Fathomm declines to broker discredited care and labels the experimental. In a market that preys on the desperate, being the operator that says "no" is the durable advantage.</p></div>
+      <div class="e reveal"><div class="n">06</div><h3>Recovery network</h3><p>Every voyage ends with a written aftercare plan and a home-country follow-up link — closing the gap that derails most solo medical trips and earning repeat trust.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="ft">
+      <div>
+        <div class="brand">Fathomm</div>
+        <p style="max-width:340px;margin-top:8px">The trusted navigator for global medical tourism — delivered, when the coast allows, as a voyage.</p>
+      </div>
+      <div>
+        <div style="color:#fff;font-weight:700;margin-bottom:8px">Categories</div>
+        Dentistry · Hair transplants · Cosmetic surgery<br>Life extension · Exosomes · Phage · Stem cell
+      </div>
+      <div>
+        <div style="color:#fff;font-weight:700;margin-bottom:8px">Data</div>
+        115 providers · 20 countries<br>Trust-scored 0–100 · Aug 2026
+      </div>
+    </div>
+    <div class="disc">
+      <b>Important.</b> This atlas is a market-research and orientation tool, not medical advice or an endorsement. Trust Scores are Fathomm's own composite estimates from public information and are decision aids, not guarantees. Exosome, stem-cell, most "life-extension revitalisation," and gene therapies are experimental and not approved by the FDA or EMA; alternative cancer clinics and therapies such as Laetrile, Hoxsey, and "young plasma" are discredited and shown only as cautionary entries. Patients with serious illness should seek accredited centers and registered clinical trials. Always verify a specific clinician's credentials and secure a written, itemized quote and aftercare plan before travel.
+      <div class="wm">Fathomm Medical Voyages Atlas · research compiled August 2026 · sources in the accompanying strategy briefing.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+/* ---------------- DATA (injected) ---------------- */
+const DATA = /*__CLINIC_DATA__*/;
+const CL = DATA.clinics, TIER_DEFS = DATA.rubric.tiers;
+const TIER_COLOR = {A:'#1f9d6b',B:'#2f86c9',C:'#d9a021',D:'#e07b39',E:'#c0392b'};
+const CAT_ORDER = ['Dentistry','Hair Transplant','Cosmetic Surgery','Life Extension / Longevity',
+  'Exosomes / Regenerative','Phage Therapy','Alt./Immuno Cancer','Stem Cell','Gene / Other Fringe'];
+
+/* set hero counts */
+document.getElementById('hs-clinics').textContent = CL.length;
+document.getElementById('hs-countries').textContent = new Set(CL.map(c=>c.country)).size;
+
+/* ---------------- NAV solidify ---------------- */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>{nav.classList.toggle('solid',scrollY>60)});
+
+/* ---------------- HERO parallax ---------------- */
+const P=[['sun',.20],['sunglow',.16],['wave3',.10],['boat',.06],['wave2',-.05],['wave1',-.12]];
+function heroPar(){const y=scrollY;for(const[id,s]of P){const el=document.getElementById(id);
+  if(el)el.style.transform=`translateY(${y*s}px)`+(id==='sun'||id==='sunglow'?' translateX(-0%)':'')}}
+addEventListener('scroll',()=>requestAnimationFrame(heroPar));
+/* case-study waves parallax */
+const cw=document.getElementById('cwaves');
+addEventListener('scroll',()=>{const r=cw.getBoundingClientRect();
+  cw.style.transform=`translateX(${(r.top*-.04)}px)`});
+
+/* ---------------- reveal on scroll ---------------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ---------------- LEGEND + tier bar ---------------- */
+const legend=document.getElementById('legend');
+TIER_DEFS.forEach(t=>{legend.insertAdjacentHTML('beforeend',
+  `<span class="lg"><span class="sw" style="background:${t.color}"></span>${t.letter} · ${t.label}</span>`)});
+
+const counts={A:0,B:0,C:0,D:0,E:0};CL.forEach(c=>counts[c.tier]++);
+const tb=document.getElementById('tierbar'),tl=document.getElementById('tierleg');
+TIER_DEFS.forEach(t=>{const n=counts[t.letter];
+  tb.insertAdjacentHTML('beforeend',`<div class="seg" style="flex:${Math.max(n,1)};background:${t.color}">${t.letter} · ${n}<small>${t.label.split(' · ')[0]}</small></div>`);
+  tl.insertAdjacentHTML('beforeend',`<span>■ <b style="color:${t.color}">${t.letter}</b> ${t.min}+ · ${t.label}</span>`)});
+
+/* ---------------- MAP ---------------- */
+const map=L.map('map',{scrollWheelZoom:false,worldCopyJump:true}).setView([28,20],2);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+  {attribution:'&copy; OpenStreetMap &copy; CARTO',subdomains:'abcd',maxZoom:19}).addTo(map);
+map.on('click',()=>{});
+let markers=[], byId={};
+function makeMarkers(){
+  CL.forEach((c,i)=>{
+    const m=L.circleMarker([c.lat,c.lng],{radius:7,weight:2,color:'#fff',
+      fillColor:c.tier_color,fillOpacity:.92});
+    m.bindPopup(`<b>${c.name}</b><br>${c.city}, ${c.country}<br>
+      <span style="color:${c.tier_color};font-weight:700">${c.tier} · ${c.trust_score}/100</span> — ${c.tier_label}<br>
+      <span style="color:#5b7386">${c.specialty}</span>`);
+    m.on('click',()=>showDetail(i));
+    m._cl=c; m._i=i; markers.push(m); byId[i]=m;
+  });
+}
+makeMarkers();
+
+/* ---------------- FILTER STATE ---------------- */
+let activeCats=new Set(CAT_ORDER), activeTiers=new Set(['A','B','C','D','E']), query='';
+const catF=document.getElementById('catFilters'), tierF=document.getElementById('tierFilters');
+catF.insertAdjacentHTML('beforeend',`<span class="pill active" data-all="1">All treatments</span>`);
+CAT_ORDER.forEach(cat=>{catF.insertAdjacentHTML('beforeend',
+  `<span class="pill active" data-cat="${cat}">${cat}</span>`)});
+['A','B','C','D','E'].forEach(t=>{tierF.insertAdjacentHTML('beforeend',
+  `<span class="pill active" data-tier="${t}" style="border-color:${TIER_COLOR[t]}">${t}</span>`)});
+
+catF.addEventListener('click',e=>{const p=e.target.closest('.pill');if(!p)return;
+  if(p.dataset.all){activeCats=new Set(CAT_ORDER);catF.querySelectorAll('[data-cat]').forEach(x=>x.classList.add('active'));
+    catF.querySelector('[data-all]').classList.add('active');render();return}
+  const cat=p.dataset.cat;if(activeCats.has(cat)){activeCats.delete(cat);p.classList.remove('active')}
+  else{activeCats.add(cat);p.classList.add('active')}
+  catF.querySelector('[data-all]').classList.toggle('active',activeCats.size===CAT_ORDER.length);render()});
+tierF.addEventListener('click',e=>{const p=e.target.closest('.pill');if(!p)return;
+  const t=p.dataset.tier;if(activeTiers.has(t)){activeTiers.delete(t);p.classList.remove('active')}
+  else{activeTiers.add(t);p.classList.add('active')}render()});
+document.getElementById('search').addEventListener('input',e=>{query=e.target.value.toLowerCase();render()});
+document.getElementById('sortsel').addEventListener('change',render);
+
+/* ---------------- RENDER ---------------- */
+const rankList=document.getElementById('rankList'), rankCount=document.getElementById('rankCount');
+function filtered(){
+  return CL.map((c,i)=>({c,i})).filter(({c})=>activeCats.has(c.category)&&activeTiers.has(c.tier)&&
+    (!query||`${c.name} ${c.city} ${c.country} ${c.specialty} ${c.category}`.toLowerCase().includes(query)));
+}
+function sortList(arr){const s=document.getElementById('sortsel').value;
+  const f={score:(a,b)=>b.c.trust_score-a.c.trust_score,
+    scoreA:(a,b)=>a.c.trust_score-b.c.trust_score,
+    priceA:(a,b)=>(a.c.price_low||1e9)-(b.c.price_low||1e9),
+    name:(a,b)=>a.c.name.localeCompare(b.c.name)}[s];
+  return arr.sort(f);}
+function render(){
+  const arr=sortList(filtered());
+  rankCount.textContent=`${arr.length} clinic${arr.length!==1?'s':''}`;
+  rankList.innerHTML=arr.map(({c,i})=>`
+    <div class="row" data-i="${i}">
+      <div class="badge" style="background:${c.tier_color}">${c.trust_score}<span class="t">${c.tier}</span></div>
+      <div class="meta"><div class="nm">${c.name}</div>
+        <div class="lo">${c.city}, ${c.country}</div>
+        <span class="cat">${c.category}</span></div>
+    </div>`).join('');
+  const shown=new Set(arr.map(o=>o.i));
+  markers.forEach(m=>{if(shown.has(m._i)){if(!map.hasLayer(m))m.addTo(map)}else{if(map.hasLayer(m))map.removeLayer(m)}});
+}
+rankList.addEventListener('click',e=>{const r=e.target.closest('.row');if(!r)return;
+  const i=+r.dataset.i;showDetail(i);const m=byId[i];map.flyTo(m.getLatLng(),Math.max(map.getZoom(),5),{duration:.8});
+  setTimeout(()=>m.openPopup(),650)});
+
+/* ---------------- DETAIL ---------------- */
+const detail=document.getElementById('detail');
+function bar(k,v,max){return `<div class="bar"><span>${k}</span><div class="track"><div class="fill" style="width:${(v/max*100)}%"></div></div><span>${v}/${max}</span></div>`}
+function showDetail(i){
+  const c=CL[i];const s=c.scores;
+  detail.innerHTML=`
+    <div class="dtop">
+      <div><h3>${c.name}</h3><div class="loc">${c.city}, ${c.country} · ${c.category}${c.defunct?' · <b style="color:#c0392b">DEFUNCT</b>':''}</div></div>
+      <div class="scorebox"><div class="big" style="color:${c.tier_color}">${c.trust_score}</div>
+        <div class="tl" style="color:${c.tier_color}">${c.tier} · ${c.tier_label}</div></div>
+    </div>
+    <div class="dgrid">
+      <div class="f"><div class="k">Specialty</div><div class="v">${c.specialty}</div></div>
+      <div class="f"><div class="k">Typical pricing</div><div class="v">${c.price}</div></div>
+      <div class="f"><div class="k">Accreditation</div><div class="v">${c.accreditations}</div></div>
+      <div class="f"><div class="k">Established</div><div class="v">${c.established}</div></div>
+      <div class="f"><div class="k">Coast / sailing access</div><div class="v">${c.coast}</div></div>
+      <div class="f"><div class="k">Website</div><div class="v"><a href="${c.website}" target="_blank" rel="noopener">${c.website.replace(/^https?:\/\//,'').replace(/\/$/,'')}</a></div></div>
+    </div>
+    <div class="bars">
+      ${bar('Evidence',s.evidence,30)}${bar('Accreditation',s.accreditation,25)}
+      ${bar('Transparency',s.transparency,15)}${bar('Track record',s.track_record,15)}${bar('Safety',s.safety,15)}
+    </div>
+    <div class="tags">
+      <div class="tag pos">✓ ${c.trust_signals}</div>
+      <div class="tag neg">⚠ ${c.red_flags}</div>
+    </div>
+    <div class="dactions">
+      <a class="btn" href="${c.website}" target="_blank" rel="noopener">Visit clinic site →</a>
+      <button class="btn ghost" onclick="document.getElementById('map').scrollIntoView({behavior:'smooth'})">Back to map</button>
+    </div>`;
+  detail.classList.add('show');
+  detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ---------------- PRICING bars ---------------- */
+const PRICES=[
+  ['Dental · All-on-4 (per arch)','Full-arch implant bridge',10250,25000,'55–67%'],
+  ['Dental · single implant','Titanium implant, no crown',1075,4000,'60–75%'],
+  ['Hair transplant · FUE/DHI package','All-inclusive w/ hotel + transfers',3200,14000,'60–80%'],
+  ['Cosmetic · rhinoplasty','Nose reshaping',6250,13000,'40–60%'],
+  ['Cosmetic · facial-bone contouring','V-line / jaw',14000,37000,'50–65%'],
+  ['Longevity · diagnostics membership','Per year (vs US peers)',11750,20000,'up to 60%']
+];
+const maxP=Math.max(...PRICES.map(p=>p[3]));
+document.getElementById('pricewrap').innerHTML=PRICES.map(p=>{
+  const[label,sub,dest,home,save]=p;
+  return `<div class="prow reveal">
+    <div class="pl"><div class="t">${label}</div><div class="s">${sub}</div></div>
+    <div class="pbar"><div class="track">
+      <div class="home" style="width:${home/maxP*100}%"></div>
+      <div class="dest" style="width:${dest/maxP*100}%">$${dest.toLocaleString()}</div>
+      <div class="save">~${save} less · home ≈ $${home.toLocaleString()}</div>
+    </div></div></div>`}).join('');
+document.querySelectorAll('.prow.reveal').forEach(el=>io.observe(el));
+
+/* ---------------- WORKFLOW ---------------- */
+const STEPS=[
+  ['Discover','The patient names a goal — a new smile, hair restoration, a longevity baseline — not a clinic. Fathomm educates on the procedure, realistic outcomes, and, crucially, the evidence base, so unproven categories are framed honestly up front.'],
+  ['Match','Fathomm surfaces destinations filtered by procedure, budget, trust tier, and — uniquely — sea accessibility for a voyage. Every option shows its Trust Score, price band, and red flags.'],
+  ['Vet','Fathomm verifies the specific operating clinician\'s credentials and accreditation, assembles independent reviews, and secures a written, itemized, all-in quote. This is where ghost surgery, hair mills, and hidden markups are neutralized.'],
+  ['Plan the voyage','Itinerary design: embarkation port, vessel, treatment scheduling, interpreter, documents, and a written aftercare and complication plan — including who provides follow-up back home.'],
+  ['Treatment','Coordinated care day-of, with a Fathomm liaison on the ground and a clear escalation path if anything goes wrong.'],
+  ['Recover & follow-up','Convalescence aboard or portside, remote check-ins, and a durable link back to home-country care for anything the destination clinic can\'t service.']
+];
+document.getElementById('steps').innerHTML=STEPS.map((s,i)=>
+  `<div class="step reveal"><div class="num">${i+1}</div><div class="sc"><h3>${s[0]}</h3><p>${s[1]}</p></div></div>`).join('');
+document.querySelectorAll('.step.reveal').forEach(el=>io.observe(el));
+
+/* initial paint */
+render();
+</script>
+</body>
+</html>

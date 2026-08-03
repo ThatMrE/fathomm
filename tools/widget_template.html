@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fathomm — Medical-Tourism Trust Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<style>
+:root{
+  --deep:#04263f; --ocean:#0a3d62; --teal:#1b8a9c; --teal2:#12a5b0; --gold:#e9b949;
+  --ink:#0c2233; --paper:#f4f7f8; --muted:#6b8296; --line:#e2ebef;
+  --A:#1f9d6b; --B:#2f86c9; --C:#d9a021; --D:#e07b39; --E:#c0392b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);
+  background:var(--paper);-webkit-font-smoothing:antialiased;line-height:1.5}
+.serif{font-family:'Cormorant Garamond','Georgia',serif}
+a{color:var(--teal)}
+#fathomm-atlas{display:flex;flex-direction:column;height:100%;min-height:520px;overflow:hidden;background:var(--paper)}
+
+/* ---- header / controls ---- */
+.wtop{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:14px 18px 8px}
+.brandmini{display:flex;align-items:center;gap:9px;font-family:'Cormorant Garamond';font-weight:700;
+  font-size:22px;color:var(--deep)}
+.brandmini svg{width:22px;height:22px}
+.brandmini small{font-family:'Inter';font-weight:600;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--teal2);display:block;line-height:1}
+.legend{display:flex;gap:12px;flex-wrap:wrap}
+.legend .lg{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:#41607a}
+.legend .sw{width:12px;height:12px;border-radius:3px}
+.controls{padding:0 18px 12px;display:flex;flex-direction:column;gap:8px}
+.filters{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.pill{border:1px solid #cddbe2;background:#fff;border-radius:999px;padding:6px 12px;font-size:12.5px;
+  font-weight:600;color:#41607a;cursor:pointer;transition:.15s;user-select:none;white-space:nowrap}
+.pill:hover{border-color:var(--teal2);color:var(--teal2)}
+.pill.active{background:var(--ocean);color:#fff;border-color:var(--ocean)}
+.searchbar{display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #cddbe2;border-radius:9px;
+  padding:6px 11px;flex:1;min-width:180px}
+.searchbar input{border:0;outline:0;font-size:13px;width:100%;font-family:inherit;background:transparent}
+
+/* ---- body: map + list ---- */
+.body{flex:1;display:flex;gap:12px;padding:0 18px 12px;min-height:0}
+#map{flex:1;border-radius:14px;box-shadow:0 10px 30px rgba(10,61,98,.14);z-index:1;min-height:260px}
+.rank{width:340px;flex:0 0 auto;background:#fff;border-radius:14px;box-shadow:0 10px 30px rgba(10,61,98,.10);
+  display:flex;flex-direction:column;overflow:hidden}
+.rh{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.rh h3{font-family:'Cormorant Garamond';font-size:19px;font-weight:700}
+.rh .rt{display:flex;gap:8px;align-items:center}
+.rh .cnt{font-size:11.5px;color:var(--muted);font-weight:600}
+.sortsel{font-size:11.5px;border:1px solid #d6e0e6;border-radius:7px;padding:4px 7px;color:#41607a;font-family:inherit}
+.list{overflow-y:auto;flex:1}
+.row{display:flex;gap:11px;padding:11px 14px;border-bottom:1px solid #f0f3f5;cursor:pointer;transition:.13s}
+.row:hover{background:#f2f8f9}
+.badge{flex:0 0 auto;width:42px;height:42px;border-radius:10px;display:grid;place-items:center;color:#fff;
+  font-family:'Cormorant Garamond';font-weight:700;font-size:19px;line-height:1;position:relative}
+.badge .t{position:absolute;bottom:-3px;right:-3px;background:#fff;color:#0c2233;font-family:'Inter';
+  font-size:8.5px;font-weight:800;border-radius:5px;padding:1px 3px;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.row .meta{min-width:0;flex:1}
+.row .meta .nm{font-weight:700;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .meta .lo{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .meta .cat{display:inline-block;font-size:10px;font-weight:700;color:var(--teal2);
+  text-transform:uppercase;letter-spacing:.03em;margin-top:2px}
+.leaflet-popup-content{font-family:'Inter';font-size:12.5px}
+.leaflet-popup-content b{font-family:'Cormorant Garamond';font-size:15px}
+
+/* ---- footer ---- */
+.wfoot{padding:8px 18px 12px;font-size:10.5px;color:#7f96a6;display:flex;justify-content:space-between;
+  gap:12px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line)}
+.wfoot a{color:#5f7d90}
+
+/* ---- detail drawer ---- */
+.backdrop{position:absolute;inset:0;background:rgba(4,38,63,.28);opacity:0;visibility:hidden;transition:.25s;z-index:40}
+.backdrop.show{opacity:1;visibility:visible}
+.drawer{position:absolute;top:0;right:0;height:100%;width:440px;max-width:92%;background:#fff;z-index:50;
+  transform:translateX(102%);transition:transform .32s cubic-bezier(.3,.7,.2,1);display:flex;flex-direction:column;
+  box-shadow:-16px 0 50px rgba(4,38,63,.24)}
+.drawer.show{transform:none}
+.dh{padding:18px 20px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.dh h3{font-family:'Cormorant Garamond';font-size:25px;font-weight:700;line-height:1.05}
+.dh .loc{color:var(--muted);font-size:13px;margin-top:3px}
+.closeb{flex:0 0 auto;width:32px;height:32px;border-radius:9px;border:1px solid var(--line);background:#fff;
+  cursor:pointer;font-size:17px;color:#5f7d90;line-height:1}
+.closeb:hover{background:#f2f6f7}
+.dbody{overflow-y:auto;padding:16px 20px 22px}
+.scorepill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;color:#fff;
+  font-weight:700;font-size:13px}
+.scorepill .n{font-family:'Cormorant Garamond';font-size:20px;line-height:1}
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px 22px;margin-top:16px}
+@media(max-width:420px){.dgrid{grid-template-columns:1fr}}
+.dgrid .k{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--teal2)}
+.dgrid .v{font-size:13px;color:#2a3f4f;word-break:break-word}
+.bars{margin-top:16px;display:grid;gap:7px}
+.bar{display:grid;grid-template-columns:96px 1fr 38px;align-items:center;gap:9px;font-size:11.5px}
+.bar .track{background:#eef2f4;border-radius:6px;height:8px;overflow:hidden}
+.bar .fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--teal),var(--teal2))}
+.tags{display:flex;flex-direction:column;gap:7px;margin-top:15px}
+.tag{font-size:12.5px;padding:9px 11px;border-radius:9px;display:flex;gap:7px;align-items:flex-start;line-height:1.4}
+.tag.pos{background:rgba(31,157,107,.09);color:#166b4a}
+.tag.neg{background:rgba(192,57,43,.08);color:#a5342a}
+.btn{display:inline-flex;align-items:center;gap:7px;background:var(--ocean);color:#fff;text-decoration:none;
+  padding:10px 16px;border-radius:9px;font-weight:600;font-size:13.5px;margin-top:16px;transition:.18s}
+.btn:hover{background:var(--teal)}
+.disc-mini{margin-top:16px;font-size:11px;color:#8aa0ae;line-height:1.5;border-top:1px solid var(--line);padding-top:12px}
+
+/* ---- responsive ---- */
+@media(max-width:760px){
+  .body{flex-direction:column}
+  #map{flex:0 0 auto;height:300px}
+  .rank{width:auto;flex:1;min-height:200px}
+  .legend{display:none}
+}
+</style>
+</head>
+<body>
+<div id="fathomm-atlas">
+  <div class="wtop">
+    <div class="brandmini">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2c3 3 4 6 4 10s-1 7-4 10c-3-3-4-6-4-10S9 5 12 2z" fill="#e9b949"/><path d="M4 14c2.5 2 5 3 8 3s5.5-1 8-3" stroke="#1b8a9c" stroke-width="1.7" stroke-linecap="round"/></svg>
+      <span>Fathomm Atlas<small>Medical-tourism trust map</small></span>
+    </div>
+    <div class="legend" id="legend"></div>
+  </div>
+  <div class="controls">
+    <div class="filters" id="catFilters"></div>
+    <div class="filters">
+      <div class="filters" id="tierFilters" style="gap:7px"></div>
+      <label class="searchbar">🔍<input id="search" placeholder="Search clinic, city, country…"/></label>
+    </div>
+  </div>
+  <div class="body">
+    <div id="map"></div>
+    <aside class="rank">
+      <div class="rh">
+        <h3>Ranking</h3>
+        <div class="rt">
+          <span class="cnt" id="rankCount"></span>
+          <select class="sortsel" id="sortsel">
+            <option value="score">Trust ↓</option>
+            <option value="scoreA">Trust ↑</option>
+            <option value="priceA">Price ↑</option>
+            <option value="name">A–Z</option>
+          </select>
+        </div>
+      </div>
+      <div class="list" id="rankList"></div>
+    </aside>
+  </div>
+  <div class="wfoot">
+    <span id="footCount"></span>
+    <span>Trust Scores are Fathomm composite estimates from public info — a decision aid, not an endorsement or medical advice.</span>
+  </div>
+  <div class="backdrop" id="backdrop"></div>
+  <div class="drawer" id="drawer"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const DATA = /*__CLINIC_DATA__*/;
+const CL=DATA.clinics, TIER_DEFS=DATA.rubric.tiers;
+const TIER_COLOR={A:'#1f9d6b',B:'#2f86c9',C:'#d9a021',D:'#e07b39',E:'#c0392b'};
+const CAT_ORDER=['Dentistry','Hair Transplant','Cosmetic Surgery','Life Extension / Longevity',
+  'Exosomes / Regenerative','Phage Therapy','Alt./Immuno Cancer','Stem Cell','Gene / Other Fringe'];
+
+document.getElementById('footCount').textContent=
+  `${CL.length} providers · ${new Set(CL.map(c=>c.country)).size} countries · scored 0–100`;
+
+/* legend */
+const legend=document.getElementById('legend');
+TIER_DEFS.forEach(t=>legend.insertAdjacentHTML('beforeend',
+  `<span class="lg"><span class="sw" style="background:${t.color}"></span>${t.letter}</span>`));
+
+/* map */
+const map=L.map('map',{scrollWheelZoom:false,worldCopyJump:true}).setView([26,18],2);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+  {attribution:'&copy; OpenStreetMap &copy; CARTO',subdomains:'abcd',maxZoom:19}).addTo(map);
+let markers=[],byId={};
+CL.forEach((c,i)=>{
+  const m=L.circleMarker([c.lat,c.lng],{radius:7,weight:2,color:'#fff',fillColor:c.tier_color,fillOpacity:.92});
+  m.bindPopup(`<b>${c.name}</b><br>${c.city}, ${c.country}<br>
+    <span style="color:${c.tier_color};font-weight:700">${c.tier} · ${c.trust_score}/100</span> — ${c.tier_label}<br>
+    <span style="color:#5b7386">${c.specialty}</span>`);
+  m.on('click',()=>openDetail(i));
+  m._i=i;markers.push(m);byId[i]=m;
+});
+
+/* filters */
+let activeCats=new Set(CAT_ORDER),activeTiers=new Set(['A','B','C','D','E']),query='';
+const catF=document.getElementById('catFilters'),tierF=document.getElementById('tierFilters');
+catF.insertAdjacentHTML('beforeend',`<span class="pill active" data-all="1">All</span>`);
+CAT_ORDER.forEach(c=>catF.insertAdjacentHTML('beforeend',`<span class="pill active" data-cat="${c}">${c}</span>`));
+['A','B','C','D','E'].forEach(t=>tierF.insertAdjacentHTML('beforeend',
+  `<span class="pill active" data-tier="${t}" style="border-color:${TIER_COLOR[t]}">${t}</span>`));
+catF.addEventListener('click',e=>{const p=e.target.closest('.pill');if(!p)return;
+  if(p.dataset.all){activeCats=new Set(CAT_ORDER);catF.querySelectorAll('[data-cat]').forEach(x=>x.classList.add('active'));
+    p.classList.add('active');render();return}
+  const cat=p.dataset.cat;if(activeCats.has(cat)){activeCats.delete(cat);p.classList.remove('active')}else{activeCats.add(cat);p.classList.add('active')}
+  catF.querySelector('[data-all]').classList.toggle('active',activeCats.size===CAT_ORDER.length);render()});
+tierF.addEventListener('click',e=>{const p=e.target.closest('.pill');if(!p)return;
+  const t=p.dataset.tier;if(activeTiers.has(t)){activeTiers.delete(t);p.classList.remove('active')}else{activeTiers.add(t);p.classList.add('active')}render()});
+document.getElementById('search').addEventListener('input',e=>{query=e.target.value.toLowerCase();render()});
+document.getElementById('sortsel').addEventListener('change',render);
+
+/* render */
+const rankList=document.getElementById('rankList'),rankCount=document.getElementById('rankCount');
+function filtered(){return CL.map((c,i)=>({c,i})).filter(({c})=>activeCats.has(c.category)&&activeTiers.has(c.tier)&&
+  (!query||`${c.name} ${c.city} ${c.country} ${c.specialty} ${c.category}`.toLowerCase().includes(query)))}
+function sortList(a){const s=document.getElementById('sortsel').value;
+  return a.sort({score:(x,y)=>y.c.trust_score-x.c.trust_score,scoreA:(x,y)=>x.c.trust_score-y.c.trust_score,
+    priceA:(x,y)=>(x.c.price_low||1e9)-(y.c.price_low||1e9),name:(x,y)=>x.c.name.localeCompare(y.c.name)}[s])}
+function render(){
+  const arr=sortList(filtered());
+  rankCount.textContent=`${arr.length}`;
+  rankList.innerHTML=arr.map(({c,i})=>`<div class="row" data-i="${i}">
+    <div class="badge" style="background:${c.tier_color}">${c.trust_score}<span class="t">${c.tier}</span></div>
+    <div class="meta"><div class="nm">${c.name}</div><div class="lo">${c.city}, ${c.country}</div>
+      <span class="cat">${c.category}</span></div></div>`).join('');
+  const shown=new Set(arr.map(o=>o.i));
+  markers.forEach(m=>{if(shown.has(m._i)){if(!map.hasLayer(m))m.addTo(map)}else if(map.hasLayer(m))map.removeLayer(m)});
+}
+rankList.addEventListener('click',e=>{const r=e.target.closest('.row');if(!r)return;
+  const i=+r.dataset.i;const m=byId[i];map.flyTo(m.getLatLng(),Math.max(map.getZoom(),5),{duration:.7});
+  openDetail(i)});
+
+/* detail drawer */
+const drawer=document.getElementById('drawer'),backdrop=document.getElementById('backdrop');
+function bar(k,v,max){return `<div class="bar"><span>${k}</span><div class="track"><div class="fill" style="width:${v/max*100}%"></div></div><span>${v}/${max}</span></div>`}
+function openDetail(i){
+  const c=CL[i],s=c.scores;
+  drawer.innerHTML=`
+    <div class="dh">
+      <div><h3>${c.name}</h3><div class="loc">${c.city}, ${c.country} · ${c.category}${c.defunct?' · <b style="color:#c0392b">DEFUNCT</b>':''}</div>
+        <div style="margin-top:10px"><span class="scorepill" style="background:${c.tier_color}"><span class="n">${c.trust_score}</span> ${c.tier} · ${c.tier_label}</span></div></div>
+      <button class="closeb" onclick="closeDetail()">✕</button>
+    </div>
+    <div class="dbody">
+      <div class="dgrid">
+        <div><div class="k">Specialty</div><div class="v">${c.specialty}</div></div>
+        <div><div class="k">Typical pricing</div><div class="v">${c.price}</div></div>
+        <div><div class="k">Accreditation</div><div class="v">${c.accreditations}</div></div>
+        <div><div class="k">Established</div><div class="v">${c.established}</div></div>
+        <div><div class="k">Coast / sailing access</div><div class="v">${c.coast}</div></div>
+        <div><div class="k">Website</div><div class="v"><a href="${c.website}" target="_blank" rel="noopener">${c.website.replace(/^https?:\/\//,'').replace(/\/$/,'')}</a></div></div>
+      </div>
+      <div class="bars">
+        ${bar('Evidence',s.evidence,30)}${bar('Accreditation',s.accreditation,25)}
+        ${bar('Transparency',s.transparency,15)}${bar('Track record',s.track_record,15)}${bar('Safety',s.safety,15)}
+      </div>
+      <div class="tags">
+        <div class="tag pos">✓ ${c.trust_signals}</div>
+        <div class="tag neg">⚠ ${c.red_flags}</div>
+      </div>
+      <a class="btn" href="${c.website}" target="_blank" rel="noopener">Visit clinic site →</a>
+      <div class="disc-mini">Fathomm Trust Score weights: evidence 30 · accreditation 25 · transparency 15 · track record 15 · safety 15. Experimental categories (exosomes, stem-cell, most "life-extension", gene therapy) are not FDA/EMA-approved; discredited entries are shown as cautionary only. Not medical advice.</div>
+    </div>`;
+  drawer.classList.add('show');backdrop.classList.add('show');
+}
+function closeDetail(){drawer.classList.remove('show');backdrop.classList.remove('show')}
+backdrop.addEventListener('click',closeDetail);
+addEventListener('keydown',e=>{if(e.key==='Escape')closeDetail()});
+
+render();
+setTimeout(()=>map.invalidateSize(),200);
+addEventListener('resize',()=>map.invalidateSize());
+</script>
+</body>
+</html>
