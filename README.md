@@ -5,9 +5,9 @@ The Fathomm website (fathomm.org). Plain static site — no build step required 
 ## Structure
 
 ```
-index.html                 Homepage — FATHOMM luxury medical voyages (SF)            →  fathomm.org/
-ocean/index.html           Ocean Voyages — the "Dive deeper" recovery landing        →  fathomm.org/ocean
-atlas/index.html           Global Clinics — the trust-scored atlas (parallax page)   →  fathomm.org/atlas
+index.html                 Homepage — the FATHOMM pitch narrative                    →  fathomm.org/
+ocean/index.html           Voyages — the luxury 24-hour medical-voyage experience    →  fathomm.org/ocean
+atlas/index.html           Clinics — the trust-scored medical-tourism atlas          →  fathomm.org/atlas
 embeds/fathomm-map.html    Embeddable map widget (iframe-ready)                     →  fathomm.org/embeds/fathomm-map.html
 data/clinics.json          Clinic dataset (coordinates, links, pricing, trust scores)
 data/clinics.csv           Same data, spreadsheet form

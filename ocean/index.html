@@ -3,119 +3,1210 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FATHOMM — Ocean Voyages</title>
-<meta name="description" content="Ocean Voyages. Dive deeper. Some things take time to surface. Recovery at sea, built around the procedure.">
+<title>FATHOMM — Voyages</title>
+<meta name="description" content="Fathomm offers luxury 24-hour medical voyages from San Francisco into international waters for cutting-edge gene therapy and peptide treatments.">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
   :root {
-    --deep: #0a1628; --deep-mid: #0d1f3c;
-    --gold: #c9a84c; --gold-light: #e0c872;
+    --deep: #0a1628;
+    --deep-mid: #0d1f3c;
+    --navy: #122244;
+    --gold: #c9a84c;
+    --gold-light: #e0c872;
+    --gold-dim: rgba(201,168,76,0.15);
     --cyan: #0ef5e3;
-    --white: #f0f0f0; --white-dim: rgba(240,240,240,0.6);
+    --cyan-dim: rgba(14,245,227,0.08);
+    --white: #f0f0f0;
+    --white-dim: rgba(240,240,240,0.6);
     --serif: 'Cormorant Garamond', Georgia, serif;
     --sans: 'Inter', -apple-system, sans-serif;
   }
-  html { scroll-behavior: smooth; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
   body {
-    min-height: 100vh;
-    background: radial-gradient(ellipse at 50% 120%, #0d2847 0%, #0a1628 55%, #060e1a 100%);
+    background: var(--deep);
     color: var(--white);
     font-family: var(--sans);
     font-weight: 300;
-    display: flex; align-items: center; justify-content: center;
-    text-align: center;
-    overflow: hidden;
+    line-height: 1.7;
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
+
   ::selection { background: var(--gold); color: var(--deep); }
 
-  /* NAV */
+  /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 1.25rem 3rem;
     display: flex; justify-content: space-between; align-items: center;
+    transition: background 0.4s, box-shadow 0.4s, padding 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(10,22,40,0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 1px 0 rgba(201,168,76,0.1);
+    padding: 0.8rem 3rem;
   }
   .nav-logo {
-    font-family: var(--serif); font-size: 1.5rem; font-weight: 600;
-    letter-spacing: 0.3em; color: var(--gold); text-decoration: none;
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-decoration: none;
   }
-  .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+  .nav-links { display: flex; gap: 0.9rem; align-items: center; }
   .nav-links a {
-    color: var(--white-dim); text-decoration: none; font-size: 0.8rem;
-    letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.3s; font-weight: 400;
+    color: var(--white-dim);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    font-weight: 400;
+    white-space: nowrap;
   }
   .nav-links a:hover { color: var(--gold); }
-  .nav-links a.active { color: var(--gold); }
   .nav-cta {
-    border: 1px solid var(--gold); padding: 0.5rem 1.2rem; color: var(--gold);
-    border-radius: 2px; transition: all 0.3s;
+    border: 1px solid var(--gold) !important;
+    padding: 0.5rem 1.2rem !important;
+    color: var(--gold) !important;
+    transition: all 0.3s !important;
   }
-  .nav-cta:hover { background: var(--gold); color: var(--deep); }
-  @media (max-width: 720px) { .nav-links a:not(.nav-cta) { display: none; } }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--deep) !important; }
+  .nav-toggle { display: none; cursor: pointer; background: none; border: none; padding: 0.5rem; }
+  .nav-toggle span {
+    display: block; width: 24px; height: 1.5px; background: var(--gold);
+    margin: 6px 0; transition: all 0.3s;
+  }
 
-  /* CONTENT */
-  .content { position: relative; z-index: 2; max-width: 620px; padding: 2rem; }
-  .label {
-    font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase;
-    color: var(--cyan); margin-bottom: 1.5rem;
-    opacity: 0; animation: fadeUp 1s 0.2s forwards;
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 2rem;
   }
-  .title {
-    font-family: var(--serif); font-size: clamp(3rem, 8vw, 5rem); font-weight: 300;
-    letter-spacing: 0.15em; color: var(--white); line-height: 1; margin-bottom: 1.25rem;
-    opacity: 0; animation: fadeUp 1s 0.4s forwards;
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse at 50% 120%, #0d2847 0%, #0a1628 50%, #060e1a 100%);
   }
-  .tagline {
-    font-family: var(--serif); font-style: italic; font-weight: 300;
-    font-size: clamp(1.2rem, 3vw, 1.6rem); color: var(--gold); margin-bottom: 1.25rem;
-    opacity: 0; animation: fadeUp 1s 0.6s forwards;
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 80%, rgba(14,245,227,0.03) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(201,168,76,0.04) 0%, transparent 40%);
   }
-  .body {
-    font-size: 1rem; color: var(--white-dim); line-height: 1.9; max-width: 460px;
-    margin: 0 auto; opacity: 0; animation: fadeUp 1s 0.8s forwards;
+
+  /* Particle canvas */
+  #particles { position: absolute; inset: 0; z-index: 1; }
+
+  .hero-content { position: relative; z-index: 2; max-width: 800px; }
+  .hero-pre {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
   }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.5s forwards;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-tagline {
+    font-family: var(--serif);
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--white-dim);
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.7s forwards;
+  }
+  .hero-cta {
+    display: inline-block;
+    padding: 1rem 3rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-family: var(--sans);
+    font-weight: 500;
+    transition: all 0.4s;
+    opacity: 0;
+    animation: fadeUp 1s 0.9s forwards;
+  }
+  .hero-cta:hover { background: var(--gold); color: var(--deep); box-shadow: 0 0 40px rgba(201,168,76,0.25); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    z-index: 2; opacity: 0; animation: fadeIn 1s 1.5s forwards;
+  }
+  .scroll-indicator .line {
+    width: 1px; height: 50px; background: linear-gradient(to bottom, var(--gold), transparent);
+    margin: 0 auto 0.5rem;
+    animation: scrollPulse 2s infinite;
+  }
+  .scroll-indicator span {
+    font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dim);
+    color: rgba(201,168,76,0.4);
+  }
+
+  /* ── WAVE SVG ── */
+  .wave-divider {
+    position: relative;
+    width: 100%;
+    line-height: 0;
+    margin-top: -1px;
+  }
+  .wave-divider svg {
+    width: 100%;
+    height: 80px;
+    display: block;
+  }
+
+  /* ── SECTIONS ── */
+  section { position: relative; }
+
+  .section-pad { padding: 7rem 2rem; }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-body {
+    font-size: 1rem;
+    color: var(--white-dim);
+    max-width: 700px;
+    line-height: 1.85;
+  }
+  .section-body p + p { margin-top: 1.2rem; }
+
   .gold-line {
-    width: 60px; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent);
-    margin: 2.5rem auto; opacity: 0; animation: fadeIn 1s 1s forwards;
+    width: 60px; height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin: 2rem 0;
   }
-  .dot {
-    width: 7px; height: 7px; background: var(--gold); border-radius: 50%;
-    display: inline-block; animation: pulse 2.4s ease-in-out infinite;
-  }
-  .surface {
-    margin-top: 2.5rem; opacity: 0; animation: fadeUp 1s 1.1s forwards;
-  }
-  .surface a {
-    color: var(--white-dim); text-decoration: none; font-size: 0.75rem;
-    letter-spacing: 0.25em; text-transform: uppercase; transition: color 0.3s;
-  }
-  .surface a:hover { color: var(--gold); }
 
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.6); } }
+  /* ── VISION ── */
+  #vision { background: var(--deep); }
+
+  /* ── EXPERIENCE ── */
+  #experience {
+    background: linear-gradient(180deg, var(--deep) 0%, var(--deep-mid) 100%);
+  }
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .timeline-item {
+    position: relative;
+    padding: 2rem 1.5rem;
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 2px;
+    background: rgba(201,168,76,0.02);
+    transition: all 0.4s;
+  }
+  .timeline-item:hover {
+    border-color: rgba(201,168,76,0.3);
+    background: rgba(201,168,76,0.05);
+    transform: translateY(-4px);
+  }
+  .timeline-time {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    color: var(--gold);
+    font-weight: 300;
+    margin-bottom: 0.3rem;
+  }
+  .timeline-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 1rem;
+  }
+  .timeline-desc {
+    font-size: 0.9rem;
+    color: var(--white-dim);
+    line-height: 1.7;
+  }
+
+  /* ── TREATMENTS ── */
+  #treatments {
+    background: linear-gradient(180deg, var(--deep-mid) 0%, var(--deep) 100%);
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .card {
+    position: relative;
+    padding: 2.5rem 2rem;
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 2px;
+    background: linear-gradient(160deg, rgba(201,168,76,0.03) 0%, rgba(10,22,40,0.8) 100%);
+    transition: all 0.5s;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  .card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-6px); }
+  .card:hover::before { opacity: 1; }
+  .card.featured {
+    border-color: rgba(201,168,76,0.25);
+    background: linear-gradient(160deg, rgba(201,168,76,0.06) 0%, rgba(10,22,40,0.9) 100%);
+  }
+  .card.featured::before { opacity: 0.5; }
+  .card-tier {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 0.5rem;
+  }
+  .card-name {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .card-price {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    color: var(--gold);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+  .card-price span {
+    font-size: 0.9rem;
+    color: var(--white-dim);
+    font-family: var(--sans);
+    font-weight: 300;
+  }
+  .card-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, var(--gold-dim), transparent);
+    margin: 1.5rem 0;
+  }
+  .card-features {
+    list-style: none;
+  }
+  .card-features li {
+    font-size: 0.9rem;
+    color: var(--white-dim);
+    padding: 0.5rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .card-features li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    transform: translateY(-50%);
+  }
+  .card-btn {
+    display: block;
+    width: 100%;
+    margin-top: 2rem;
+    padding: 0.9rem;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+    text-decoration: none;
+  }
+  .card-btn:hover { background: var(--gold); color: var(--deep); }
+  .card.featured .card-btn { background: var(--gold); color: var(--deep); }
+  .card.featured .card-btn:hover { background: var(--gold-light); box-shadow: 0 0 30px rgba(201,168,76,0.3); }
+
+  /* ── SCIENCE ── */
+  #science { background: var(--deep); }
+  .science-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    margin-top: 3rem;
+  }
+  .science-item { }
+  .science-num {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    color: var(--gold);
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .science-stat {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 1rem;
+  }
+  .science-desc {
+    font-size: 0.9rem;
+    color: var(--white-dim);
+    line-height: 1.7;
+  }
+
+  /* ── MEMBERSHIP ── */
+  #membership {
+    background: linear-gradient(180deg, var(--deep) 0%, var(--deep-mid) 100%);
+  }
+  .membership-box {
+    margin-top: 3rem;
+    padding: 3.5rem;
+    border: 1px solid rgba(201,168,76,0.2);
+    background: linear-gradient(135deg, rgba(201,168,76,0.04) 0%, rgba(10,22,40,0.6) 100%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .membership-info {}
+  .membership-price {
+    font-family: var(--serif);
+    font-size: 3rem;
+    color: var(--gold);
+    font-weight: 300;
+    margin-bottom: 0.3rem;
+  }
+  .membership-price span {
+    font-size: 1rem;
+    color: var(--white-dim);
+    font-family: var(--sans);
+  }
+  .membership-subtitle {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 1.5rem;
+  }
+  .membership-perks {
+    list-style: none;
+  }
+  .membership-perks li {
+    font-size: 0.95rem;
+    color: var(--white-dim);
+    padding: 0.6rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    border-bottom: 1px solid rgba(201,168,76,0.06);
+  }
+  .membership-perks li::before {
+    content: '\2726';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.7rem;
+  }
+  .membership-cta-area { text-align: center; }
+  .membership-cta-area .hero-cta { display: inline-block; }
+
+  /* ── FAQ ── */
+  #faq { background: linear-gradient(180deg, var(--deep-mid) 0%, var(--deep) 100%); }
+  .faq-list { margin-top: 3rem; max-width: 800px; }
+  .faq-item {
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+  }
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: left;
+    padding: 1.5rem 2rem 1.5rem 0;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s;
+    line-height: 1.5;
+  }
+  .faq-q:hover { color: var(--gold); }
+  .faq-q::after {
+    content: '+';
+    position: absolute;
+    right: 0; top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: var(--gold);
+    transition: transform 0.3s;
+  }
+  .faq-item.active .faq-q::after { transform: translateY(-50%) rotate(45deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+  }
+  .faq-a-inner {
+    padding: 0 0 1.5rem;
+    font-size: 0.9rem;
+    color: var(--white-dim);
+    line-height: 1.8;
+  }
+  .faq-item.active .faq-a { max-height: 300px; }
+
+  /* ── CONTACT / WAITLIST ── */
+  #waitlist { background: var(--deep); }
+  .waitlist-form {
+    margin-top: 3rem;
+    max-width: 500px;
+  }
+  .form-group { margin-bottom: 1.5rem; }
+  .form-group label {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    margin-bottom: 0.5rem;
+  }
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.15);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 300;
+    transition: border-color 0.3s;
+    border-radius: 1px;
+    outline: none;
+  }
+  .form-group input::placeholder { color: rgba(240,240,240,0.25); }
+  .form-group input:focus,
+  .form-group select:focus { border-color: var(--gold); }
+  .form-group select option { background: var(--deep); }
+  .form-submit {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--gold);
+    background: var(--gold);
+    color: var(--deep);
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s;
+  }
+  .form-submit:hover { background: var(--gold-light); box-shadow: 0 0 40px rgba(201,168,76,0.3); }
+  .form-note {
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    color: rgba(240,240,240,0.3);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 3rem 2rem;
+    border-top: 1px solid rgba(201,168,76,0.08);
+    text-align: center;
+    background: var(--deep);
+  }
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .footer-nav {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .footer-nav a {
+    color: var(--white-dim);
+    text-decoration: none;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .footer-nav a:hover { color: var(--gold); }
+  .footer-text {
+    font-size: 0.75rem;
+    color: rgba(240,240,240,0.25);
+    line-height: 1.8;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 0.8; transform: scaleY(1.1); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── RESPONSIVE ── */
+  /* Collapse nav to a menu before the links would crowd (many items). */
+  @media (max-width: 1180px) {
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: rgba(10,22,40,0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 1.5rem 2rem;
+      gap: 1.2rem;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+    .nav-toggle { display: block; }
+  }
+  @media (max-width: 900px) {
+    .timeline { grid-template-columns: repeat(2, 1fr); }
+    .cards { grid-template-columns: 1fr; max-width: 450px; margin-left: auto; margin-right: auto; }
+    .science-grid { grid-template-columns: 1fr; }
+    .membership-box { grid-template-columns: 1fr; }
+    .membership-cta-area { text-align: left; }
+  }
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.5rem; }
+    nav.scrolled { padding: 0.8rem 1.5rem; }
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: rgba(10,22,40,0.97);
+      backdrop-filter: blur(20px);
+      padding: 1.5rem 2rem;
+      gap: 1.2rem;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+    .nav-toggle { display: block; }
+    .section-pad { padding: 4.5rem 1.5rem; }
+    .timeline { grid-template-columns: 1fr; }
+    .membership-box { padding: 2rem; }
+    .hero-title { letter-spacing: 0.15em; }
+  }
+
+  /* Glow orb ambient */
+  .glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    opacity: 0.4;
+  }
 </style>
 </head>
 <body>
-  <nav>
-    <a href="/" class="nav-logo">FATHOMM</a>
-    <div class="nav-links">
-      <a href="/atlas/">Global Clinics</a>
-      <a href="/ocean/" class="active">Ocean Voyages</a>
-      <a href="/#waitlist" class="nav-cta">Join Waitlist</a>
-    </div>
-  </nav>
 
-  <div class="content">
-    <p class="label">Recovery at Sea</p>
-    <h1 class="title">Ocean Voyages</h1>
-    <p class="tagline">Dive deeper.</p>
-    <p class="body">Some things take time to surface. Recovery reimagined as a voyage — private, unhurried, and built around the procedure.</p>
-    <div class="gold-line"></div>
-    <div class="dot"></div>
-    <p class="surface"><a href="/atlas/">Surface into Global Clinics &rarr;</a></p>
+<!-- ═══════ NAV ═══════ -->
+<nav id="nav">
+  <a href="/" class="nav-logo">FATHOMM</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#vision">Vision</a>
+    <a href="#experience">Experience</a>
+    <a href="#treatments">Treatments</a>
+    <a href="#science">Science</a>
+    <a href="#membership">Membership</a>
+    <a href="#faq">FAQ</a>
+    <a href="/atlas/">Clinics</a>
+    <a href="/ocean/">Voyages</a>
+    <a href="#waitlist" class="nav-cta">Join Waitlist</a>
   </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <canvas id="particles"></canvas>
+  <div class="hero-content">
+    <p class="hero-pre">Luxury Medical Voyages &mdash; San Francisco</p>
+    <h1 class="hero-title">FATHOM<span>M</span></h1>
+    <p class="hero-tagline">Where the depths reveal what science has only begun to promise.</p>
+    <a href="#waitlist" class="hero-cta">Begin Your Voyage</a>
+  </div>
+  <div class="scroll-indicator">
+    <div class="line"></div>
+    <span>Explore</span>
+  </div>
+</section>
+
+<!-- Wave -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" fill="none">
+    <path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80Z" fill="#0a1628"/>
+    <path d="M0,50 C240,20 480,70 720,50 C960,30 1200,60 1440,50 L1440,80 L0,80Z" fill="#0a1628" opacity="0.5"/>
+  </svg>
+</div>
+
+<!-- ═══════ VISION ═══════ -->
+<section id="vision" class="section-pad">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">The Vision</p>
+      <h2 class="section-title">Pioneering the frontier of <em>human potential</em></h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="section-body reveal reveal-delay-1">
+      <p>Fathomm was born from a singular conviction: the most transformative advances in human biology should not be bound by borders. By moving beyond the horizon into international waters, we unlock access to therapies that are redefining longevity, vitality, and performance around the world.</p>
+      <p>Each voyage is a convergence of uncompromising luxury and rigorous science &mdash; an experience designed for those who understand that the most meaningful investments are the ones you make in yourself. Our world-class medical team, Michelin-caliber hospitality, and cutting-edge onboard facilities ensure that every detail reflects the magnitude of the journey you're undertaking.</p>
+    </div>
+  </div>
+  <!-- Ambient glow -->
+  <div class="glow-orb" style="width:400px;height:400px;background:rgba(14,245,227,0.03);top:20%;right:-100px;"></div>
+</section>
+
+<!-- ═══════ EXPERIENCE ═══════ -->
+<section id="experience" class="section-pad">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">The Experience</p>
+      <h2 class="section-title">A 24-hour voyage of <em>transformation</em></h2>
+      <div class="gold-line"></div>
+      <p class="section-body" style="margin-bottom:0;">From the moment you step aboard to the sunrise return, every element has been choreographed for your comfort, privacy, and wellbeing.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="timeline-time">6:00 PM</div>
+        <div class="timeline-label">Embarkation</div>
+        <p class="timeline-desc">Board at our private San Francisco terminal. Welcome champagne, cabin orientation, and a personal concierge introduction as the city skyline recedes into golden hour.</p>
+      </div>
+      <div class="timeline-item reveal reveal-delay-2">
+        <div class="timeline-time">8:00 PM</div>
+        <div class="timeline-label">Consultation &amp; Dining</div>
+        <p class="timeline-desc">A private consultation with your medical team, followed by a multi-course dinner prepared by our executive chef — tailored to optimize your body for treatment.</p>
+      </div>
+      <div class="timeline-item reveal reveal-delay-3">
+        <div class="timeline-time">10:00 PM</div>
+        <div class="timeline-label">Treatment</div>
+        <p class="timeline-desc">Your personalized protocol is administered in our state-of-the-art onboard medical suite. Rest in your private recovery cabin with ocean views and full monitoring.</p>
+      </div>
+      <div class="timeline-item reveal reveal-delay-4">
+        <div class="timeline-time">6:00 AM</div>
+        <div class="timeline-label">Sunrise Return</div>
+        <p class="timeline-desc">Wake to sunrise over the Pacific. Post-treatment assessment, a nourishing breakfast, and return to San Francisco renewed — in every sense of the word.</p>
+      </div>
+    </div>
+  </div>
+  <div class="glow-orb" style="width:500px;height:500px;background:rgba(201,168,76,0.02);bottom:-100px;left:-150px;"></div>
+</section>
+
+<!-- Wave -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" fill="none">
+    <path d="M0,30 C180,60 540,10 720,40 C900,70 1260,20 1440,50 L1440,80 L0,80Z" fill="#0a1628" opacity="0.6"/>
+    <path d="M0,50 C360,20 720,60 1080,30 C1260,18 1380,40 1440,35 L1440,80 L0,80Z" fill="#0a1628"/>
+  </svg>
+</div>
+
+<!-- ═══════ TREATMENTS ═══════ -->
+<section id="treatments" class="section-pad">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:1rem;">
+      <p class="section-label">Treatment Protocols</p>
+      <h2 class="section-title">Choose your <em>protocol</em></h2>
+      <p class="section-body" style="max-width:600px;margin:0 auto;">Three tiers, each meticulously designed. All protocols include the full luxury voyage experience, private medical consultation, and 30 days of post-treatment telemedicine.</p>
+    </div>
+    <div class="cards">
+      <!-- Vitality -->
+      <div class="card reveal reveal-delay-1">
+        <p class="card-tier">Tier I</p>
+        <h3 class="card-name">Vitality Protocol</h3>
+        <div class="card-price">$4,500 <span>/ voyage</span></div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>BPC-157 regenerative peptide therapy</li>
+          <li>GHK-Cu tissue repair &amp; anti-aging</li>
+          <li>Thymosin Beta-4 immune optimization</li>
+          <li>Full bloodwork panel &amp; biomarker analysis</li>
+          <li>Personalized recovery protocol</li>
+        </ul>
+        <a href="#waitlist" class="card-btn">Reserve</a>
+      </div>
+      <!-- Apex -->
+      <div class="card featured reveal reveal-delay-2">
+        <p class="card-tier">Tier II &mdash; Most Popular</p>
+        <h3 class="card-name">Apex Protocol</h3>
+        <div class="card-price">$12,000 <span>/ voyage</span></div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Follistatin gene therapy for muscle &amp; vitality</li>
+          <li>Klotho longevity gene expression</li>
+          <li>Complete peptide foundation stack</li>
+          <li>Advanced genomic sequencing</li>
+          <li>Dedicated recovery suite with IV support</li>
+        </ul>
+        <a href="#waitlist" class="card-btn">Reserve</a>
+      </div>
+      <!-- Transcend -->
+      <div class="card reveal reveal-delay-3">
+        <p class="card-tier">Tier III &mdash; Comprehensive</p>
+        <h3 class="card-name">Transcend Protocol</h3>
+        <div class="card-price">$25,000 <span>/ voyage</span></div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Full gene therapy suite (Follistatin + Klotho + custom)</li>
+          <li>Complete peptide protocol library</li>
+          <li>NAD+ infusion &amp; senolytic therapy</li>
+          <li>Epigenetic age analysis with follow-up</li>
+          <li>Private physician for the entire voyage</li>
+          <li>90 days of post-treatment telemedicine</li>
+        </ul>
+        <a href="#waitlist" class="card-btn">Reserve</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SCIENCE ═══════ -->
+<section id="science" class="section-pad">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">The Science</p>
+      <h2 class="section-title">Grounded in research, <em>proven in practice</em></h2>
+      <div class="gold-line"></div>
+      <div class="section-body">
+        <p>Our protocols draw from therapies with robust international clinical use and published peer-reviewed research. Peptides like BPC-157 and Thymosin Beta-4 have been studied across thousands of trials worldwide. Gene therapies targeting Follistatin and Klotho represent the leading edge of longevity science, with clinical programs active across multiple countries.</p>
+        <p>Every treatment is administered by board-certified physicians with specialized training in regenerative medicine. Our onboard medical suite meets international maritime medical standards, with redundant monitoring systems and emergency protocols that exceed industry benchmarks.</p>
+      </div>
+    </div>
+    <div class="science-grid reveal reveal-delay-1">
+      <div class="science-item">
+        <div class="science-num">12+</div>
+        <div class="science-stat">Board-Certified Physicians</div>
+        <p class="science-desc">Our rotating medical team includes specialists in regenerative medicine, genetics, and internal medicine from leading institutions.</p>
+      </div>
+      <div class="science-item">
+        <div class="science-num">4,200+</div>
+        <div class="science-stat">Published Studies</div>
+        <p class="science-desc">The peptide and gene therapies in our protocols are supported by thousands of peer-reviewed papers and international clinical trials.</p>
+      </div>
+      <div class="science-item">
+        <div class="science-num">40+</div>
+        <div class="science-stat">Countries with Clinical Use</div>
+        <p class="science-desc">These therapies are legally administered in dozens of nations. Our international waters operations comply with maritime medical regulations.</p>
+      </div>
+    </div>
+  </div>
+  <div class="glow-orb" style="width:350px;height:350px;background:rgba(14,245,227,0.02);top:30%;left:-80px;"></div>
+</section>
+
+<!-- ═══════ MEMBERSHIP ═══════ -->
+<section id="membership" class="section-pad">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Inner Circle</p>
+      <h2 class="section-title">Annual <em>Membership</em></h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="membership-box reveal reveal-delay-1">
+      <div class="membership-info">
+        <div class="membership-price">$15,000 <span>/ year</span></div>
+        <div class="membership-subtitle">Fathomm Inner Circle</div>
+        <ul class="membership-perks">
+          <li>Priority booking on all voyages</li>
+          <li>Four quarterly voyages at preferred rates</li>
+          <li>Exclusive members-only research briefings</li>
+          <li>Dedicated physician continuity across voyages</li>
+          <li>Invitation to annual Fathomm Symposium</li>
+          <li>Complimentary guest pass (one per year)</li>
+          <li>Concierge health optimization between voyages</li>
+        </ul>
+      </div>
+      <div class="membership-cta-area">
+        <p style="font-size:0.95rem;color:var(--white-dim);margin-bottom:2rem;line-height:1.8;">Membership is limited to ensure the intimacy and exclusivity of the Fathomm experience. Current availability is by application only.</p>
+        <a href="#waitlist" class="hero-cta" style="opacity:1;animation:none;">Apply for Membership</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FAQ ═══════ -->
+<section id="faq" class="section-pad">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Questions</p>
+      <h2 class="section-title">Frequently <em>asked</em></h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="faq-list reveal reveal-delay-1">
+
+      <div class="faq-item">
+        <button class="faq-q">Is this legal?</button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. Fathomm operates in international waters, beyond any single nation's regulatory jurisdiction. Our therapies comply with international maritime medical standards, and our medical team adheres to rigorous safety protocols informed by global best practices. All treatments are legally administered in numerous countries worldwide.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">How safe are the treatments?</button>
+        <div class="faq-a"><div class="faq-a-inner">Patient safety is our absolute priority. Every protocol is designed and supervised by board-certified physicians. Our onboard medical suite is equipped with advanced monitoring, emergency systems, and redundant safety measures. All candidates undergo comprehensive pre-screening before approval. We maintain a physician-to-patient ratio that far exceeds standard clinical settings.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Where does the voyage depart from?</button>
+        <div class="faq-a"><div class="faq-a-inner">All voyages depart from our private terminal in San Francisco. The exact location is shared with confirmed passengers 48 hours before departure. Complimentary luxury ground transportation is available from select Bay Area hotels.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What is the experience like onboard?</button>
+        <div class="faq-a"><div class="faq-a-inner">Think of it as a boutique hotel at sea. Private cabins with ocean views, a world-class chef, curated wine selection, and serene common spaces designed for rest and reflection. The vessel accommodates a maximum of 12 guests per voyage, ensuring an intimate, unhurried experience.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Who is eligible?</button>
+        <div class="faq-a"><div class="faq-a-inner">Fathomm voyages are available to adults over 21 who pass our medical pre-screening process. After joining the waitlist, our team will schedule a confidential consultation to discuss your health history, goals, and determine the appropriate protocol. Not all applicants are approved — we prioritize safety above all else.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What happens after the voyage?</button>
+        <div class="faq-a"><div class="faq-a-inner">Every protocol includes post-treatment telemedicine follow-up (30 to 90 days depending on tier). You'll receive a detailed treatment summary, biomarker tracking, and personalized recommendations. Inner Circle members receive ongoing concierge health optimization between voyages.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ WAITLIST ═══════ -->
+<section id="waitlist" class="section-pad">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Join Us</p>
+      <h2 class="section-title">Request an <em>invitation</em></h2>
+      <div class="gold-line"></div>
+      <p class="section-body" style="margin-bottom:0;">Voyages are limited and by application only. Submit your interest below and a member of our team will be in touch within 48 hours.</p>
+    </div>
+    <form class="waitlist-form reveal reveal-delay-1" id="waitlistForm" onsubmit="return handleSubmit(event)">
+      <div class="form-group">
+        <label for="wName">Full Name</label>
+        <input type="text" id="wName" name="name" placeholder="Your name" required>
+      </div>
+      <div class="form-group">
+        <label for="wEmail">Email Address</label>
+        <input type="email" id="wEmail" name="email" placeholder="your@email.com" required>
+      </div>
+      <div class="form-group">
+        <label for="wInterest">Protocol of Interest</label>
+        <select id="wInterest" name="interest">
+          <option value="">Select a protocol</option>
+          <option value="vitality">Vitality Protocol — $4,500</option>
+          <option value="apex">Apex Protocol — $12,000</option>
+          <option value="transcend">Transcend Protocol — $25,000</option>
+          <option value="membership">Annual Membership — $15,000/yr</option>
+          <option value="undecided">Not sure yet</option>
+        </select>
+      </div>
+      <button type="submit" class="form-submit">Join the Waitlist</button>
+      <p class="form-note">Your information is confidential and will never be shared. By submitting, you agree to our privacy policy.</p>
+    </form>
+  </div>
+  <div class="glow-orb" style="width:300px;height:300px;background:rgba(201,168,76,0.03);bottom:0;right:-50px;"></div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="footer-logo">FATHOMM</div>
+  <div class="footer-nav">
+    <a href="#vision">Vision</a>
+    <a href="#treatments">Treatments</a>
+    <a href="#membership">Membership</a>
+    <a href="/atlas/">Clinics</a>
+    <a href="/ocean/">Voyages</a>
+    <a href="#waitlist">Join Waitlist</a>
+  </div>
+  <p class="footer-text">
+    &copy; 2026 Fathomm Inc. All rights reserved.<br>
+    Luxury medical voyages from San Francisco into international waters.<br>
+    This website is for informational purposes only and does not constitute medical advice.
+  </p>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  // ── NAV SCROLL ──
+  const nav = document.getElementById('nav');
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+
+  // Close menu on link click
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // ── SCROLL REVEAL ──
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(el => revealObserver.observe(el));
+
+  // ── FAQ ACCORDION ──
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const wasActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item.active').forEach(i => i.classList.remove('active'));
+      if (!wasActive) item.classList.add('active');
+    });
+  });
+
+  // ── PARTICLES ──
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let animId;
+
+  function resizeCanvas() {
+    canvas.width = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
+  }
+
+  function createParticles() {
+    particles = [];
+    const count = Math.min(Math.floor((canvas.width * canvas.height) / 12000), 120);
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.5 + 0.3,
+        dx: (Math.random() - 0.5) * 0.3,
+        dy: (Math.random() - 0.5) * 0.15 - 0.05,
+        o: Math.random() * 0.4 + 0.1,
+        pulse: Math.random() * Math.PI * 2,
+        pulseSpeed: Math.random() * 0.01 + 0.005
+      });
+    }
+  }
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.x += p.dx;
+      p.y += p.dy;
+      p.pulse += p.pulseSpeed;
+
+      if (p.x < -10) p.x = canvas.width + 10;
+      if (p.x > canvas.width + 10) p.x = -10;
+      if (p.y < -10) p.y = canvas.height + 10;
+      if (p.y > canvas.height + 10) p.y = -10;
+
+      const opacity = p.o * (0.6 + 0.4 * Math.sin(p.pulse));
+      const isCyan = p.r < 0.8;
+      const color = isCyan
+        ? `rgba(14,245,227,${opacity * 0.7})`
+        : `rgba(201,168,76,${opacity * 0.5})`;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+
+      if (p.r > 1) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
+        ctx.fillStyle = isCyan
+          ? `rgba(14,245,227,${opacity * 0.05})`
+          : `rgba(201,168,76,${opacity * 0.04})`;
+        ctx.fill();
+      }
+    });
+
+    // Draw connections
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(201,168,76,${0.03 * (1 - dist / 120)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+
+    animId = requestAnimationFrame(drawParticles);
+  }
+
+  resizeCanvas();
+  createParticles();
+  drawParticles();
+
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      resizeCanvas();
+      createParticles();
+    }, 200);
+  });
+
+  // ── Pause particles when not in view ──
+  const heroObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (!animId) drawParticles();
+      } else {
+        cancelAnimationFrame(animId);
+        animId = null;
+      }
+    });
+  }, { threshold: 0 });
+  heroObserver.observe(document.querySelector('.hero'));
+
+})();
+
+// ── FORM ──
+// Paste your form endpoint below (Formspree / Tally / Google Form POST URL).
+// When set, submissions POST there; until then the confirmation animation runs.
+const WAITLIST_ENDPOINT = ""; // e.g. "https://formspree.io/f/xxxxxxx"
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('waitlistForm');
+  const btn = form.querySelector('.form-submit');
+  const data = {
+    name: form.querySelector('#wName').value,
+    email: form.querySelector('#wEmail').value,
+    interest: form.querySelector('#wInterest').value
+  };
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+
+  const confirm = () => {
+    btn.textContent = 'You\'re on the list';
+    btn.style.background = 'rgba(14,245,227,0.15)';
+    btn.style.borderColor = 'var(--cyan)';
+    btn.style.color = 'var(--cyan)';
+    form.reset();
+    setTimeout(() => {
+      btn.textContent = 'Join the Waitlist';
+      btn.style.background = '';
+      btn.style.borderColor = '';
+      btn.style.color = '';
+      btn.disabled = false;
+    }, 4000);
+  };
+  const fail = () => {
+    btn.textContent = 'Something went wrong — try again';
+    btn.disabled = false;
+    setTimeout(() => { btn.textContent = 'Join the Waitlist'; }, 4000);
+  };
+
+  if (!WAITLIST_ENDPOINT) {
+    setTimeout(confirm, 1200);
+    return false;
+  }
+  fetch(WAITLIST_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).then(r => r.ok ? confirm() : fail()).catch(fail);
+  return false;
+}
+</script>
 </body>
 </html>

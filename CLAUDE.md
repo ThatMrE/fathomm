@@ -6,13 +6,13 @@ Static site for **fathomm.org**. **No build step, no framework.** Every file is 
 Gold / navy luxury theme, applied site-wide:
 - Background: deep navy `#0a1628` (radial `#0d2847→#0a1628→#060e1a`); gold accent `#c9a84c` (light `#e0c872`); cyan micro-labels `#0ef5e3`; text `#f0f0f0`, muted `rgba(240,240,240,.6)`.
 - Typeface: **Cormorant Garamond** (serif display/headings) + **Inter** (body/labels), Google Fonts. Logotype: `FATHOMM` wordmark (serif, gold, letter-spaced, uppercase).
-- Nav: brand `FATHOMM` (→ `/`) · **Global Clinics** (`/atlas`) · **Ocean Voyages** (`/ocean`) · **Join Waitlist** (gold-outline CTA). The homepage nav also lists its in-page sections (Vision, Experience, Treatments, Science, Membership, FAQ).
+- Nav: brand `FATHOMM` (→ `/`) · **Clinics** (`/atlas`) · **Voyages** (`/ocean`) · **Join Waitlist** (gold-outline CTA). The homepage nav also lists its in-page sections (The Voyage, Science, Legal, Why Now).
 - The atlas keeps its light-theme CSS but is repainted by a `GOLD / NAVY LUXURY RESKIN` override block at the end of its `<style>` (grade colors A–E kept; map uses CARTO `dark_all` tiles).
 
 ## Layout
-- `index.html` — homepage: FATHOMM luxury 24-hour medical voyages from San Francisco (gene therapy + peptides) — vision, experience, treatment tiers, science, membership, FAQ, waitlist → `/`.
-- `ocean/index.html` — Ocean Voyages: the "Dive deeper" recovery-at-sea landing → `/ocean`.
-- `atlas/index.html` — Global Clinics: the trust-scored atlas (full parallax page) → `/atlas`.
+- `index.html` — homepage: the FATHOMM pitch narrative (problem, solution, experience, science pipeline, tiers, legal framework, market/why-now, team, vision, waitlist) → `/`. Confidential deck financials (the ask, projections, unit economics) are deliberately NOT published here.
+- `ocean/index.html` — **Voyages**: the full luxury 24-hour medical-voyage experience page (experience timeline, tiers, membership, FAQ) → `/ocean`.
+- `atlas/index.html` — **Clinics**: the trust-scored medical-tourism atlas (full parallax page) → `/atlas`.
 
 ## Waitlist
 `index.html` has a `#waitlist` form. Paste your form endpoint into the `WAITLIST_ENDPOINT`
