@@ -237,24 +237,140 @@ footer a{color:#bcd6e1}
 .disc{margin-top:26px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);font-size:12.5px;
   color:#7f9aab;max-width:900px}
 .wm{font-size:11px;color:#5f7a8b;margin-top:14px}
+
+/* ============================================================
+   DARK MINIMALIST RESKIN — site-wide design (deep-navy / sky-blue)
+   Overrides the light theme above. Grade colors A–E kept (semantic).
+   ============================================================ */
+:root{
+  --deep:#02121f; --deep2:#02182b; --ocean:#0ea5e9; --teal:#0ea5e9; --teal2:#38bdf8;
+  --gold:#38bdf8; --foam:#0a2236; --ink:#eaf2f8; --paper:#000d1a; --muted:#8aa2b4;
+}
+/* typeface: Inter across the whole page (matches the rest of the site) */
+body, body *{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}
+h1,h2,h3{letter-spacing:-.02em}
+body{background:linear-gradient(135deg,#000a14 0%,#001428 100%);background-attachment:fixed;color:var(--ink)}
+a{color:var(--teal2)}
+
+/* --- NAV (minimalist) --- */
+#nav{padding:16px 26px}
+#nav.solid{background:rgba(0,10,20,.85);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(255,255,255,.08)}
+#nav .brand{font-weight:800;font-size:22px;color:#fff;gap:9px;text-decoration:none}
+#nav .brand .mark{font-size:20px}
+#nav .links{gap:26px;font-size:15px;font-weight:500}
+#nav .links a{color:#cbd8e6;opacity:.85}
+#nav .links a:hover{opacity:1;color:#fff}
+#nav .links a.active{color:#38bdf8;opacity:1;border-bottom:0}
+#nav .links a.cta{background:#0ea5e9;color:#00121f;padding:9px 18px;border-radius:999px;font-weight:700;opacity:1}
+#nav .links a.cta:hover{background:#38bdf8;color:#00121f}
+@media(max-width:720px){#nav .links a:not(.cta){display:none}}
+
+/* --- HERO --- */
+#hero{background:linear-gradient(180deg,#00101f 0%,#04263f 45%,#062f4d 78%,#0a3d62 100%)}
+#sun circle,#sun{opacity:.45}
+.hero-stats .n{color:#38bdf8}
+
+/* --- GENERIC BLOCKS --- */
+.block{color:var(--ink)}
+.block.tint{background:linear-gradient(180deg,#00101f,#02182b)}
+.block.dark{background:#02121f}
+.lead{color:#cddcea;font-weight:500}
+.block.dark .lead{color:#bfe4ec}
+.sub,.block.dark .sub{color:#8aa2b4}
+h2.big{color:#fff}
+.eyebrow{color:#38bdf8}
+
+/* --- WHAT-IS cards --- */
+.why .c{background:#06192b;border-color:rgba(255,255,255,.08);box-shadow:none}
+.why .c h3{color:#fff}
+.why .c p{color:#8aa2b4}
+
+/* --- VOYAGE split --- */
+.boatcard{background:#04182b;border-color:rgba(255,255,255,.08)}
+.split li b{color:#fff}
+.split li .dot{background:rgba(14,165,233,.16);color:#38bdf8}
+
+/* --- ATLAS map section --- */
+#atlas{background:linear-gradient(180deg,#02182b,#00101f)}
+.atlas-head{color:#c3d3e0}
+.legend .lg{color:#9fb4c4}
+.pill{background:#06192b;border-color:rgba(255,255,255,.12);color:#a9c0d0}
+.pill:hover{border-color:#0ea5e9;color:#38bdf8}
+.pill.active{background:#0ea5e9;border-color:#0ea5e9;color:#00121f}
+.searchbar{background:#06192b;border-color:rgba(255,255,255,.12)}
+.searchbar input{background:transparent;color:#eaf2f8}
+.searchbar input::placeholder{color:#6d8497}
+#map{box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.rank{background:#06192b;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.rank .rh{border-bottom-color:rgba(255,255,255,.08)}
+.rank .rh h3{color:#fff}
+.rank .rh .cnt{color:#8aa2b4}
+.sortsel{background:#0a2236;border-color:rgba(255,255,255,.14);color:#c3d3e0}
+.row{border-bottom-color:rgba(255,255,255,.06)}
+.row:hover{background:rgba(255,255,255,.04)}
+.row .meta .nm{color:#eaf2f8}
+.row .meta .lo{color:#8aa2b4}
+.badge .t{background:#0a2236;color:#eaf2f8;box-shadow:0 1px 4px rgba(0,0,0,.4)}
+
+/* --- DETAIL panel --- */
+.detail{background:#06192b;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.detail h3{color:#fff}
+.detail .loc{color:#8aa2b4}
+.dgrid .f .v{color:#c3d3e0}
+.bar .track{background:rgba(255,255,255,.09)}
+.tag.pos{background:rgba(31,157,107,.16);color:#5fd6a2}
+.tag.neg{background:rgba(192,57,43,.18);color:#f0917f}
+.btn{background:#0ea5e9;color:#00121f}
+.btn:hover{background:#38bdf8}
+.btn.ghost{background:transparent;color:#38bdf8;border-color:rgba(255,255,255,.2)}
+.btn.ghost:hover{background:rgba(255,255,255,.06)}
+
+/* --- TRUST rubric --- */
+.rubric .p{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1)}
+.rubric .p .w{color:#38bdf8}
+.rubric .p .d{color:#a9c6d4}
+.tierleg{color:#bcd6e1}
+
+/* --- PRICING --- */
+.prow{background:#06192b;border-color:rgba(255,255,255,.08);box-shadow:none}
+.prow .pl .t{color:#fff}
+.prow .pl .s{color:#8aa2b4}
+.pbar .track{background:rgba(255,255,255,.06)}
+.pbar .home{background:repeating-linear-gradient(45deg,rgba(255,255,255,.10),rgba(255,255,255,.10) 8px,rgba(255,255,255,.04) 8px,rgba(255,255,255,.04) 16px)}
+.pbar .save{color:#9fb4c4}
+
+/* --- WORKFLOW --- */
+.step .sc h3{color:#fff}
+.step .sc p{color:#8aa2b4}
+.step .num{background:#0ea5e9;color:#00121f;box-shadow:0 8px 24px rgba(14,165,233,.35)}
+.steps:before{background:linear-gradient(180deg,#0ea5e9,transparent)}
+
+/* --- CASE STUDY --- */
+#case{background:#00101f}
+.case-hero .cbg{background:linear-gradient(160deg,#02182b,#04263f 60%,#062f4d)}
+.case-scene .tagn{color:#38bdf8}
+.case-num .c .n{color:#38bdf8}
+
+/* --- EXPANSION --- */
+.exp .e{background:#06192b;border-color:rgba(255,255,255,.08);box-shadow:none}
+.exp .e .n{color:#38bdf8}
+.exp .e h3{color:#fff}
+.exp .e p{color:#8aa2b4}
+
+/* --- FOOTER --- */
+footer{background:rgba(0,7,14,.7);border-top:1px solid rgba(255,255,255,.08)}
+footer .brand{color:#fff}
 </style>
 </head>
 <body>
 
 <!-- ================= NAV ================= -->
 <nav id="nav">
-  <a class="brand" href="/" style="color:#fff;text-decoration:none">
-    <svg viewBox="0 0 24 24" fill="none"><path d="M12 2c3 3 4 6 4 10s-1 7-4 10c-3-3-4-6-4-10S9 5 12 2z" fill="#e9b949"/><path d="M4 14c2.5 2 5 3 8 3s5.5-1 8-3" stroke="#9fe3ea" stroke-width="1.6" stroke-linecap="round"/></svg>
-    Fathomm
-  </a>
+  <a class="brand" href="/"><span class="mark">🌊</span> Fathomm</a>
   <div class="links">
-    <a href="/">Home</a>
-    <a href="#what">Medical tourism</a>
-    <a href="#voyage">The voyage</a>
-    <a href="#atlas">The Atlas</a>
-    <a href="#trust">Trust score</a>
-    <a href="#workflow">How it works</a>
-    <a href="/ocean/">Ocean</a>
+    <a href="/ocean/">Ocean Voyages</a>
+    <a href="#atlas" class="active">Global Clinics</a>
+    <a href="/#waitlist" class="cta">Join Waitlist</a>
   </div>
 </nav>
 
@@ -4034,7 +4150,7 @@ TIER_DEFS.forEach(t=>{const n=counts[t.letter];
 
 /* ---------------- MAP ---------------- */
 const map=L.map('map',{scrollWheelZoom:false,worldCopyJump:true}).setView([28,20],2);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
   {attribution:'&copy; OpenStreetMap &copy; CARTO',subdomains:'abcd',maxZoom:19}).addTo(map);
 map.on('click',()=>{});
 let markers=[], byId={};
