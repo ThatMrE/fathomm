@@ -3,7 +3,8 @@
 Static site for **fathomm.org**. **No build step, no framework.** Every file is served as-is.
 
 ## Layout
-- `index.html` — landing placeholder (leave unchanged unless asked).
+- `index.html` — homepage: the research-driven case for medical-tourism demand → `/`.
+- `ocean/index.html` — Ocean page: the original "Dive deeper" landing, kept in the nav → `/ocean`.
 - `atlas/index.html` — the Medical-Tourism Atlas (full parallax page) → `/atlas`.
 - `embeds/fathomm-map.html` — embeddable map widget (iframe) → `/embeds/fathomm-map.html`.
 - `data/clinics.json` / `clinics.csv` — clinic dataset (115 providers, 20 countries, trust-scored 0–100).
