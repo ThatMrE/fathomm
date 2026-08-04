@@ -1,0 +1,13 @@
+# Netlify configuration for the CellHaus site.
+# The site is a single self-contained static page (no build step).
+[build]
+  publish = "cellhaus"
+  command = ""
+
+# Security / caching niceties for a static site.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
