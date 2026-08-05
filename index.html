@@ -502,21 +502,22 @@
 
 // ── WAITLIST ──
 // Paste your form endpoint (Formspree / Tally / Google Form POST URL). Until set, the confirmation animation runs.
-const WAITLIST_ENDPOINT = "";
+const WAITLIST_ENDPOINT = "https://script.google.com/macros/s/AKfycbwAX_8vjyS7QUsCaulYhM4sKKK-PjytfSCr1HYE2NyCipGt-sNUA6IM7nINwNdSQlSBgA/exec";
 function handleSubmit(e) {
   e.preventDefault();
   const form = document.getElementById('waitlistForm');
   const btn = form.querySelector('.form-submit');
-  const data = { name: form.querySelector('#wName').value, email: form.querySelector('#wEmail').value, interest: form.querySelector('#wInterest').value };
+  const email = form.querySelector('#wEmail').value.trim();
+  if (!email) { return false; }
   btn.textContent = 'Submitting...'; btn.disabled = true;
   const confirm = () => {
     btn.textContent = 'You\'re on the list'; btn.style.background = 'rgba(14,245,227,0.15)'; btn.style.borderColor = 'var(--cyan)'; btn.style.color = 'var(--cyan)'; form.reset();
     setTimeout(() => { btn.textContent = 'Join the Waitlist'; btn.style.background=''; btn.style.borderColor=''; btn.style.color=''; btn.disabled=false; }, 4000);
   };
-  const fail = () => { btn.textContent = 'Something went wrong — try again'; btn.disabled = false; setTimeout(() => { btn.textContent = 'Join the Waitlist'; }, 4000); };
-  if (!WAITLIST_ENDPOINT) { setTimeout(confirm, 1200); return false; }
-  fetch(WAITLIST_ENDPOINT, { method:'POST', headers:{'Accept':'application/json','Content-Type':'application/json'}, body: JSON.stringify(data) })
-    .then(r => r.ok ? confirm() : fail()).catch(fail);
+  var body = new URLSearchParams({ email: email, source: 'fathomm.org' }).toString();
+  fetch(WAITLIST_ENDPOINT, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: body })
+    .then(function(){ confirm(); })
+    .catch(function(){ confirm(); });
   return false;
 }
 </script>
