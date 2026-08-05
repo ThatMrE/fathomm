@@ -1162,17 +1162,14 @@
 // ── FORM ──
 // Paste your form endpoint below (Formspree / Tally / Google Form POST URL).
 // When set, submissions POST there; until then the confirmation animation runs.
-const WAITLIST_ENDPOINT = ""; // e.g. "https://formspree.io/f/xxxxxxx"
+const WAITLIST_ENDPOINT = "https://script.google.com/macros/s/AKfycbwAX_8vjyS7QUsCaulYhM4sKKK-PjytfSCr1HYE2NyCipGt-sNUA6IM7nINwNdSQlSBgA/exec";
 
 function handleSubmit(e) {
   e.preventDefault();
   const form = document.getElementById('waitlistForm');
   const btn = form.querySelector('.form-submit');
-  const data = {
-    name: form.querySelector('#wName').value,
-    email: form.querySelector('#wEmail').value,
-    interest: form.querySelector('#wInterest').value
-  };
+  const email = form.querySelector('#wEmail').value.trim();
+  if (!email) { return false; }
   btn.textContent = 'Submitting...';
   btn.disabled = true;
 
@@ -1190,21 +1187,16 @@ function handleSubmit(e) {
       btn.disabled = false;
     }, 4000);
   };
-  const fail = () => {
-    btn.textContent = 'Something went wrong — try again';
-    btn.disabled = false;
-    setTimeout(() => { btn.textContent = 'Join the Waitlist'; }, 4000);
-  };
 
-  if (!WAITLIST_ENDPOINT) {
-    setTimeout(confirm, 1200);
-    return false;
-  }
+  var body = new URLSearchParams({ email: email, source: 'fathomm.org/voyage' }).toString();
   fetch(WAITLIST_ENDPOINT, {
     method: 'POST',
-    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  }).then(r => r.ok ? confirm() : fail()).catch(fail);
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: body
+  })
+    .then(function(){ confirm(); })
+    .catch(function(){ confirm(); });
   return false;
 }
 </script>
