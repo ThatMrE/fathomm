@@ -22,8 +22,8 @@ serves `cellhaus/index.html` as-is.
 
 ## Application form
 
-The `#apply` form uses **Netlify Forms** (`data-netlify="true"`, form name
-`apply`). Submissions appear in the Netlify dashboard under *Forms* with no
-extra setup. JavaScript shows an inline success panel; if JS is disabled the
-native POST still works. Replace `hello@haus.fund` with the real inbox before
-going live.
+The `#apply` section embeds the **Airtable application form**
+(`airtable.com/app9STfjol4NHGEWj/pag6vvU75E9mWLH49/form`) via an iframe, with a
+direct "Open the application form" link as a fallback. Submissions land in the
+linked Airtable base — no Netlify Forms setup required. Replace
+`hello@haus.fund` with the real inbox before going live.

@@ -540,70 +540,16 @@
     </div>
 
     <div>
-      <form class="apply" name="apply" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleApply(event)">
-        <input type="hidden" name="form-name" value="apply" />
-        <p class="hp"><label>Don't fill this out: <input name="bot-field" /></label></p>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="name">Full name</label>
-            <input id="name" name="name" type="text" required />
-          </div>
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" required />
-          </div>
-        </div>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="company">Company</label>
-            <input id="company" name="company" type="text" required />
-          </div>
-          <div class="field">
-            <label for="track">Track</label>
-            <select id="track" name="track">
-              <option>Biotech — cell / gene therapy</option>
-              <option>Medtech — device / diagnostics</option>
-              <option>Not sure yet</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="website">Website / deck</label>
-            <input id="website" name="website" type="text" placeholder="https://" />
-          </div>
-          <div class="field">
-            <label for="stage">Stage</label>
-            <select id="stage" name="stage">
-              <option>Concept</option>
-              <option>Working prototype</option>
-              <option>Past first prototyping</option>
-              <option>Revenue / pilots</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="what">What are you building?</label>
-          <textarea id="what" name="what" required></textarea>
-        </div>
-
-        <div class="field">
-          <label for="lab">What would you run in the lab — and why Japan?</label>
-          <textarea id="lab" name="lab" required></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Submit application</button>
-        <p class="form-fine">Or reach the team directly at <a href="mailto:hello@haus.fund" style="color:var(--teal)">hello@haus.fund</a></p>
-      </form>
-
-      <div class="form-success" id="applySuccess">
-        <h3>Application received.</h3>
-        <p>Thank you — we review applications on a rolling basis and will be in touch. In the meantime, keep building.</p>
-      </div>
+      <iframe class="airtable-embed"
+        src="https://airtable.com/embed/app9STfjol4NHGEWj/pag6vvU75E9mWLH49/form"
+        title="CellHaus application form"
+        frameborder="0" width="100%" height="720"
+        style="background:#ffffff;border:1px solid var(--panel-line);border-radius:8px;display:block;"></iframe>
+      <p class="form-fine">
+        Form not loading?
+        <a href="https://airtable.com/app9STfjol4NHGEWj/pag6vvU75E9mWLH49/form" target="_blank" rel="noopener" style="color:var(--teal)">Open the application form&nbsp;↗</a>
+        · or reach the team at <a href="mailto:hello@haus.fund" style="color:var(--teal)">hello@haus.fund</a>
+      </p>
     </div>
   </div>
 </section>
@@ -639,27 +585,5 @@
   </div>
 </footer>
 
-<script>
-  // Progressive-enhancement: show a success panel on submit. Netlify Forms
-  // still captures the POST; if JS is disabled the native submit works too.
-  function handleApply(e){
-    var form = e.target;
-    if(!form.checkValidity()) return; // let the browser show validation
-    e.preventDefault();
-    var data = new FormData(form);
-    fetch('/', {
-      method:'POST',
-      headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body: new URLSearchParams(data).toString()
-    }).then(function(){
-      form.style.display='none';
-      document.getElementById('applySuccess').style.display='block';
-      document.getElementById('applySuccess').scrollIntoView({behavior:'smooth',block:'center'});
-    }).catch(function(){
-      // Fall back to a normal submit if the fetch is blocked
-      form.submit();
-    });
-  }
-</script>
 </body>
 </html>
