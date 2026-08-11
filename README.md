@@ -1,6 +1,6 @@
 # Fathomm
 
-The Fathomm website (fathomm.org). Plain static site — no build step required to deploy.
+The Fathomm website (fathomm.org). A plain static site. Deploying it needs no build step.
 
 ## Structure
 
@@ -18,7 +18,7 @@ CNAME                      Custom domain (GitHub Pages). Safe to delete on other
 .nojekyll                  Serve folders/paths as-is (GitHub Pages)
 ```
 
-The atlas page and the widget are **fully self-contained** — the clinic data is inlined, so
+The atlas page and the widget are **fully self-contained**. The clinic data is inlined, so
 each file works on its own with no server code and no data fetch.
 
 ## View locally
@@ -57,12 +57,13 @@ Commit the regenerated `data/*` and the two HTML files together.
 ## Runtime dependencies (CDN)
 
 Both HTML files load Leaflet (cdnjs), Google Fonts, and CARTO map tiles at runtime.
-If a strict Content-Security-Policy is added, allow-list those origins or self-host them
-(the four `<link>`/`<script>` src lines at the top of each file are the only ones to repoint).
+If you add a strict Content-Security-Policy, allow-list those origins or self-host them.
+The four `<link>` and `<script>` src lines at the top of each file are the only ones to
+repoint.
 
 ## Trust Score
 
-Composite 0–100 estimate per provider — evidence 30 · accreditation 25 · transparency 15 ·
+Composite 0–100 estimate per provider: evidence 30 · accreditation 25 · transparency 15 ·
 track record 15 · safety 15. A decision aid, **not** an endorsement or medical advice.
-Experimental categories (exosomes, stem-cell, most "life-extension", gene therapy) are labeled
-not FDA/EMA-approved; discredited entries appear only as cautionary items.
+The experimental categories (exosomes, stem-cell, most "life-extension", gene therapy) carry
+a not-FDA/EMA-approved label. Discredited entries appear only as cautionary items.
