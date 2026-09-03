@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CellHaus — Cell &amp; Gene Therapy Residency · Kobe, Japan 2026</title>
+<meta name="description" content="CellHaus is a live-in cell, gene &amp; longevity therapy residency inside the Kobe Biomedical Innovation Cluster — the world's most accelerated regenerative-medicine market. Launching September 2026." />
+<meta property="og:title" content="CellHaus — Cell &amp; Gene Therapy Residency · Kobe 2026" />
+<meta property="og:description" content="A live-in biotech residency for cell, gene, and longevity founders — built inside Japan's largest biomedical cluster." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#05080f;
+    --bg-2:#070d18;
+    --panel:rgba(255,255,255,.03);
+    --panel-line:rgba(46,230,201,.14);
+    --teal:#2ee6c9;
+    --teal-dim:#1fae98;
+    --amber:#e8b24c;
+    --ink:#eef3f2;
+    --muted:rgba(238,243,242,.62);
+    --faint:rgba(238,243,242,.38);
+    --maxw:1140px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1100px 700px at 78% -8%, rgba(46,230,201,.10), transparent 60%),
+      radial-gradient(900px 700px at 8% 12%, rgba(64,120,255,.08), transparent 55%),
+      linear-gradient(180deg,#060b14,#05080f 40%,#04070d);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;line-height:1.08;letter-spacing:-.01em;margin:0}
+  .mono{font-family:'Space Mono',monospace}
+  .kicker{
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--teal);display:inline-block;margin-bottom:18px;
+  }
+  .kicker .num{color:var(--faint);margin-left:6px}
+
+  /* ---------- codon strip ---------- */
+  .codon-strip{
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.42em;
+    color:rgba(46,230,201,.30);white-space:nowrap;overflow:hidden;user-select:none;
+  }
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(14px);
+    background:rgba(5,8,15,.72);
+    border-bottom:1px solid rgba(255,255,255,.05);
+  }
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:.32em;font-size:15px}
+  .brand b{color:var(--teal)}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{font-size:13px;color:var(--muted);letter-spacing:.04em;transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .btn{
+    display:inline-block;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;
+    letter-spacing:.08em;text-transform:uppercase;padding:11px 22px;border-radius:2px;transition:.2s;
+  }
+  .btn-primary{background:var(--teal);color:#04120f;border:1px solid var(--teal)}
+  .btn-primary:hover{background:transparent;color:var(--teal)}
+  .btn-ghost{border:1px solid rgba(46,230,201,.4);color:var(--teal)}
+  .btn-ghost:hover{background:rgba(46,230,201,.08)}
+  @media(max-width:820px){.nav-links a:not(.btn){display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:88px 0 64px;overflow:hidden}
+  .hero .codon-strip{margin-bottom:34px;opacity:.8}
+  .kanji-bg{
+    position:absolute;right:-2%;top:-6%;font-family:'Cormorant Garamond',serif;
+    font-size:min(46vw,560px);line-height:.8;font-weight:700;color:rgba(46,230,201,.05);
+    pointer-events:none;user-select:none;z-index:0;
+  }
+  .hero-in{position:relative;z-index:2;max-width:820px}
+  .loc-line{display:flex;gap:26px;flex-wrap:wrap;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--faint);margin-bottom:26px}
+  .loc-line b{color:var(--teal);font-weight:400}
+  h1.title{font-size:clamp(40px,7vw,80px);font-weight:700;letter-spacing:-.02em}
+  h1.title .accent{color:var(--teal)}
+  .lede{font-size:clamp(17px,2.2vw,21px);color:var(--muted);margin:26px 0 34px;max-width:660px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-note{font-size:13px;color:var(--faint);margin-left:4px}
+
+  /* ---------- stat row ---------- */
+  .stats{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:1px;margin-top:64px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:4px;overflow:hidden;
+  }
+  .stat{background:var(--bg-2);padding:22px 18px}
+  .stat .n{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:600;color:var(--teal)}
+  .stat .l{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:6px}
+  @media(max-width:820px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+  /* ---------- section shell ---------- */
+  section{padding:84px 0;position:relative}
+  .sec-head{max-width:720px;margin-bottom:48px}
+  .sec-head h2{font-size:clamp(28px,4vw,42px)}
+  .sec-head p{color:var(--muted);font-size:17px;margin-top:16px}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(46,230,201,.25),transparent)}
+
+  /* ---------- cards ---------- */
+  .grid{display:grid;gap:18px}
+  .g-2{grid-template-columns:repeat(2,1fr)}
+  .g-3{grid-template-columns:repeat(3,1fr)}
+  .g-4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:900px){.g-3,.g-4{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:620px){.g-2,.g-3,.g-4{grid-template-columns:1fr}}
+  .card{
+    background:var(--panel);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:26px;
+    transition:.25s;position:relative;overflow:hidden;
+  }
+  .card:hover{border-color:var(--panel-line);background:rgba(46,230,201,.04);transform:translateY(-2px)}
+  .card .idx{font-family:'Space Mono',monospace;font-size:12px;color:var(--teal);letter-spacing:.1em}
+  .card h3{font-size:19px;margin:12px 0 10px}
+  .card p{color:var(--muted);font-size:14.5px;margin:0}
+  .card .big{font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:600;color:var(--amber);display:block;margin-bottom:4px}
+
+  /* ---------- feature split ---------- */
+  .split{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  @media(max-width:860px){.split{grid-template-columns:1fr;gap:34px}}
+  .pill-list{list-style:none;padding:0;margin:22px 0 0}
+  .pill-list li{padding:14px 0;border-top:1px solid rgba(255,255,255,.07);display:flex;gap:14px}
+  .pill-list li:last-child{border-bottom:1px solid rgba(255,255,255,.07)}
+  .pill-list .k{font-family:'Space Grotesk',sans-serif;color:var(--teal);font-weight:600;min-width:120px;font-size:14px}
+  .pill-list .v{color:var(--muted);font-size:14.5px}
+
+  /* ---------- timeline ---------- */
+  .phases{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:820px){.phases{grid-template-columns:1fr}}
+  .phase{background:var(--panel);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:24px}
+  .phase h3{color:var(--teal);font-size:16px;letter-spacing:.06em;text-transform:uppercase}
+  .phase .span{font-family:'Space Mono',monospace;font-size:12px;color:var(--faint);margin:4px 0 16px;display:block}
+  .phase ul{list-style:none;padding:0;margin:0}
+  .phase li{font-size:14px;color:var(--muted);padding:8px 0;border-top:1px dashed rgba(255,255,255,.08);display:flex;justify-content:space-between;gap:12px}
+  .phase li:first-child{border-top:none}
+  .phase li b{color:var(--ink);font-weight:500;font-family:'Space Mono',monospace;font-size:12px;white-space:nowrap}
+
+  /* ---------- regulatory steps ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:8px}
+  @media(max-width:820px){.steps{grid-template-columns:1fr}}
+  .step{padding:26px;border:1px solid rgba(255,255,255,.07);border-right:none;position:relative}
+  .step:last-child{border-right:1px solid rgba(255,255,255,.07)}
+  @media(max-width:820px){.step{border-right:1px solid rgba(255,255,255,.07)}}
+  .step .n{font-family:'Space Grotesk',sans-serif;font-size:40px;font-weight:700;color:rgba(46,230,201,.25);line-height:1}
+  .step h3{font-size:17px;margin:10px 0 8px}
+  .step p{font-size:14px;color:var(--muted);margin:0}
+
+  /* ---------- portfolio ---------- */
+  .co-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:900px){.co-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.co-grid{grid-template-columns:1fr}}
+  .co{background:var(--panel);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:20px;transition:.2s}
+  .co:hover{border-color:var(--panel-line)}
+  .co .nm{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:.04em;font-size:15px}
+  .co .nm.hero-pick::after{content:'HERO PICK';font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--amber);border:1px solid rgba(232,178,76,.4);border-radius:2px;padding:2px 6px;margin-left:8px;vertical-align:middle}
+  .co p{font-size:13.5px;color:var(--muted);margin:8px 0 0}
+
+  /* ---------- partners ---------- */
+  .partners-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:820px){.partners-grid{grid-template-columns:1fr}}
+  .partner{border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:24px;background:var(--panel)}
+  .partner .tag{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.14em;color:var(--faint);text-transform:uppercase}
+  .partner h3{font-size:17px;margin:8px 0 8px;color:var(--teal)}
+  .partner p{font-size:13.5px;color:var(--muted);margin:0}
+  .logo-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+  .logo-chip{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.06em;color:var(--muted);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:8px 15px}
+
+  /* ---------- apply ---------- */
+  #apply{background:linear-gradient(180deg,transparent,rgba(46,230,201,.04))}
+  .apply-shell{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+  @media(max-width:860px){.apply-shell{grid-template-columns:1fr;gap:36px}}
+  .apply-copy h2{font-size:clamp(30px,4.5vw,46px)}
+  .apply-copy .lede{margin-top:18px}
+  .checklist{list-style:none;padding:0;margin:24px 0 0}
+  .checklist li{padding:10px 0;color:var(--muted);font-size:14.5px;display:flex;gap:12px;align-items:flex-start}
+  .checklist li::before{content:'▹';color:var(--teal);font-size:15px}
+  form.apply{background:var(--bg-2);border:1px solid var(--panel-line);border-radius:8px;padding:30px}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+  .field input,.field select,.field textarea{
+    width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.12);border-radius:4px;
+    color:var(--ink);font-family:'Inter',sans-serif;font-size:15px;padding:12px 14px;transition:.2s;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--teal);background:rgba(46,230,201,.05)}
+  .field textarea{resize:vertical;min-height:96px}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:520px){.field-row{grid-template-columns:1fr}}
+  form.apply button{width:100%;border:none;cursor:pointer;margin-top:6px;padding:15px}
+  .form-fine{font-size:12px;color:var(--faint);margin-top:14px;text-align:center}
+  .hp{position:absolute;left:-5000px}
+  .form-success{display:none;background:rgba(46,230,201,.08);border:1px solid var(--teal);border-radius:8px;padding:34px;text-align:center}
+  .form-success h3{color:var(--teal);font-size:22px;margin-bottom:10px}
+  .form-success p{color:var(--muted);font-size:15px;margin:0}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid rgba(255,255,255,.07);padding:56px 0 40px}
+  .foot-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;align-items:flex-start}
+  .foot-brand .brand{font-size:18px;display:block;margin-bottom:12px}
+  .foot-brand p{color:var(--muted);font-size:14px;max-width:340px;margin:0}
+  .foot-links{display:flex;gap:60px;flex-wrap:wrap}
+  .foot-col h4{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin:0 0 14px}
+  .foot-col a{display:block;color:var(--muted);font-size:14px;padding:5px 0;transition:.2s}
+  .foot-col a:hover{color:var(--teal)}
+  .foot-bottom{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--faint)}
+  .kanji-inline{font-family:'Cormorant Garamond',serif;color:var(--teal)}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="brand">CELL<b>HAUS</b></a>
+    <nav class="nav-links">
+      <a href="#program">Program</a>
+      <a href="#kobe">Why Kobe</a>
+      <a href="#calendar">Calendar</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#partners">Partners</a>
+      <a href="#apply" class="btn btn-primary">Apply</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<a id="top"></a>
+<section class="hero">
+  <div class="kanji-bg" aria-hidden="true">細胞</div>
+  <div class="wrap hero-in">
+    <div class="codon-strip">ATGC · CATT · GGAC · CTTA · AGCG · TTAG · GCAT · CCGT · AATG · GCAA · ATGC · CATT · GGAC</div>
+    <div class="loc-line">
+      <span>KOBE <b>2026</b></span>
+      <span>PORT ISLAND · <b>KBIC</b></span>
+      <span>GLOBAL RESIDENCY NODE <b>02</b></span>
+    </div>
+    <h1 class="title">The house where<br/><span class="accent">biology</span> gets built.</h1>
+    <p class="lede">CellHaus is a live-in residency for cell, gene, and longevity founders — built inside the Kobe Biomedical Innovation Cluster and the world's most accelerated regenerative-medicine market. First cohort launches September 2026.</p>
+    <div class="hero-cta">
+      <a href="#apply" class="btn btn-primary">Apply to the cohort</a>
+      <a href="#program" class="btn btn-ghost">How it works</a>
+      <span class="hero-note">$10K uncapped SAFE · lab access · Kobe → Tokyo → San Francisco</span>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="n">12–15</div><div class="l">Founders / cohort</div></div>
+      <div class="stat"><div class="n">$10K</div><div class="l">SAFE per founder</div></div>
+      <div class="stat"><div class="n">56</div><div class="l">Days on the ground in Kobe</div></div>
+      <div class="stat"><div class="n">3</div><div class="l">Cities · Kobe · Tokyo · SF</div></div>
+      <div class="stat"><div class="n">334</div><div class="l">KBIC members &amp; partners</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ===================== PROGRAM ===================== -->
+<section id="program">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">The Residency<span class="num">/ 01</span></span>
+      <h2>A live-in lab, a first check, and a bridge into Japan.</h2>
+      <p>Residents live and build together on Port Island, work daily in shared wet-lab and prototyping space at Kobe University's Medtech Innovation Center, and turn a claim into validated, Japan-based feasibility data — then carry it out to global capital. It's the residency layer of Haus Fund, a pre-seed fund that catches founders inside the house, before anyone else will.</p>
+    </div>
+
+    <div class="grid g-4">
+      <div class="card">
+        <span class="idx">01</span>
+        <h3>Capital</h3>
+        <p><span class="big">$10K</span>An uncapped SAFE per founder, plus a possible follow-on co-investment into the strongest teams.</p>
+      </div>
+      <div class="card">
+        <span class="idx">02</span>
+        <h3>Labs</h3>
+        <p>Shared wet-lab and prototyping access at MIC — cell-culture room, simulation bench, 3D printers, and a Cell Processing Center contract route for deeper work.</p>
+      </div>
+      <div class="card">
+        <span class="idx">03</span>
+        <h3>Houses</h3>
+        <p>A co-living, co-working residency in central Kobe — a 7-minute walk from Sannomiya, steps from the cluster's hospitals and regulators.</p>
+      </div>
+      <div class="card">
+        <span class="idx">04</span>
+        <h3>Community</h3>
+        <p>Weekly office hours with a dedicated Program Manager, peer learning sessions, Friday community dinners, and a month living alongside ~300 builders.</p>
+      </div>
+    </div>
+
+    <div class="grid g-3" style="margin-top:18px">
+      <div class="card">
+        <h3>Regulatory groundwork</h3>
+        <p>Map your Japan route and prepare a PMDA pre-consultation across the conditional, SRM and Sakigake pathways — and refine a trial protocol with a PI and clinical site in view.</p>
+      </div>
+      <div class="card">
+        <h3>Ecosystem access</h3>
+        <p>Introductions across KBIC's network — RIKEN BDR, FBRI's PIC/S-GMP manufacturing, regulatory advisors, clinical partners, corporates and CDMOs.</p>
+      </div>
+      <div class="card">
+        <h3>Summits &amp; showcases</h3>
+        <p>Both Longevity Biomedical summit weekends, BioJapan in Yokohama, a Tokyo Demo Day, and a closing San Francisco showcase in front of investors and partners.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ===================== WHY KOBE ===================== -->
+<section id="kobe">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <span class="kicker">Why Kobe, Why Now<span class="num">/ 02</span></span>
+        <h2 style="font-size:clamp(28px,4vw,42px)">Kobe is not a backdrop — it is the accelerant.</h2>
+        <p style="color:var(--muted);font-size:17px;margin-top:16px">The city pairs the deepest regenerative-medicine cluster in Asia with the fastest path from bench to approved product anywhere on earth. iPS-cell technology was born here; the world's first transplant of iPS-derived tissue was performed here in 2014; and in March 2026 Japan approved its first two iPS-cell therapies on a single day.</p>
+        <ul class="pill-list">
+          <li><span class="k">Terrain</span><span class="v">The Kobe Biomedical Innovation Cluster — 334 members, ~12,700 staff, 8 hospitals and 1,500 beds on one island.</span></li>
+          <li><span class="k">Regulation</span><span class="v">Conditional, time-limited approval lets cell therapies reach market on early-stage data — years ahead of the FDA / EMA.</span></li>
+          <li><span class="k">Network</span><span class="v">RIKEN BDR, FBRI's PIC/S-GMP cell-manufacturing centre, and the lineage of the world's first iPS-cell transplant.</span></li>
+          <li><span class="k">Capital</span><span class="v">AMED non-dilutive grants, a registered-VC co-invest network, and Kobe operating costs roughly half of Tokyo.</span></li>
+        </ul>
+      </div>
+      <div class="grid g-2">
+        <div class="card"><p><span class="big">$0.81→2.05B</span>Japan cell &amp; gene therapy market, 2025→2033 (~11.4% CAGR, IMARC).</p></div>
+        <div class="card"><p><span class="big">21.2%</span>CAGR of Japan's regenerative-medicine market, 2024–2029 (Technavio).</p></div>
+        <div class="card"><p><span class="big">¥634B</span>Cumulative investment into the Kobe cluster since 2000.</p></div>
+        <div class="card"><p><span class="big">¥350B</span>Government earmark (~$2.3B) for pharma-startup support via AMED.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ===================== REGULATORY EDGE ===================== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">The Regulatory Edge<span class="num">/ 03</span></span>
+      <h2>Approved on early data — the conditional pathway.</h2>
+      <p>Japan's 2014 dual laws — the PMD Act and the Act on the Safety of Regenerative Medicine — created a distinct legal class for regenerative products and a uniquely fast route to market. We coach for it honestly: toward real efficacy, not just early approval.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <h3>Conditional approval</h3>
+        <p>Demonstrate safety and probable benefit from small, early-stage trials — even single-arm, surrogate-endpoint data.</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <h3>Market &amp; reimburse</h3>
+        <p>Sell and earn reimbursement during a confirmatory window of up to 7 years — a commercial bridge unavailable under the FDA / EMA.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <h3>Confirm or withdraw</h3>
+        <p>A second PMDA review confirms efficacy for full approval, or the product is withdrawn — patient access with a built-in check.</p>
+      </div>
+    </div>
+    <p style="color:var(--faint);font-size:13px;margin-top:20px;font-family:'Space Mono',monospace">SAKIGAKE + orphan fast-tracks target a ~6–9 month PMDA review, versus ~12 standard. Sources: PMDA · MHLW · Cell Stem Cell.</p>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ===================== CALENDAR ===================== -->
+<section id="calendar">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">Program Calendar<span class="num">/ 04</span></span>
+      <h2>The founder journey — one cohort, three phases.</h2>
+      <p>Recruit the best founders, build in Kobe, then showcase across Tokyo and San Francisco. Roughly three months, moving city to city, with 56 days on the ground in Kobe.</p>
+    </div>
+    <div class="phases">
+      <div class="phase">
+        <h3>Recruit</h3>
+        <span class="span">JUL – AUG 2026</span>
+        <ul>
+          <li>Applications open <b>Jul 10</b></li>
+          <li>Digital kickoff &amp; onboarding <b>Sep 15</b></li>
+          <li>Cohort selected &amp; accepted <b>Aug 10</b></li>
+        </ul>
+      </div>
+      <div class="phase">
+        <h3>Build in Kobe</h3>
+        <span class="span">SEP – NOV 2026</span>
+        <ul>
+          <li>Arrival &amp; residency begins <b>Sep 22</b></li>
+          <li>Orientation — Kobe <b>Sep 26</b></li>
+          <li>BioJapan — Yokohama <b>Oct 7–9</b></li>
+          <li>Mirai pop-up city — Port Island <b>Oct</b></li>
+          <li>Longevity summits <b>Oct 17–25</b></li>
+          <li>Demo Day <b>Oct 31</b></li>
+        </ul>
+      </div>
+      <div class="phase">
+        <h3>Showcase &amp; Scale</h3>
+        <span class="span">NOV – DEC 2026</span>
+        <ul>
+          <li>Tokyo leg — HLM Conference <b>Nov 18–20</b></li>
+          <li>Showcase — Tokyo <b>Nov 21</b></li>
+          <li>Showcase — San Francisco <b>Dec 12</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ===================== WHO SHOULD APPLY ===================== -->
+<section>
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <span class="kicker">Who Should Apply<span class="num">/ 05</span></span>
+        <h2 style="font-size:clamp(28px,4vw,42px)">Bring a real, testable asset — and a reason to be in Japan.</h2>
+        <p style="color:var(--muted);font-size:17px;margin-top:16px">Because residents actually use the lab and the weeks are short, the profile that succeeds is specific. We back cell therapy, gene therapy, and medical-device companies — split into a Biotech track and a Medtech track — at the concept-or-prototype stage, ideally already past first prototyping.</p>
+      </div>
+      <ul class="checklist">
+        <li>A validated concept or working prototype — a device, assay, or cell/gene construct that is past first prototyping.</li>
+        <li>At least one hands-on technical team member on the ground who can run wet-lab or device work (1–3 people, full duration).</li>
+        <li>A clear Japan rationale and a view on the regulatory route you want — PMDA, conditional/SRM, or Sakigake.</li>
+        <li>A defined experimental plan: which experiments, what materials, and no ethics-committee approval required for this pilot.</li>
+        <li>Ecosystem fit — rare disease, oncology, diagnostics, autologous cell therapy, or medical devices.</li>
+        <li>A collaborative, coachable posture — the program runs on peer learning, office hours, and Demo Day.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ===================== PORTFOLIO ===================== -->
+<section id="portfolio">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">Proof in the Portfolio<span class="num">/ 06</span></span>
+      <h2>Founders already building inside the house.</h2>
+      <p>Two batches in, across donor-free blood, AI-designed cell states, precision nutrients, and aging clocks — the kind of frontier biology CellHaus is built to catch early.</p>
+    </div>
+    <div class="co-grid">
+      <div class="co"><div class="nm hero-pick">Origenity</div><p>AI-driven cell design — programming novel, functionally-optimized cell states beyond what exists in nature.</p></div>
+      <div class="co"><div class="nm">Wasna</div><p>Donor-free plasma &amp; platelets, driving cost from $2,000 toward $100 / L, with Fortune-500 proof-of-concept.</p></div>
+      <div class="co"><div class="nm">Nutr1l1nk</div><p>Bio-AI precision nutrients — 75+ built at TRL 7/8, licensing to a global consumer brand.</p></div>
+      <div class="co"><div class="nm">Hypervariant</div><p>An immune-system aging clock built on proteomics + AI. Published in Nature Aging, 2025.</p></div>
+      <div class="co"><div class="nm">Auctum</div><p>A 'sliver' human micro-organ for preclinical toxicology — riding the FDA animal-testing phase-out.</p></div>
+      <div class="co"><div class="nm">Broadcast Bio</div><p>Reads cellular extracellular vesicles to flag clinical-trial signals up to 12 weeks faster.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ===================== PARTNERS ===================== -->
+<section id="partners">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">Strategic Partners<span class="num">/ 07</span></span>
+      <h2>Capital, science, and the bridge both ways.</h2>
+      <p>Anchor partnerships connect CellHaus founders to Japanese capital and science — and carry them out to global markets. Delivered with residency partners Biopunk House and Kobe University's Medtech Innovation Center.</p>
+    </div>
+    <div class="partners-grid">
+      <div class="partner">
+        <span class="tag">Tokyo Longevity &amp; Frontier Fund</span>
+        <h3><a href="https://asagilabs.com" target="_blank" rel="noopener">ASAGI Labs Ventures ↗</a></h3>
+        <p>Capital, Japan academic &amp; pharma sourcing, and regulatory / KOL bridging. Co-hosts the Health Longevity &amp; Medicine Conference.</p>
+      </div>
+      <div class="partner">
+        <span class="tag">Japan &amp; APAC Market Access</span>
+        <h3><a href="https://www.heka.bio" target="_blank" rel="noopener">HekaBio ↗</a></h3>
+        <p>A Tokyo-based commercialization operator that in-licenses de-risked oncology &amp; neuro assets and drives PMDA regulatory strategy, KOL relationships, and reimbursement — the on-the-ground route to the Japanese market.</p>
+      </div>
+      <div class="partner">
+        <span class="tag">Frontier Biotech Network</span>
+        <h3><a href="https://www.unchainbio.com" target="_blank" rel="noopener">Unchain Bio ↗</a></h3>
+        <p>A biotech venture &amp; community partner connecting CellHaus founders to frontier collaborators, talent, and capital across the wider biology-builder network.</p>
+      </div>
+      <div class="partner">
+        <span class="tag">Silicon Valley Soft-Landing</span>
+        <h3>US Market Access Center</h3>
+        <p>US market access, mentorship, and a Bay Area showcase — the bridge that carries Japan-built founders to US customers and capital.</p>
+      </div>
+      <div class="partner">
+        <span class="tag">Science Accelerator</span>
+        <h3>RenPhil · Big If True</h3>
+        <p>Trains scientists into ARPA-style Venture Directors, aligned with Japan's Global Startup Campus and reversing the brain drain.</p>
+      </div>
+      <div class="partner">
+        <span class="tag">Residency &amp; Community</span>
+        <h3>Biopunk House</h3>
+        <p>Co-founding residency partner (Elliot Roth, Roxana Grunenwald) — the biology-builder community that gives the house its culture and its founders.</p>
+      </div>
+    </div>
+    <div class="logo-row">
+      <span class="logo-chip">RIKEN BDR</span>
+      <span class="logo-chip">FBRI / KBIC</span>
+      <span class="logo-chip">Kobe University · MIC</span>
+      <span class="logo-chip">AMED</span>
+      <span class="logo-chip">JETRO</span>
+      <span class="logo-chip">Sysmex</span>
+      <span class="logo-chip">Sumitomo Pharma</span>
+      <span class="logo-chip">Takeda</span>
+      <span class="logo-chip">Astellas</span>
+      <span class="logo-chip">Healios</span>
+      <span class="logo-chip">Biopunk House</span>
+      <span class="logo-chip">Invest Kobe</span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ===================== APPLY ===================== -->
+<section id="apply">
+  <div class="wrap apply-shell">
+    <div class="apply-copy">
+      <span class="kicker">Apply<span class="num">/ 08</span></span>
+      <h2>Build the future of cell therapy with us.</h2>
+      <p class="lede">Applications for the September 2026 cohort are reviewed on a rolling basis. Tell us what you're building, why Japan, and what you'd run in the lab.</p>
+      <ul class="checklist">
+        <li>12–15 founders per cohort · Biotech and Medtech tracks.</li>
+        <li>$10K uncapped SAFE + possible follow-on co-investment.</li>
+        <li>Kobe → Tokyo → San Francisco, September–December 2026.</li>
+        <li>Self-funded runway for housing, food and living during the stay.</li>
+      </ul>
+    </div>
+
+    <div>
+      <iframe class="airtable-embed"
+        src="https://airtable.com/embed/app9STfjol4NHGEWj/pag6vvU75E9mWLH49/form"
+        title="CellHaus application form"
+        frameborder="0" width="100%" height="720"
+        style="background:#ffffff;border:1px solid var(--panel-line);border-radius:8px;display:block;"></iframe>
+      <p class="form-fine">
+        Form not loading?
+        <a href="https://airtable.com/app9STfjol4NHGEWj/pag6vvU75E9mWLH49/form" target="_blank" rel="noopener" style="color:var(--teal)">Open the application form&nbsp;↗</a>
+        · or reach the team at <a href="mailto:hello@haus.fund" style="color:var(--teal)">hello@haus.fund</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="#top" class="brand">CELL<b>HAUS</b></a>
+        <p>Cell &amp; Gene Therapy Residency — Kobe, Japan. <span class="kanji-inline">細胞</span> · Launching September 2026. Biology wants to be free; we are building the house where it gets built.</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h4>Program</h4>
+          <a href="#program">The residency</a>
+          <a href="#kobe">Why Kobe</a>
+          <a href="#calendar">Calendar</a>
+          <a href="#apply">Apply</a>
+        </div>
+        <div class="foot-col">
+          <h4>Network</h4>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#partners">Partners</a>
+          <a href="mailto:hello@haus.fund">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CellHaus · Haus Fund · Global Residency Node 02</span>
+      <span class="mono">KOBE · PORT ISLAND · KBIC</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
