@@ -7,16 +7,30 @@ The Fathomm website (fathomm.org). A plain static site. Deploying it needs no bu
 ```
 index.html                 Homepage — the FATHOMM pitch narrative                    →  fathomm.org/
 voyage/index.html          Voyages — the luxury 24-hour medical-voyage experience    →  fathomm.org/voyage
-atlas/index.html           Clinics — the trust-scored medical-tourism atlas          →  fathomm.org/atlas
+atlas/index.html           Clinics — atlas map + searchable 311-clinic directory     →  fathomm.org/atlas
+submit/index.html          Submit a clinic — Netlify Forms submission page           →  fathomm.org/submit
+thank-you.html             Submission confirmation (form no-JS fallback)             →  fathomm.org/thank-you
 embeds/fathomm-map.html    Embeddable map widget (iframe-ready)                     →  fathomm.org/embeds/fathomm-map.html
-data/clinics.json          Clinic dataset (coordinates, links, pricing, trust scores)
+data/clinics.json          Curated clinic dataset (coordinates, pricing, trust scores)
 data/clinics.csv           Same data, spreadsheet form
+data/directory.json        Full directory = clinics.json + directory_sources.psv (merged)
+data/directory_sources.psv Listed hospitals (name|city|country|region|specialty|website|accreditation)
 tools/build_data.py        Regenerates data/clinics.{json,csv} from source
-tools/inject.py            Injects data/clinics.json into the two HTML files
-tools/*_template.html      Templates (contain a data placeholder) used by inject.py
-CNAME                      Custom domain (GitHub Pages). Safe to delete on other hosts.
-.nojekyll                  Serve folders/paths as-is (GitHub Pages)
+tools/inject.py            Injects data/clinics.json into the atlas + widget
+tools/build_directory.py   Builds data/directory.json (merge + dedup)
+tools/inject_directory.py  Inlines data/directory.json into atlas/index.html (#directory)
+tools/*_template.html      Templates (contain a data placeholder) used by the inject scripts
+CNAME                      Custom domain. .nojekyll serves folders/paths as-is.
+.nojekyll                  Serve folders/paths as-is
 ```
+
+## Hosting & submissions
+
+The site is hosted on **Netlify** (project `fathomm`, git-connected to `main` — every push
+deploys). Clinic submissions on `/submit` use **Netlify Forms** (`clinic-submission`). To
+activate: Netlify dashboard → **Forms → Enable form detection**, then redeploy. Submissions
+appear in the Forms tab (and email, if a notification is configured); they are a moderation
+queue — approve, then add to `data/directory_sources.psv` and rebuild.
 
 The atlas page and the widget are **fully self-contained**. The clinic data is inlined, so
 each file works on its own with no server code and no data fetch.

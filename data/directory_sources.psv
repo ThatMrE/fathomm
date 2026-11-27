@@ -1,0 +1,226 @@
+name|city|country|region|primary_specialty|website|accreditation
+Bumrungrad International Hospital|Bangkok|Thailand|Asia|Multi-specialty|https://www.bumrungrad.com|JCI
+Bangkok Hospital|Bangkok|Thailand|Asia|Multi-specialty|https://www.bangkokhospital.com|JCI
+Samitivej Sukhumvit Hospital|Bangkok|Thailand|Asia|Multi-specialty|https://www.samitivejhospitals.com|JCI
+BNH Hospital|Bangkok|Thailand|Asia|Multi-specialty|https://www.bnhhospital.com|JCI
+Phyathai 2 International Hospital|Bangkok|Thailand|Asia|Multi-specialty|https://www.phyathai.com|JCI
+Praram 9 Hospital|Bangkok|Thailand|Asia|Multi-specialty|https://www.praram9.com|JCI
+Vejthani Hospital|Bangkok|Thailand|Asia|Orthopedics|https://www.vejthani.com|JCI
+Sikarin Hospital|Bangkok|Thailand|Asia|Multi-specialty|https://www.sikarin.com|JCI
+MedPark Hospital|Bangkok|Thailand|Asia|Multi-specialty|https://www.medparkhospital.com|JCI
+Bangkok Hospital Pattaya|Pattaya|Thailand|Asia|Multi-specialty|https://www.bangkokpattayahospital.com|JCI
+Bangkok Hospital Phuket|Phuket|Thailand|Asia|Multi-specialty|https://www.phukethospital.com|JCI
+Yanhee Hospital|Bangkok|Thailand|Asia|Cosmetic surgery|https://www.yanhee.net|unknown
+Bangkok International Dental Center|Bangkok|Thailand|Asia|Dental|https://www.bangkokdentalcenter.com|unknown
+Chiang Mai Ram Hospital|Chiang Mai|Thailand|Asia|Multi-specialty|https://www.chiangmairam.com|unknown
+Bangpakok 9 International Hospital|Bangkok|Thailand|Asia|Multi-specialty|https://www.bangpakok9internationalhospital.com|JCI
+Thonburi Hospital|Bangkok|Thailand|Asia|Multi-specialty|https://www.thonburihospital.com|unknown
+Indraprastha Apollo Hospitals|New Delhi|India|Asia|Multi-specialty|https://www.apollohospitals.com|JCI
+Apollo Hospitals Greams Road|Chennai|India|Asia|Multi-specialty|https://www.apollohospitals.com|JCI
+Apollo Hospitals Jubilee Hills|Hyderabad|India|Asia|Multi-specialty|https://www.apollohospitals.com|JCI
+Fortis Memorial Research Institute|Gurugram|India|Asia|Multi-specialty|https://www.fortishealthcare.com|JCI
+Fortis Escorts Heart Institute|New Delhi|India|Asia|Cardiac surgery|https://www.fortishealthcare.com|JCI
+Medanta - The Medicity|Gurugram|India|Asia|Multi-specialty|https://www.medanta.org|JCI
+Max Super Speciality Hospital Saket|New Delhi|India|Asia|Multi-specialty|https://www.maxhealthcare.in|NABH
+BLK-Max Super Speciality Hospital|New Delhi|India|Asia|Multi-specialty|https://www.blkmaxhospital.com|JCI
+Artemis Hospital|Gurugram|India|Asia|Multi-specialty|https://www.artemishospitals.com|JCI
+Manipal Hospital|Bangalore|India|Asia|Multi-specialty|https://www.manipalhospitals.com|NABH
+Narayana Institute of Cardiac Sciences|Bangalore|India|Asia|Cardiac surgery|https://www.narayanahealth.org|JCI
+Kokilaben Dhirubhai Ambani Hospital|Mumbai|India|Asia|Multi-specialty|https://www.kokilabenhospital.com|NABH
+Wockhardt Hospitals|Mumbai|India|Asia|Cardiac surgery|https://www.wockhardthospitals.com|unknown
+Gleneagles Hospital Chennai|Chennai|India|Asia|Organ transplant|https://www.gleneagleshospitals.co.in|JCI
+Jaslok Hospital|Mumbai|India|Asia|Multi-specialty|https://www.jaslokhospital.net|NABH
+Sir Ganga Ram Hospital|New Delhi|India|Asia|Multi-specialty|https://www.sgrh.com|NABH
+Amrita Institute of Medical Sciences|Kochi|India|Asia|Multi-specialty|https://www.amritahospitals.org|JCI
+Aster Medcity|Kochi|India|Asia|Multi-specialty|https://www.asterhospitals.in|JCI
+Christian Medical College|Vellore|India|Asia|Multi-specialty|https://www.cmch-vellore.edu|NABH
+Sri Ramachandra Medical Centre|Chennai|India|Asia|Multi-specialty|https://www.sriramachandra.edu.in|NABH
+Fortis Hospital Mulund|Mumbai|India|Asia|Multi-specialty|https://www.fortishealthcare.com|JCI
+Nanavati Max Super Speciality Hospital|Mumbai|India|Asia|Multi-specialty|https://www.nanavatimaxhospital.org|NABH
+Global Hospital Mumbai|Mumbai|India|Asia|Organ transplant|https://www.gleneagleshospitals.co.in|JCI
+Columbia Asia Referral Hospital Yeshwanthpur|Bangalore|India|Asia|Multi-specialty|https://www.manipalhospitals.com|NABH
+Rela Hospital|Chennai|India|Asia|Organ transplant|https://www.relainstitute.com|unknown
+HCG Cancer Centre|Bangalore|India|Asia|Oncology|https://www.hcgoncology.com|unknown
+Prince Court Medical Centre|Kuala Lumpur|Malaysia|Asia|Multi-specialty|https://www.princecourt.com|JCI
+Gleneagles Hospital Kuala Lumpur|Kuala Lumpur|Malaysia|Asia|Multi-specialty|https://gleneagles.com.my|JCI
+Pantai Hospital Kuala Lumpur|Kuala Lumpur|Malaysia|Asia|Multi-specialty|https://www.pantai.com.my|MSQH
+Sunway Medical Centre|Petaling Jaya|Malaysia|Asia|Multi-specialty|https://www.sunwaymedical.com|ACHS
+Subang Jaya Medical Centre|Subang Jaya|Malaysia|Asia|Multi-specialty|https://www.ramsaysimedarby.com|MSQH
+Penang Adventist Hospital|Penang|Malaysia|Asia|Cardiac surgery|https://www.pah.com.my|JCI
+Island Hospital|Penang|Malaysia|Asia|Multi-specialty|https://www.islandhospital.com|MSQH
+Gleneagles Hospital Penang|Penang|Malaysia|Asia|Multi-specialty|https://gleneagles.com.my|MSQH
+Mahkota Medical Centre|Melaka|Malaysia|Asia|Multi-specialty|https://www.mahkotamedical.com|MSQH
+Loh Guan Lye Specialists Centre|Penang|Malaysia|Asia|Multi-specialty|https://www.lohguanlye.com|MSQH
+Institut Jantung Negara (National Heart Institute)|Kuala Lumpur|Malaysia|Asia|Cardiac surgery|https://www.ijn.com.my|MSQH
+KPJ Ampang Puteri Specialist Hospital|Kuala Lumpur|Malaysia|Asia|Multi-specialty|https://www.kpjampang.com|MSQH
+Ramsay Sime Darby ParkCity Medical Centre|Kuala Lumpur|Malaysia|Asia|Multi-specialty|https://www.ramsaysimedarby.com|unknown
+Mount Elizabeth Hospital|Singapore|Singapore|Asia|Multi-specialty|https://www.mountelizabeth.com.sg|JCI
+Mount Elizabeth Novena Hospital|Singapore|Singapore|Asia|Multi-specialty|https://www.mountelizabeth.com.sg|JCI
+Gleneagles Hospital|Singapore|Singapore|Asia|Multi-specialty|https://www.gleneagles.com.sg|JCI
+Raffles Hospital|Singapore|Singapore|Asia|Multi-specialty|https://www.rafflesmedicalgroup.com|JCI
+Parkway East Hospital|Singapore|Singapore|Asia|Multi-specialty|https://www.parkwayeast.com.sg|JCI
+Farrer Park Hospital|Singapore|Singapore|Asia|Multi-specialty|https://www.farrerpark.com|JCI
+Thomson Medical Centre|Singapore|Singapore|Asia|Fertility/IVF|https://www.thomsonmedical.com|unknown
+Asan Medical Center|Seoul|South Korea|Asia|Multi-specialty|https://eng.amc.seoul.kr|unknown
+Samsung Medical Center|Seoul|South Korea|Asia|Multi-specialty|https://www.samsunghospital.com|JCI
+Severance Hospital (Yonsei University)|Seoul|South Korea|Asia|Multi-specialty|https://www.yuhs.or.kr|JCI
+Seoul National University Hospital|Seoul|South Korea|Asia|Multi-specialty|https://www.snuh.org|unknown
+Seoul St. Mary's Hospital|Seoul|South Korea|Asia|Multi-specialty|https://www.cmcseoul.or.kr|JCI
+Gangnam Severance Hospital|Seoul|South Korea|Asia|Multi-specialty|https://gs.iseverance.com|JCI
+Korea University Anam Hospital|Seoul|South Korea|Asia|Multi-specialty|https://anam.kumc.or.kr|unknown
+Seoul National University Bundang Hospital|Seongnam|South Korea|Asia|Multi-specialty|https://www.snubh.org|JCI
+CHA Bundang Medical Center|Seongnam|South Korea|Asia|Fertility/IVF|https://chamc.co.kr|JCI
+Inje University Haeundae Paik Hospital|Busan|South Korea|Asia|Multi-specialty|https://www.paik.ac.kr|JCI
+Wooridul Spine Hospital|Seoul|South Korea|Asia|Spine surgery|https://www.wooridul.co.kr|unknown
+JK Plastic Surgery Center|Seoul|South Korea|Asia|Cosmetic surgery|https://www.jkplastic.com|unknown
+Banobagi Plastic Surgery|Seoul|South Korea|Asia|Cosmetic surgery|https://www.banobagi.com|unknown
+Chang Gung Memorial Hospital|Taoyuan|Taiwan|Asia|Multi-specialty|https://www.cgmh.org.tw|JCI
+National Taiwan University Hospital|Taipei|Taiwan|Asia|Multi-specialty|https://www.ntuh.gov.tw|JCI
+Taipei Veterans General Hospital|Taipei|Taiwan|Asia|Multi-specialty|https://www.vghtpe.gov.tw|unknown
+Taipei Medical University Hospital|Taipei|Taiwan|Asia|Multi-specialty|https://www.tmuh.org.tw|JCI
+Wan Fang Hospital|Taipei|Taiwan|Asia|Multi-specialty|https://www.wanfang.gov.tw|JCI
+Cheng Hsin General Hospital|Taipei|Taiwan|Asia|Cardiac surgery|https://www.chgh.org.tw|unknown
+China Medical University Hospital|Taichung|Taiwan|Asia|Multi-specialty|https://www.cmuh.cmu.edu.tw|unknown
+St. Luke's Medical Center|Quezon City|Philippines|Asia|Multi-specialty|https://www.stlukes.com.ph|JCI
+The Medical City|Pasig|Philippines|Asia|Multi-specialty|https://www.themedicalcity.com|JCI
+Makati Medical Center|Makati|Philippines|Asia|Multi-specialty|https://www.makatimed.net.ph|JCI
+Asian Hospital and Medical Center|Muntinlupa|Philippines|Asia|Multi-specialty|https://www.asianhospital.com|JCI
+Chinese General Hospital and Medical Center|Manila|Philippines|Asia|Multi-specialty|https://www.cghmc.com.ph|unknown
+Cardinal Santos Medical Center|San Juan|Philippines|Asia|Multi-specialty|https://www.cardinalsantos.com.ph|unknown
+Siloam Hospitals Lippo Village|Tangerang|Indonesia|Asia|Multi-specialty|https://www.siloamhospitals.com|JCI
+BIMC Siloam Nusa Dua|Bali|Indonesia|Asia|Multi-specialty|https://www.bimcbali.com|JCI
+Siloam Hospitals Bali|Denpasar|Indonesia|Asia|Multi-specialty|https://www.siloamhospitals.com|JCI
+Pondok Indah Hospital|Jakarta|Indonesia|Asia|Multi-specialty|https://www.rspondokindah.co.id|unknown
+Mayapada Hospital|Jakarta|Indonesia|Asia|Multi-specialty|https://mayapadahospital.com|unknown
+Bethsaida Hospital|Tangerang|Indonesia|Asia|Multi-specialty|https://www.bethsaidahospitals.com|unknown
+CHRISTUS Muguerza Alta Especialidad|Monterrey|Mexico|Latin America|Multi-specialty|https://christusmuguerza.com.mx|JCI
+Hospital Angeles Lomas|Mexico City|Mexico|Latin America|Multi-specialty|https://www.hospitalesangeles.com|JCI
+Hospital Angeles Pedregal|Mexico City|Mexico|Latin America|Multi-specialty|https://www.hospitalesangeles.com|JCI
+Hospital Angeles Puebla|Puebla|Mexico|Latin America|Multi-specialty|https://www.hospitalesangeles.com|JCI
+Hospital Angeles Tijuana|Tijuana|Mexico|Latin America|Multi-specialty|https://www.hospitalesangeles.com|unknown
+Hospital San Jose Tec de Monterrey|Monterrey|Mexico|Latin America|Multi-specialty|https://www.hsj.com.mx|JCI
+Centro Medico ABC (American British Cowdray)|Mexico City|Mexico|Latin America|Multi-specialty|https://www.abchospital.com|JCI
+Medica Sur|Mexico City|Mexico|Latin America|Multi-specialty|https://www.medicasur.com.mx|JCI
+Hospital Galenia|Cancun|Mexico|Latin America|Multi-specialty|https://www.hospitalgalenia.com|JCI
+Star Medica|Mexico City|Mexico|Latin America|Multi-specialty|https://www.starmedica.com|unknown
+Hospiten Cancun|Cancun|Mexico|Latin America|Multi-specialty|https://www.hospiten.com|unknown
+Oasis of Hope Hospital|Tijuana|Mexico|Latin America|Oncology|https://www.oasisofhope.com|unknown
+Sani Dental Group|Los Algodones|Mexico|Latin America|Dental|https://www.sanidentalgroup.com|unknown
+Hospital CMQ|Puerto Vallarta|Mexico|Latin America|Multi-specialty|https://www.hospitalcmq.com|unknown
+Hospital Clinica Biblica|San Jose|Costa Rica|Latin America|Multi-specialty|https://www.clinicabiblica.com|JCI
+Hospital CIMA San Jose|San Jose|Costa Rica|Latin America|Multi-specialty|https://www.hospitalcima.com|JCI
+Hospital Metropolitano|San Jose|Costa Rica|Latin America|Multi-specialty|https://www.hospitalmetropolitano.cr|unknown
+Hospital La Catolica|San Jose|Costa Rica|Latin America|Multi-specialty|https://www.hospitallacatolica.com|unknown
+Prisma Dental|San Jose|Costa Rica|Latin America|Dental|https://www.prismadental.com|unknown
+Fundacion Santa Fe de Bogota|Bogota|Colombia|Latin America|Multi-specialty|https://www.fsfb.org.co|JCI
+Fundacion Valle del Lili|Cali|Colombia|Latin America|Multi-specialty|https://www.valledellili.org|JCI
+Fundacion Cardioinfantil (La Cardio)|Bogota|Colombia|Latin America|Cardiac surgery|https://www.lacardio.org|JCI
+Centro Medico Imbanaco|Cali|Colombia|Latin America|Multi-specialty|https://www.imbanaco.com|JCI
+Hospital Pablo Tobon Uribe|Medellin|Colombia|Latin America|Multi-specialty|https://www.hptu.org.co|unknown
+Clinica Las Americas|Medellin|Colombia|Latin America|Oncology|https://www.lasamericas.com.co|unknown
+Clinica del Country|Bogota|Colombia|Latin America|Multi-specialty|https://www.clinicadelcountry.com|unknown
+Clinica Medellin|Medellin|Colombia|Latin America|Multi-specialty|https://www.clinicamedellin.com|unknown
+Hospital Israelita Albert Einstein|Sao Paulo|Brazil|Latin America|Multi-specialty|https://www.einstein.br|JCI
+Hospital Sirio-Libanes|Sao Paulo|Brazil|Latin America|Multi-specialty|https://www.hospitalsiriolibanes.org.br|JCI
+Hospital Alemao Oswaldo Cruz|Sao Paulo|Brazil|Latin America|Multi-specialty|https://www.hospitalalemao.org.br|JCI
+Hospital Moinhos de Vento|Porto Alegre|Brazil|Latin America|Multi-specialty|https://www.hospitalmoinhos.org.br|JCI
+Hospital do Coracao (HCor)|Sao Paulo|Brazil|Latin America|Cardiac surgery|https://www.hcor.com.br|JCI
+Hospital Samaritano|Sao Paulo|Brazil|Latin America|Multi-specialty|https://www.hsamaritano.com.br|JCI
+Beneficencia Portuguesa de Sao Paulo (BP)|Sao Paulo|Brazil|Latin America|Multi-specialty|https://www.bp.org.br|unknown
+Rede D'Or Sao Luiz|Sao Paulo|Brazil|Latin America|Multi-specialty|https://www.rededorsaoluiz.com.br|unknown
+Hospital Punta Pacifica (Pacifica Salud)|Panama City|Panama|Latin America|Multi-specialty|https://www.pacificasalud.com|JCI
+Hospital Nacional|Panama City|Panama|Latin America|Multi-specialty|https://www.hospitalnacional.com|unknown
+Clinica Hospital San Fernando|Panama City|Panama|Latin America|Multi-specialty|https://www.hospitalsanfernando.com|unknown
+The Panama Clinic|Panama City|Panama|Latin America|Multi-specialty|https://www.thepanamaclinic.com|unknown
+Hospital Italiano de Buenos Aires|Buenos Aires|Argentina|Latin America|Multi-specialty|https://www.hospitalitaliano.org.ar|JCI
+Hospital Aleman|Buenos Aires|Argentina|Latin America|Multi-specialty|https://www.hospitalaleman.org.ar|unknown
+Fundacion Favaloro|Buenos Aires|Argentina|Latin America|Cardiac surgery|https://www.fundacionfavaloro.org|unknown
+FLENI|Buenos Aires|Argentina|Latin America|Neurology|https://www.fleni.org.ar|unknown
+Sanatorio Finochietto|Buenos Aires|Argentina|Latin America|Multi-specialty|https://www.sanatoriofinochietto.com|unknown
+CEMIC|Buenos Aires|Argentina|Latin America|Multi-specialty|https://www.cemic.edu.ar|unknown
+Acibadem Maslak Hospital|Istanbul|Turkiye|Europe|Multi-specialty|https://www.acibadem.com.tr|JCI
+Acibadem Altunizade Hospital|Istanbul|Turkiye|Europe|Multi-specialty|https://www.acibadem.com.tr|JCI
+Acibadem Bursa Hospital|Bursa|Turkiye|Europe|Multi-specialty|https://www.acibadem.com.tr|JCI
+Acibadem Adana Hospital|Adana|Turkiye|Europe|Multi-specialty|https://www.acibadem.com.tr|JCI
+Acibadem Kent Hospital|Izmir|Turkiye|Europe|Multi-specialty|https://www.acibadem.com.tr|JCI
+Anadolu Medical Center|Kocaeli|Turkiye|Europe|Oncology|https://www.anadolumedicalcenter.com|JCI
+Memorial Sisli Hospital|Istanbul|Turkiye|Europe|Multi-specialty|https://www.memorial.com.tr|JCI
+Memorial Ankara Hospital|Ankara|Turkiye|Europe|Multi-specialty|https://www.memorial.com.tr|JCI
+Memorial Antalya Hospital|Antalya|Turkiye|Europe|Multi-specialty|https://www.memorial.com.tr|JCI
+Medical Park Bahcelievler Hospital|Istanbul|Turkiye|Europe|Multi-specialty|https://www.medicalpark.com.tr|JCI
+Medicana International Istanbul|Istanbul|Turkiye|Europe|Multi-specialty|https://www.medicana.com.tr|JCI
+American Hospital Istanbul (Koc)|Istanbul|Turkiye|Europe|Multi-specialty|https://www.americanhospital.com.tr|JCI
+Liv Hospital Ulus|Istanbul|Turkiye|Europe|Multi-specialty|https://www.livhospital.com|unknown
+Group Florence Nightingale Hospital|Istanbul|Turkiye|Europe|Cardiac surgery|https://www.florence.com.tr|JCI
+Istanbul Medipol University Hospital|Istanbul|Turkiye|Europe|Multi-specialty|https://www.medipol.com.tr|JCI
+Hisar Intercontinental Hospital|Istanbul|Turkiye|Europe|Multi-specialty|https://www.hisarhospital.com|JCI
+Dunyagoz Hospital|Istanbul|Turkiye|Europe|Ophthalmology|https://www.dunyagoz.com|unknown
+Estetik International|Bursa|Turkiye|Europe|Cosmetic surgery|https://www.esteticinternational.com|unknown
+Dr. Serkan Aygin Clinic|Istanbul|Turkiye|Europe|Hair transplant|https://www.drserkanaygin.com|unknown
+Cosmedica Clinic|Istanbul|Turkiye|Europe|Hair transplant|https://www.cosmedica.com|unknown
+Smile Hair Clinic|Istanbul|Turkiye|Europe|Hair transplant|https://www.smilehairclinic.com|unknown
+Vera Clinic|Istanbul|Turkiye|Europe|Hair transplant|https://www.veraclinic.net|unknown
+MDental Clinic|Budapest|Hungary|Europe|Dental|https://www.mdentalclinichungary.com|unknown
+Kreativ Dental Clinic|Budapest|Hungary|Europe|Dental|https://www.kreativdental.com|unknown
+Evergreen Dental|Budapest|Hungary|Europe|Dental|https://www.evergreen-dental.com|unknown
+Helvetic Clinics|Budapest|Hungary|Europe|Dental|https://www.helvetic-clinics.com|unknown
+Buda Health Center|Budapest|Hungary|Europe|Multi-specialty|https://www.budahealthcenter.hu|unknown
+Medicover Hospital|Warsaw|Poland|Europe|Multi-specialty|https://www.medicover.pl|unknown
+LUX MED|Warsaw|Poland|Europe|Multi-specialty|https://www.luxmed.pl|unknown
+Indexmedica Dental Clinic|Krakow|Poland|Europe|Dental|https://www.indexmedica.com|unknown
+Carolina Medical Center|Warsaw|Poland|Europe|Orthopedics|https://www.carolina.pl|unknown
+Centro Medico Teknon (Quironsalud)|Barcelona|Spain|Europe|Multi-specialty|https://www.teknon.es|JCI
+Quironsalud Barcelona Hospital|Barcelona|Spain|Europe|Multi-specialty|https://www.quironsalud.com|unknown
+Hospital Universitari Dexeus (Quironsalud)|Barcelona|Spain|Europe|Fertility/IVF|https://www.dexeus.com|unknown
+Instituto Bernabeu|Alicante|Spain|Europe|Fertility/IVF|https://www.institutobernabeu.com|unknown
+IVI (IVIRMA) Valencia|Valencia|Spain|Europe|Fertility/IVF|https://ivi.es|unknown
+Clinica Universidad de Navarra|Pamplona|Spain|Europe|Multi-specialty|https://www.cun.es|JCI
+Hospital Clinic de Barcelona|Barcelona|Spain|Europe|Multi-specialty|https://www.clinicbarcelona.org|unknown
+Na Homolce Hospital|Prague|Czechia|Europe|Multi-specialty|https://www.homolka.cz|unknown
+Canadian Medical|Prague|Czechia|Europe|Multi-specialty|https://www.canadian.cz|unknown
+Esthe Plastic Surgery Clinic|Prague|Czechia|Europe|Cosmetic surgery|https://www.esthe-plastic-surgery.com|unknown
+Erpet Medical Centre|Prague|Czechia|Europe|Dental|https://www.erpetmedical.com|unknown
+Nordclinic|Kaunas|Lithuania|Europe|Cosmetic surgery|https://www.nordclinic.com|unknown
+Kardiolita Hospital|Vilnius|Lithuania|Europe|Multi-specialty|https://www.kardiolitahospital.com|unknown
+Charite - Universitatsmedizin Berlin|Berlin|Germany|Europe|Multi-specialty|https://www.charite.de|unknown
+Heidelberg University Hospital|Heidelberg|Germany|Europe|Oncology|https://www.heidelberg-university-hospital.com|unknown
+University Hospital Munich (LMU Klinikum)|Munich|Germany|Europe|Multi-specialty|https://www.lmu-klinikum.de|unknown
+University Medical Center Hamburg-Eppendorf (UKE)|Hamburg|Germany|Europe|Multi-specialty|https://www.uke.de|unknown
+Schon Klinik Munich Harlaching|Munich|Germany|Europe|Orthopedics|https://www.schoen-klinik.com|unknown
+Asklepios Klinik Barmbek|Hamburg|Germany|Europe|Multi-specialty|https://www.asklepios.com|unknown
+Hygeia Hospital|Athens|Greece|Europe|Multi-specialty|https://www.hygeia.gr|JCI
+Metropolitan Hospital|Athens|Greece|Europe|Cardiac surgery|https://www.metropolitan-hospital.gr|JCI
+IASO Hospital|Athens|Greece|Europe|Fertility/IVF|https://www.iaso.gr|unknown
+Mitera Hospital|Athens|Greece|Europe|Maternity|https://www.mitera.gr|unknown
+Athens Medical Center|Athens|Greece|Europe|Multi-specialty|https://www.iatriko.gr|unknown
+European Interbalkan Medical Center|Thessaloniki|Greece|Europe|Multi-specialty|https://www.interbalkan-med.gr|unknown
+American Hospital Dubai|Dubai|UAE|Middle East|Multi-specialty|https://www.ahdubai.com|JCI
+Cleveland Clinic Abu Dhabi|Abu Dhabi|UAE|Middle East|Multi-specialty|https://www.clevelandclinicabudhabi.ae|JCI
+Mediclinic City Hospital|Dubai|UAE|Middle East|Multi-specialty|https://www.mediclinic.ae|JCI
+Burjeel Medical City|Abu Dhabi|UAE|Middle East|Multi-specialty|https://www.burjeel.com|JCI
+Saudi German Hospital Dubai|Dubai|UAE|Middle East|Multi-specialty|https://www.sghgroup.net|unknown
+Kings College Hospital London Dubai|Dubai|UAE|Middle East|Multi-specialty|https://kingscollegehospitaldubai.com|JCI
+Zulekha Hospital Dubai|Dubai|UAE|Middle East|Multi-specialty|https://www.zulekhahospitals.com|JCI
+Medcare Hospital|Dubai|UAE|Middle East|Multi-specialty|https://www.medcare.ae|unknown
+Sheikh Shakhbout Medical City|Abu Dhabi|UAE|Middle East|Multi-specialty|https://www.ssmc.ae|JCI
+NMC Specialty Hospital|Dubai|UAE|Middle East|Multi-specialty|https://nmc.ae|unknown
+King Hussein Cancer Center|Amman|Jordan|Middle East|Oncology|https://www.khcc.jo|JCI
+Jordan Hospital|Amman|Jordan|Middle East|Multi-specialty|https://www.jordan-hospital.com|JCI
+Istishari Hospital|Amman|Jordan|Middle East|Multi-specialty|https://www.istisharihospital.com|JCI
+Abdali Hospital|Amman|Jordan|Middle East|Multi-specialty|https://www.abdalihospital.com|JCI
+Specialty Hospital|Amman|Jordan|Middle East|Multi-specialty|https://www.specialty-hospital.com|JCI
+King Abdullah University Hospital|Irbid|Jordan|Middle East|Multi-specialty|https://www.kauh.jo|unknown
+Sheba Medical Center (Tel HaShomer)|Ramat Gan|Israel|Middle East|Multi-specialty|https://www.shebaonline.org|JCI
+Hadassah Medical Center|Jerusalem|Israel|Middle East|Multi-specialty|https://www.hadassah-med.com|JCI
+Rambam Health Care Campus|Haifa|Israel|Middle East|Multi-specialty|https://www.rambam.org.il|unknown
+Tel Aviv Sourasky Medical Center (Ichilov)|Tel Aviv|Israel|Middle East|Multi-specialty|https://www.tasmc.org.il|unknown
+Assuta Medical Center|Tel Aviv|Israel|Middle East|Oncology|https://www.assuta.co.il|JCI
+Shaare Zedek Medical Center|Jerusalem|Israel|Middle East|Multi-specialty|https://www.szmc.org.il|unknown
+Rabin Medical Center (Beilinson)|Petah Tikva|Israel|Middle East|Organ transplant|https://www.clalit.co.il|unknown
+King Faisal Specialist Hospital and Research Centre|Riyadh|Saudi Arabia|Middle East|Multi-specialty|https://www.kfshrc.edu.sa|JCI
+Dr. Sulaiman Al Habib Medical Group|Riyadh|Saudi Arabia|Middle East|Multi-specialty|https://www.drsulaimanalhabib.com|JCI
+King Faisal Specialist Hospital Jeddah|Jeddah|Saudi Arabia|Middle East|Multi-specialty|https://www.kfshrc.edu.sa|JCI
+Kingdom Hospital|Riyadh|Saudi Arabia|Middle East|Multi-specialty|https://www.kingdomhospital.com|JCI
+International Medical Center|Jeddah|Saudi Arabia|Middle East|Multi-specialty|https://www.imc.med.sa|JCI
+King Fahad Medical City|Riyadh|Saudi Arabia|Middle East|Multi-specialty|https://www.kfmc.med.sa|JCI
+Saudi German Hospital Riyadh|Riyadh|Saudi Arabia|Middle East|Multi-specialty|https://www.sghgroup.net|unknown

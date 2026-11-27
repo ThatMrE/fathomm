@@ -30,7 +30,23 @@ Gold and navy luxury theme, applied site-wide:
   financials (the ask, the projections, the unit economics) stay off this page on purpose.
 - `/voyage` — the full luxury 24-hour medical-voyage experience: timeline, tiers,
   membership, FAQ.
-- `/atlas` — the trust-scored medical-tourism atlas, as a full parallax page.
+- `/atlas` — the medical-tourism atlas (full parallax map) plus the **searchable directory**
+  (`#directory`): 311 clinics in 35 countries — Fathomm's trust-scored entries plus listed
+  hospitals compiled from accreditation directories — with region/search filters, a credited
+  **Data & sources** block, and a **Submit a clinic** CTA.
+- `/submit` — clinic-submission form → **Netlify Forms** (`clinic-submission`), honeypot spam
+  protection, AJAX with a `/thank-you` (`thank-you.html`) no-JS fallback. Submissions are a
+  moderation queue, not auto-published.
+
+## Clinic directory data
+`data/directory.json` is built by merging the curated `data/clinics.json` (trust-scored) with
+`data/directory_sources.psv` (listed hospitals), de-duplicated, then inlined into `/atlas`:
+```
+python3 tools/build_directory.py     # -> data/directory.json
+python3 tools/inject_directory.py    # inlines it into atlas/index.html (#directory)
+```
+Keep the directory data inlined (no runtime fetch), same as the map. Netlify Forms needs
+**Forms → Enable form detection** turned on in the Netlify dashboard (one-time), then a redeploy.
 
 ## Waitlist
 

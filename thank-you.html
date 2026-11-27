@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FATHOMM — Thank You</title>
+<meta name="robots" content="noindex">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500&display=swap');
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  :root { --deep:#0a1628; --gold:#c9a84c; --cyan:#0ef5e3; --white:#f0f0f0; --white-dim:rgba(240,240,240,0.6);
+    --serif:'Cormorant Garamond',Georgia,serif; --sans:'Inter',-apple-system,sans-serif; }
+  body { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+    background:radial-gradient(ellipse at 50% 120%, #0d2847 0%, #0a1628 55%, #060e1a 100%);
+    color:var(--white); font-family:var(--sans); font-weight:300; padding:2rem; -webkit-font-smoothing:antialiased; }
+  .eyebrow { font-size:0.68rem; letter-spacing:0.4em; text-transform:uppercase; color:var(--cyan); margin-bottom:1.2rem; }
+  h1 { font-family:var(--serif); font-size:clamp(2.4rem,7vw,4rem); font-weight:300; line-height:1.1; margin-bottom:1rem; }
+  h1 em { font-style:italic; color:var(--gold); }
+  p { color:var(--white-dim); max-width:460px; line-height:1.8; }
+  .gold-line { width:60px; height:1px; background:linear-gradient(to right,transparent,var(--gold),transparent); margin:2rem auto; }
+  .actions { margin-top:1.5rem; display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+  .actions a { color:var(--gold); text-decoration:none; font-size:0.74rem; letter-spacing:0.22em; text-transform:uppercase;
+    border:1px solid var(--gold); padding:0.8rem 1.6rem; border-radius:2px; transition:all .3s; }
+  .actions a:hover { background:var(--gold); color:var(--deep); }
+  .actions a.ghost { border-color:rgba(201,168,76,0.3); color:var(--white-dim); }
+  .actions a.ghost:hover { color:var(--gold); background:transparent; border-color:var(--gold); }
+</style>
+</head>
+<body>
+  <p class="eyebrow">Submission received</p>
+  <h1>Thank <em>you</em>.</h1>
+  <div class="gold-line"></div>
+  <p>Your clinic has been submitted for review. We verify every entry &mdash; the clinic's existence and accreditation &mdash; before it appears in the Atlas.</p>
+  <div class="actions">
+    <a href="/submit/">Submit another</a>
+    <a class="ghost" href="/atlas/">Back to the Atlas</a>
+  </div>
+</body>
+</html>
