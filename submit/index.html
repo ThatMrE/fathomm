@@ -71,6 +71,7 @@
     font-family:var(--sans); font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; font-weight:600; cursor:pointer; transition:all .4s; }
   button.submit:hover { background:var(--gold-light); box-shadow:0 0 40px rgba(201,168,76,0.3); }
   button.submit:disabled { opacity:.6; cursor:default; }
+  .recaptcha-field { margin-top:0.4rem; margin-bottom:1rem; min-height:78px; overflow-x:auto; }
   .note { margin-top:1rem; font-size:0.75rem; color:rgba(240,240,240,0.4); }
   .formmsg { margin-top:1.2rem; font-size:0.9rem; color:var(--cyan); min-height:1.2em; }
   .formmsg.err { color:#f0917f; }
@@ -102,7 +103,7 @@
   <p class="lede">Know a medical-tourism clinic or hospital that belongs in the Fathomm directory? Add it below. Every submission is reviewed before it's listed &mdash; we verify the clinic exists and check accreditation before it appears on the map.</p>
 
   <!-- Netlify Forms: static form detected at deploy. Honeypot = bot-field. -->
-  <form name="clinic-submission" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you" id="clinicForm">
+  <form name="clinic-submission" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true" action="/thank-you" id="clinicForm">
     <input type="hidden" name="form-name" value="clinic-submission" />
     <input type="hidden" name="subject" value="New clinic submission: %{formName}" />
     <p class="hidden"><label>Don't fill this out <input name="bot-field" /></label></p>
@@ -163,9 +164,13 @@
       <textarea id="notes" name="notes" placeholder="Pricing, specialties, why it belongs in the directory, your relationship to the clinic…"></textarea>
     </div>
 
+    <div class="field recaptcha-field">
+      <div data-netlify-recaptcha="true"></div>
+    </div>
+
     <button type="submit" class="submit" id="submitBtn">Submit for review</button>
     <p class="formmsg" id="formmsg" role="status" aria-live="polite"></p>
-    <p class="note">We review every submission before listing. We never publish your email, and we only use it to follow up on your submission.</p>
+    <p class="note">Spam-protected with a quick human check. We review every submission before listing. We never publish your email, and we only use it to follow up on your submission.</p>
   </form>
 </div>
 
@@ -187,18 +192,11 @@
   navToggle.addEventListener('click',()=>navLinks.classList.toggle('open'));
   navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
 
-  // AJAX submit (keeps the visitor on-page). Falls back to normal POST -> /thank-you if JS is off.
+  // Standard POST -> Netlify validates honeypot + reCAPTCHA, then redirects to /thank-you.
+  // (reCAPTCHA must ride a real form submit, so we don't intercept with AJAX.)
   const form=document.getElementById('clinicForm'), btn=document.getElementById('submitBtn'), msg=document.getElementById('formmsg');
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    msg.classList.remove('err'); msg.textContent='Submitting…'; btn.disabled=true;
-    const body=new URLSearchParams(new FormData(form)).toString();
-    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body})
-      .then(r=>{
-        if(r.ok){ form.reset(); msg.textContent='Thank you — your clinic has been submitted for review. ⚓'; btn.textContent='Submitted'; }
-        else { msg.classList.add('err'); msg.textContent='Something went wrong. Please try again.'; btn.disabled=false; }
-      })
-      .catch(()=>{ msg.classList.add('err'); msg.textContent='Network error. Please try again.'; btn.disabled=false; });
+  form.addEventListener('submit',function(){
+    msg.classList.remove('err'); msg.textContent='Submitting…'; btn.disabled=true; btn.textContent='Submitting…';
   });
 </script>
 </body>
