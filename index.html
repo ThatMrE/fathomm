@@ -245,7 +245,23 @@
   .form-submit { width: 100%; padding: 1rem; border: 1px solid var(--gold); background: var(--gold); color: var(--deep);
     font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; cursor: pointer; transition: all 0.4s; }
   .form-submit:hover { background: var(--gold-light); box-shadow: 0 0 40px rgba(201,168,76,0.3); }
+  .form-submit:disabled { opacity: 0.7; cursor: not-allowed; }
   .form-note { margin-top: 1rem; font-size: 0.75rem; color: rgba(240,240,240,0.3); text-align: center; }
+
+  /* Mobile form optimizations */
+  @media (max-width: 600px) {
+    .waitlist-form { margin-top: 2rem; padding: 0 1rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { font-size: 0.65rem; margin-bottom: 0.4rem; }
+    .form-group input, .form-group select { padding: 0.8rem; font-size: 1rem; }
+    .form-submit { padding: 0.9rem; font-size: 0.75rem; }
+  }
+  @media (max-width: 400px) {
+    #waitlist { padding: 2rem 1rem; }
+    .section-title { font-size: 1.8rem; }
+    .waitlist-form { padding: 0; }
+    .form-group input, .form-group select { font-size: 16px; }
+  }
 
   /* ── FOOTER ── */
   footer { padding: 3rem 2rem; border-top: 1px solid rgba(201,168,76,0.08); text-align: center; background: var(--deep); }
@@ -409,7 +425,8 @@
       <div class="gold-line"></div>
       <p class="section-body">We run a limited number of voyages, by application only. Leave your details and a member of our team will contact you.</p>
     </div>
-    <form class="waitlist-form reveal" id="waitlistForm" onsubmit="return handleSubmit(event)">
+    <form class="waitlist-form reveal" id="waitlistForm" name="fathomm-waitlist" method="POST" netlify="true" onsubmit="return handleSubmit(event)">
+      <input type="hidden" name="form-name" value="fathomm-waitlist">
       <div class="form-group"><label for="wName">Full Name</label><input type="text" id="wName" name="name" placeholder="Your name" required></div>
       <div class="form-group"><label for="wEmail">Email Address</label><input type="email" id="wEmail" name="email" placeholder="your@email.com" required></div>
       <div class="form-group"><label for="wInterest">Protocol of Interest</label>
@@ -502,23 +519,41 @@
 })();
 
 // ── WAITLIST ──
-// Paste your form endpoint (Formspree / Tally / Google Form POST URL). Until set, the confirmation animation runs.
-const WAITLIST_ENDPOINT = "https://script.google.com/macros/s/AKfycbwAX_8vjyS7QUsCaulYhM4sKKK-PjytfSCr1HYE2NyCipGt-sNUA6IM7nINwNdSQlSBgA/exec";
+// Netlify Forms integration: submissions are automatically stored in Netlify dashboard
 function handleSubmit(e) {
   e.preventDefault();
   const form = document.getElementById('waitlistForm');
   const btn = form.querySelector('.form-submit');
   const email = form.querySelector('#wEmail').value.trim();
   if (!email) { return false; }
+
   btn.textContent = 'Submitting...'; btn.disabled = true;
+
   const confirm = () => {
-    btn.textContent = 'You\'re on the list'; btn.style.background = 'rgba(14,245,227,0.15)'; btn.style.borderColor = 'var(--cyan)'; btn.style.color = 'var(--cyan)'; form.reset();
-    setTimeout(() => { btn.textContent = 'Join the Waitlist'; btn.style.background=''; btn.style.borderColor=''; btn.style.color=''; btn.disabled=false; }, 4000);
+    btn.textContent = 'You\'re on the list';
+    btn.style.background = 'rgba(14,245,227,0.15)';
+    btn.style.borderColor = 'var(--cyan)';
+    btn.style.color = 'var(--cyan)';
+    form.reset();
+    setTimeout(() => {
+      btn.textContent = 'Join the Waitlist';
+      btn.style.background='';
+      btn.style.borderColor='';
+      btn.style.color='';
+      btn.disabled=false;
+    }, 4000);
   };
-  var body = new URLSearchParams({ email: email, source: 'fathomm.org' }).toString();
-  fetch(WAITLIST_ENDPOINT, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: body })
-    .then(function(){ confirm(); })
-    .catch(function(){ confirm(); });
+
+  // Use Netlify Forms native submission
+  const formData = new FormData(form);
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(formData).toString()
+  })
+  .then(() => confirm())
+  .catch(() => confirm());
+
   return false;
 }
 </script>
